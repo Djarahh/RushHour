@@ -1,3 +1,5 @@
+from block.py import Block
+
 class Rushhour(object):
     """docstring for Rushhour."""
     def __init__(self, arg):
@@ -33,11 +35,6 @@ class Rushhour(object):
                         coordinate[0] = x
                         coordinate[1] = y
                     # make cars
-                    
-
-
-
-
 
     def load_cars():
         """Function for loading the cars on the board"""
