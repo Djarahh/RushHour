@@ -1,4 +1,4 @@
-class Coordinate(object):
+class Block(object):
     """
     Describes a coordinateself.
     """
