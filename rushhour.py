@@ -1,5 +1,3 @@
-from block.py import Block 
-
 class Rushhour(object):
     """docstring for Rushhour."""
     def __init__(self, arg):
@@ -11,7 +9,7 @@ class Rushhour(object):
         for x in range(length):
             for y in range(length):
                 # use bord.load function to append coordinates to the board
-                bord.load(Block(x,y))
+                bord.load(Coordinate(x,y))
 
     def load_cars():
         """Function for loading the cars on the board"""
