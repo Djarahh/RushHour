@@ -5,11 +5,11 @@ entrance  2,6
 length    2
 color     red
 location
+2,2
 2,3
-2,4
 
 2
-lenght    3
+length    3
 color     yellow
 location
 2,5

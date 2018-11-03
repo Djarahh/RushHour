@@ -9,9 +9,9 @@ class Rushhour(object):
 
     def load_board(self, filename):
         """Function for loading the board"""
-        self.bord = Bord(("2","6"))
+        self.bord = Bord([2, 6])
         self.car_list = []
-        coordinate_list = []
+
         # open file in read mode
         with open(filename, "r") as file:
             # itterate over text and strip line
@@ -23,56 +23,78 @@ class Rushhour(object):
                     for x in range(int(text_line[1])):
                         for y in range(int(text_line[1])):
                             # use bord.load function to append coordinates to the board
-                                self.bord.load(Coordinate(x,y))
+                                self.bord.load(Block([x, y]))
                 # the order of cars: id, length, colour, location
-                if text_line.isdigit():
+                elif text_line.isdigit():
                     id = text_line
-                if text_line.startswith("length"):
+                elif text_line.startswith("length"):
                     text_line = text_line.rsplit()
                     length = text_line[1]
-                if text_line.startswith("color"):
+                elif text_line.startswith("color"):
                     text_line = text_line.rsplit()
                     color = text_line[1]
                     if color == "red":
                         car = True
                     else:
                         car = False
-                if text_line.startswith("location"):
-                    while file.readline() is not "":
-                        coordinate = file.readline().split(",")
-                        x = coordinate[0]
-                        y = coordinate[1]
-                        # appending coordinates in a list (temporay solution?)
-                        coordinate_list.append(x, y)
+                elif text_line.startswith("location"):
+                    coordinate_list = []
+                    while True:
+                        coordinate = file.readline().strip().split(",")
+                        if coordinate[0] is not "":
+                            x = int(coordinate[0])
+                            y = int(coordinate[1])
+                            # appending coordinates in a list (temporay solution?)
+                            coordinate_list.append([x, y])
+                        else:
+                            break
                     # make car objects
-                    car = Car(id, length, colour, location, car)
+                    car = Car(id, length, color, coordinate_list, car)
                     # make list of cars
                     self.car_list.append(car)
 
-    def move():
+    def move(command):
         """Function for moving the cars on the board"""
+
+        # updating car coordinates
+        
         pass
 
     def won():
         """Win condition for the game"""
-        False
+        True
         pass
 
+    def update_board(self):
+        """Function for updating the current board"""
+        for car in self.car_list:
+            for coordinate in car.return_coordinates():
+                # for each block of the board (blocks are stored in the coordinates)
+                for block in self.bord.coordinate:
+                    if coordinate == block.coordinate:
+                        block.occupy(True)
 
-    def play():
+    def play(self):
         """Lets play a game"""
 
         print("This is russhour!!")
-
-        while not self.won:
+        counter = 0
+        while self.won:
             command = input("> ").upper()
-            print(command)
-            print(self.board)
-            print(self.car_list)
-
-
+            # call update board function
+            self.update_board()
+            # print boards
+            for block in self.bord.coordinate:
+                if block.occupied:
+                    print("2", end=" ")
+                else:
+                    print("0", end=" ")
+                counter += 1
+                # place enter at end of the row
+                if counter % 6 == 0:
+                    print("\n")
         pass
 
 if __name__ == "__main__":
     rushhour = Rushhour("boards1")
-    russhour.play()
+    rushhour.play()
