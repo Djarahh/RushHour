@@ -1,5 +1,3 @@
-from coordinate import Coordinate
-
 class Bord(object):
     """ Defines a board. """
     def __init__(self, entrance):

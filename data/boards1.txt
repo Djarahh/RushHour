@@ -1,4 +1,5 @@
 board   6
+entrance  2,6
 
 1
 length    2
