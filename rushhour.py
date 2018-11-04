@@ -53,11 +53,18 @@ class Rushhour(object):
                     # make list of cars
                     self.car_list.append(car)
 
-    def move(command):
+    def move(self, command, id):
         """Function for moving the cars on the board"""
-
+        # selecting the right car
+        car = self.car_list[int(id) - 1]
+        # convert command to contain integers
+        print(car)
+        car.update_coordinates(command)
+        print(car)
+        print(command)
+        print(id)
         # updating car coordinates
-        
+
         pass
 
     def won():
@@ -82,6 +89,12 @@ class Rushhour(object):
         while self.won:
             command = input("> ").upper()
             # call update board function
+            if command.startswith("MOVE"):
+                command = command.split()
+                id = command[2]
+                command = command[1].split(",")
+
+                self.move(command, id)
             self.update_board()
             # print boards
             for block in self.bord.coordinate:

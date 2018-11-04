@@ -19,9 +19,9 @@ class Car(object):
     def return_coordinates(self):
         return(self.coordinate)
 
-    # def update_coordinates(self, command):
-    #     """updates coordinates"""
-    #     self.coordinate
+    def update_coordinates(self, command):
+        """updates coordinates"""
+        self.coordinate = command
 
     def __str__(self):
         return(f"{self.coordinate}")
