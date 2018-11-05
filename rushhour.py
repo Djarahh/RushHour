@@ -57,9 +57,14 @@ class Rushhour(object):
         """Function for moving the cars on the board"""
         # selecting the right car
         car = self.car_list[int(id) - 1]
-        # convert command to contain integers
+
+        # convert command to integers
+        move = []
+        for i in command:
+            i = int(i)
+            move.append(i)
         print(car)
-        car.update_coordinates(command)
+        car.update_coordinates(move)
         print(car)
         print(command)
         print(id)
@@ -74,6 +79,10 @@ class Rushhour(object):
 
     def update_board(self):
         """Function for updating the current board"""
+        # reset board to all False in case of move
+        for block in self.bord.coordinate:
+            block.occupy(False)
+        # set occupied blocks to True
         for car in self.car_list:
             for coordinate in car.return_coordinates():
                 # for each block of the board (blocks are stored in the coordinates)
