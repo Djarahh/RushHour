@@ -108,9 +108,13 @@ class Rushhour(object):
             # print boards
             for block in self.bord.coordinate:
                 if block.occupied:
-                    print("2", end=" ")
+                    # printing car id on spot in grid
+                    for car in self.car_list:
+                        for coordinate in car.coordinate:
+                            if block.coordinate == coordinate:
+                                print(car.id, end="  ")
                 else:
-                    print("0", end=" ")
+                    print("0", end="  ")
                 counter += 1
                 # place enter at end of the row
                 if counter % 6 == 0:

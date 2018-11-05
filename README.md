@@ -10,6 +10,7 @@ update 05/11
 in de command line (< in je terminal)"MOVE coordinaten van beweegrichting car_id"
 voorbeeld: MOVE 1,2 1
 (als je alleen in x richting kan bewegen dan worden de x coordinaten vervangen door [][1, y], [2, y]])
+2. bij het renderen van het board wordt nu de id van de juiste auto geprint.
 
 update 04/11
 Hoi!

@@ -15,6 +15,7 @@ class Car(object):
         self.direction = self.direction()
         #whether the car is THE red car, yes or no
         self.car = car
+
     def update_coordinates(self, command):
         # command = command.split(",")
         if self.direction == "x":
