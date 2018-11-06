@@ -37,10 +37,6 @@ class Car(object):
         else:
             return("y")
 
-
-    def move(self, new_location):
-        self.location = new_location
-
     def return_coordinates(self):
         return(self.coordinate)
 
