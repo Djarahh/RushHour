@@ -1,4 +1,4 @@
-class Bord(object):
+class Board(object):
     """ Defines a board. """
     def __init__(self, entrance):
         self.entrance = entrance

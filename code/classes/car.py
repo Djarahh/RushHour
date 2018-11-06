@@ -30,8 +30,6 @@ class Car(object):
             else:
                 self.coordinate[2][0] = command[2]
 
-        return(command)
-
     def direction(self):
         if self.coordinate[0][0] == self.coordinate[1][0]:
             return("x")

@@ -1,16 +1,22 @@
+import os
+import sys
+directory = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(os.path.join(directory, "code", "classes"))
+sys.path.append(os.path.join(directory, "data"))
+
 from block import Block
 from car import Car
-from bord import Bord
+from board import Board
 
 
 class Rushhour(object):
     """docstring for Rushhour."""
     def __init__(self, game):
-        self.game = self.load_board(f"data/{game}.txt")
+        self.game = self.load_board(f"{game}.txt")
 
     def load_board(self, filename):
         """Function for loading the board"""
-        self.bord = Bord([2, 6])
+        self.board = Board([2, 6])
         self.car_list = []
 
         # open file in read mode
@@ -23,9 +29,9 @@ class Rushhour(object):
                     text_line = text_line.rsplit()
                     for x in range(int(text_line[1])):
                         for y in range(int(text_line[1])):
-                            # use bord.load function to append coordinates
+                            # use board.load function to append coordinates
                             # to the board
-                                self.bord.load(Block([x, y]))
+                                self.board.load(Block([x, y]))
                 # the order of cars: id, length, colour, location
                 elif text_line.isdigit():
                     id = text_line
@@ -67,14 +73,11 @@ class Rushhour(object):
             i = int(i)
             move.append(i)
         # check if move is allowed: if block is occupied (exept by itself)
-        for block in self.bord.coordinate:
+        for block in self.board.coordinate:
             if block.occupied:
-                pass
+                print("noyoudontmate")
             else:
                 car.update_coordinates(move)
-
-
-        pass
 
     def won():
         """Win condition for the game"""
@@ -84,21 +87,21 @@ class Rushhour(object):
     def update_board(self):
         """Function for updating the current board"""
         # reset board to all False in case of move
-        for block in self.bord.coordinate:
+        for block in self.board.coordinate:
             block.occupy(False)
         # set occupied blocks to True
         for car in self.car_list:
             for coordinate in car.return_coordinates():
                 # for each block of the board
                 # (blocks are stored in the coordinates)
-                for block in self.bord.coordinate:
+                for block in self.board.coordinate:
                     if coordinate == block.coordinate:
                         block.occupy(True)
                         block.car_id = car.id
 
     def print_board(self):
         counter = 0
-        for block in self.bord.coordinate:
+        for block in self.board.coordinate:
             if block.occupied:
                 # printing car id on spot in grid
                 for car in self.car_list:
