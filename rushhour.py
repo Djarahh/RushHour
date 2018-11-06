@@ -12,7 +12,7 @@ from board import Board
 class Rushhour(object):
     """docstring for Rushhour."""
     def __init__(self, game):
-        self.game = self.load_board(f"{game}.txt")
+        self.game = self.load_board(f"data/{game}.txt")
 
     def load_board(self, filename):
         """Function for loading the board"""
@@ -64,6 +64,7 @@ class Rushhour(object):
 
     def move(self, command, id):
         """Function for moving the cars on the board"""
+
         # selecting the right car
         car = self.car_list[int(id) - 1]
 
@@ -72,12 +73,25 @@ class Rushhour(object):
         for i in command:
             i = int(i)
             move.append(i)
-        # check if move is allowed: if block is occupied (exept by itself)
-        for block in self.board.coordinate:
-            if block.occupied:
-                print("noyoudontmate")
-            else:
-                car.update_coordinates(move)
+
+        # check if coordinates are allowed
+        self.check_move(move, id)
+        # do the move
+        car.update_coordinates(move)
+
+    def check_move(self, move, car_id):
+        """checks if the move is legal"""
+        counter = 0
+        car = self.car_list[int(car_id) - 1]
+        for coordinate in car.temp_coordinates(move):
+            for block in self.board.coordinate:
+                if coordinate == block.coordinate:
+                    # if both blocks are occupied
+                    counter += 1
+        if counter < len(car.temp_coordinate(move)):
+            return True
+        else:
+            return False
 
     def won():
         """Win condition for the game"""
