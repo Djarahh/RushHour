@@ -2,6 +2,7 @@ from block import Block
 from car import Car
 from bord import Bord
 
+
 class Rushhour(object):
     """docstring for Rushhour."""
     def __init__(self, game):
@@ -22,7 +23,8 @@ class Rushhour(object):
                     text_line = text_line.rsplit()
                     for x in range(int(text_line[1])):
                         for y in range(int(text_line[1])):
-                            # use bord.load function to append coordinates to the board
+                            # use bord.load function to append coordinates
+                            # to the board
                                 self.bord.load(Block([x, y]))
                 # the order of cars: id, length, colour, location
                 elif text_line.isdigit():
@@ -44,7 +46,8 @@ class Rushhour(object):
                         if coordinate[0] is not "":
                             x = int(coordinate[0])
                             y = int(coordinate[1])
-                            # appending coordinates in a list (temporay solution?)
+                            # appending coordinates in a list
+                            # (temporay solution?)
                             coordinate_list.append([x, y])
                         else:
                             break
@@ -86,7 +89,8 @@ class Rushhour(object):
         # set occupied blocks to True
         for car in self.car_list:
             for coordinate in car.return_coordinates():
-                # for each block of the board (blocks are stored in the coordinates)
+                # for each block of the board
+                # (blocks are stored in the coordinates)
                 for block in self.bord.coordinate:
                     if coordinate == block.coordinate:
                         block.occupy(True)
@@ -126,6 +130,7 @@ class Rushhour(object):
             # print boards
             self.print_board()
         pass
+
 
 if __name__ == "__main__":
     rushhour = Rushhour("boards1")
