@@ -77,26 +77,29 @@ class Rushhour(object):
         if self.check_move(move, id):
             print("dont you fucking move")
             # do the move
-            # car.update_coordinates(move)
+            car.update_coordinates(move)
         else:
             print("invalid move!!")
 
 
     def check_move(self, move, car_id):
         """checks if the move is legal"""
-        self.print_board()
-        print(1)
+
         counter = 0
         car = self.car_list[int(car_id) - 1]
         for coordinate in car.temp_coordinates(move):
             for block in self.board.coordinate:
-                if coordinate == block.coordinate:
-                    # if both blocks are occupied
-                    counter += 1
-        if counter < len(car.temp_coordinates(move)):
-            return True
-        else:
-            return False
+                if block.occupied:
+                    if coordinate == block.coordinate:
+                        # if both blocks are occupied
+                        return False
+        return True
+        # print(counter)
+        # print(len(car.temp_coordinates(move)))
+        # if counter < len(car.temp_coordinates(move)):
+        #     return True
+        # else:
+        #     return False
 
     def won():
         """Win condition for the game"""

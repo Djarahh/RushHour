@@ -1,3 +1,5 @@
+import copy
+
 class Car(object):
     """
     Describes a car object.
@@ -37,7 +39,7 @@ class Car(object):
             return("y")
 
     def temp_coordinates(self, command):
-        temp = self.coordinate
+        temp = copy.deepcopy(self.coordinate)
         if self.direction == "x":
             temp[0][1] = command[0]
             temp[1][1] = command[1]
