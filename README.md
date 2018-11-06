@@ -4,7 +4,6 @@ Vragen:
 visualisatie hebben van het bord.
 -
 
-
 update 05/11
 1. move werkt! je kan de stukken op het board als volgt bewegen:
 in de command line (< in je terminal)"MOVE coordinaten van beweegrichting car_id"
@@ -25,3 +24,7 @@ vinden voor commandos doorgeven (zie rushhour voor voorbeeld)
 5. current_bord.py wordt nog niet gebruikt.
 6. data in apparte file gedaan voor makkelijker overzicht.
 7. kleine weizigingen in block, bord en car.
+
+QUOTES:
+
+Yara over Stan: hij heeft z'n appel en z'n peer door elkaar gehaald. 
