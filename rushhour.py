@@ -67,7 +67,6 @@ class Rushhour(object):
 
         # selecting the right car
         car = self.car_list[int(id) - 1]
-
         # convert command to integers
         move = []
         for i in command:
@@ -75,12 +74,18 @@ class Rushhour(object):
             move.append(i)
 
         # check if coordinates are allowed
-        self.check_move(move, id)
-        # do the move
-        car.update_coordinates(move)
+        if self.check_move(move, id):
+            print("dont you fucking move")
+            # do the move
+            # car.update_coordinates(move)
+        else:
+            print("invalid move!!")
+
 
     def check_move(self, move, car_id):
         """checks if the move is legal"""
+        self.print_board()
+        print(1)
         counter = 0
         car = self.car_list[int(car_id) - 1]
         for coordinate in car.temp_coordinates(move):
@@ -88,7 +93,7 @@ class Rushhour(object):
                 if coordinate == block.coordinate:
                     # if both blocks are occupied
                     counter += 1
-        if counter < len(car.temp_coordinate(move)):
+        if counter < len(car.temp_coordinates(move)):
             return True
         else:
             return False
