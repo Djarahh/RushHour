@@ -63,12 +63,13 @@ class Rushhour(object):
         for i in command:
             i = int(i)
             move.append(i)
-        print(car)
-        car.update_coordinates(move)
-        print(car)
-        print(command)
-        print(id)
-        # updating car coordinates
+        # check if move is allowed: if block is occupied (exept by itself)
+        for block in self.bord.coordinate:
+            if block.occupied:
+                pass
+            else:
+                car.update_coordinates(move)
+
 
         pass
 
@@ -89,12 +90,29 @@ class Rushhour(object):
                 for block in self.bord.coordinate:
                     if coordinate == block.coordinate:
                         block.occupy(True)
+                        block.car_id = car.id
+
+    def print_board(self):
+        counter = 0
+        for block in self.bord.coordinate:
+            if block.occupied:
+                # printing car id on spot in grid
+                for car in self.car_list:
+                    for coordinate in car.coordinate:
+                        if block.coordinate == coordinate:
+                            print(car.id, end="  ")
+            else:
+                print("0", end="  ")
+            counter += 1
+            # place enter at end of the row
+            if counter % 6 == 0:
+                print("\n")
+
 
     def play(self):
         """Lets play a game"""
 
         print("This is russhour!!")
-        counter = 0
         while self.won:
             command = input("> ").upper()
             # call update board function
@@ -106,19 +124,7 @@ class Rushhour(object):
                 self.move(command, id)
             self.update_board()
             # print boards
-            for block in self.bord.coordinate:
-                if block.occupied:
-                    # printing car id on spot in grid
-                    for car in self.car_list:
-                        for coordinate in car.coordinate:
-                            if block.coordinate == coordinate:
-                                print(car.id, end="  ")
-                else:
-                    print("0", end="  ")
-                counter += 1
-                # place enter at end of the row
-                if counter % 6 == 0:
-                    print("\n")
+            self.print_board()
         pass
 
 if __name__ == "__main__":
