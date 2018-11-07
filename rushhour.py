@@ -167,9 +167,10 @@ class Rushhour(object):
         Genereert willekeurige commands voor de auto's in het spel
         """
         # while not self.won
+        counter = 0
         while not self.won():
             # pick a random car (in case of 3 cars)
-            counter = 0
+
             amount_cars = len(self.car_list)
             rand_id = randint(1, amount_cars)
 
