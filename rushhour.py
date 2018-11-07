@@ -154,19 +154,15 @@ class Rushhour(object):
     def check_command(self, command):
         """Checks if the command input is valid"""
         if len(command) == 2:
-            if int(command[0]) - int(command[1]) == 1 or -1:
-                print(int(command[0]) - int(command[1]))
-                print("haha")
+            if abs(int(command[0]) - int(command[1])) == 1:
                 return True
-            else:
-                return False
 
         elif len(command) == 3:
-            if command[0] - command [1] - command[2] == 2 or -2:
-                print(hihi)
+            if abs(int(command[0]) -int(command[2])) == 2:
                 return True
-        else:
-            return False
+
+        return False
+
 
 if __name__ == "__main__":
     rushhour = Rushhour("boards1")
