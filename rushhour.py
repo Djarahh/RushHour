@@ -16,7 +16,7 @@ class Rushhour(object):
 
     def load_board(self, filename):
         """Function for loading the board"""
-        self.board = Board([2, 6])
+        self.board = Board([2, 5])
         self.car_list = []
 
         # open file in read mode
@@ -97,10 +97,10 @@ class Rushhour(object):
     def won(self):
         """Win condition for the game"""
         # if car 1 (red car) is on exit coordinate game is won
-        car_cor = self.car_list[0].coordinate
-        print(car_cor)
-        for coordinate in car_cor:
-            if self.car_list[0].coordinate == self.board.entrance:
+        car = self.car_list[0].coordinate
+        for coordinate in car:
+            if coordinate == self.board.entrance:
+                print("Congratulations, you won the game!")
                 return True
         else:
             return False
