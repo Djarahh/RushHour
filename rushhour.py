@@ -142,14 +142,12 @@ class Rushhour(object):
                 command = command.split()
                 id = command[2]
                 command = command[1].split(",")
-
                 self.move(command, id)
             self.update_board()
             # print boards
             self.print_board()
-        pass
 
 
 if __name__ == "__main__":
-    rushhour = Rushhour("boards1")
+    rushhour = Rushhour("board_game1")
     rushhour.play()
