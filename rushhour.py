@@ -94,10 +94,17 @@ class Rushhour(object):
                         return False
         return True
 
-    def won():
+    def won(self):
         """Win condition for the game"""
-        True
-        pass
+        # if car 1 (red car) is on exit coordinate game is won
+        car_cor = self.car_list[0].coordinate
+        print(car_cor)
+        for coordinate in car_cor:
+            if self.car_list[0].coordinate == self.board.entrance:
+                return True
+        else:
+            return False
+
 
     def update_board(self):
         """Function for updating the current board"""
@@ -135,7 +142,7 @@ class Rushhour(object):
         """Lets play a game"""
 
         print("This is russhour!!")
-        while self.won:
+        while not self.won():
             command = input("> ").upper()
             # call update board function
             if command.startswith("MOVE"):
