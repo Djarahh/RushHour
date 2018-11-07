@@ -133,6 +133,11 @@ class Rushhour(object):
             if counter % 6 == 0:
                 print("\n")
 
+    def inside_boundries(self, id):
+        """checks if move is inside board"""
+        car = self.car_list[int(id) - 1]
+        
+
 
     def play(self):
         """Lets play a game"""
@@ -141,13 +146,16 @@ class Rushhour(object):
         while not self.won():
             command = input("> ").upper()
             # call update board function
-            if command.isdigit():
-                command = command.split()
-                id = command[0]
-                command = command[1]
-                # NEW FUNCTION
-                if self.check_command(command):
-                    self.move(command, id)
+            if command:
+                if command[0].isdigit():
+                    print(command)
+                    command = command.split()
+                    id = command[0]
+                    command = command[1]
+                    print(command)
+                    # NEW FUNCTION
+                    if self.check_command(command):
+                        self.move(command, id)
             self.update_board()
             # print boards
             self.print_board()
