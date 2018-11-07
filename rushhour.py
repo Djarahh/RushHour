@@ -7,6 +7,7 @@ sys.path.append(os.path.join(directory, "data"))
 from block import Block
 from car import Car
 from board import Board
+from random import randint
 
 
 class Rushhour(object):
@@ -161,6 +162,30 @@ class Rushhour(object):
             # print boards
             self.print_board()
 
+    def willekeurig(self):
+        """
+        Genereert willekeurige commands voor de auto's in het spel
+        """
+        # while not self.won
+        while not self.won():
+            # pick a random car (in case of 3 cars)
+            counter = 0
+            amount_cars = len(self.car_list)
+            rand_id = randint(1, amount_cars)
+
+            # give a random command
+            random = randint(1,2)
+            if random == 1:
+                command = '+'
+            else:
+                command = '-'
+
+            self.move(command, rand_id)
+            counter += 1
+            self.update_board()
+            print(counter)
+            self.print_board()
+
     def check_command(self, command):
         if command == "-" or command == "+":
             return True
@@ -170,4 +195,4 @@ class Rushhour(object):
 
 if __name__ == "__main__":
     rushhour = Rushhour("board_game1")
-    rushhour.play()
+    rushhour.willekeurig()

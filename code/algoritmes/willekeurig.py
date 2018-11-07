@@ -16,7 +16,7 @@ def willekeurig():
         random = randint(1,2)
         if random == 1:
             command = '+'
-        elif:
+        else:
             command = '-'
 
         self.move(command, rand_id)
