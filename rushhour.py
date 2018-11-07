@@ -68,10 +68,9 @@ class Rushhour(object):
         # selecting the right car
         car = self.car_list[int(id) - 1]
         # convert command to integers
-        move = command
 
         # check if coordinates are allowed
-        if self.check_move(command, id):
+        if self.check_move(command, id) and self.inside_boundries(id, command):
             # do the move
             car.update_coordinates(command)
         else:
@@ -133,11 +132,16 @@ class Rushhour(object):
             if counter % 6 == 0:
                 print("\n")
 
-    def inside_boundries(self, id):
+    def inside_boundries(self, id, command):
         """checks if move is inside board"""
+        block_list = []
         car = self.car_list[int(id) - 1]
-        
-
+        for coordinate in car.temp_coordinates(command):
+            for block in self.board.coordinate:
+                block_list.append(block.coordinate)
+            if coordinate not in block_list:
+                return False
+        return True
 
     def play(self):
         """Lets play a game"""
@@ -148,34 +152,20 @@ class Rushhour(object):
             # call update board function
             if command:
                 if command[0].isdigit():
-                    print(command)
                     command = command.split()
                     id = command[0]
                     command = command[1]
-                    print(command)
-                    # NEW FUNCTION
                     if self.check_command(command):
                         self.move(command, id)
             self.update_board()
             # print boards
             self.print_board()
 
-    # # NEW FUNCTION
     def check_command(self, command):
         if command == "-" or command == "+":
             return True
         else:
             return False
-    #     """Checks if the command input is valid"""
-    #     if len(command) == 2:
-    #         if abs(int(command[0]) - int(command[1])) == 1:
-    #             return True
-    #
-    #     elif len(command) == 3:
-    #         if abs(int(command[0]) -int(command[2])) == 2:
-    #             return True
-    #
-    #     return False
 
 
 if __name__ == "__main__":
