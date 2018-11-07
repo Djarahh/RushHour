@@ -2,7 +2,23 @@
 Vragen:
 - Hoe kunnen we checken of onze functies doen wat we willen, aangezien we geen
 visualisatie hebben van het bord.
--
+qvdpost@gmail.com - 0634123112
+
+Exploration:
+Upper Bound:
+- Om mee te beginnen zeggen we dat er voor een spel van 6x6, 36 vakjes zijn die
+kunnen worden ingevuld door auto's. Dus 36! als upperbound. 3.72 x 10^41.
+In andere woorden: voor een bord van nxn, UB = n^2!
+- Wanneer de we kijken naar de staat van de auto's op een bord van 6x6 en zo de
+upperbound uitrekenen gaat dat als volgt:
+De auto's zelf hebben voor lengte 2 een bewegingsvrijheid van 5, voor een
+auto met lengte van 3 heeft een bewegingsvrijheid van 4. Afhankelijk van de
+hoeveelheid auto's op het spelbord kun je de statespace uitrekenen:
+(bewegingsvrijheid auto lengte 2)^aantal auto's lengte 2 * (bewegingsvrijheid
+auto lengte 3)^aantal auto's lengte 3. 
+In andere woorden: voor een bord van lengte n met x auto's van lengte 2 en y auto's
+met lengte 3. Wordt de UB = (n- 1)^x * (m-2)^y
+
 
 update 05/11
 1. move werkt! je kan de stukken op het board als volgt bewegen:
@@ -27,4 +43,4 @@ vinden voor commandos doorgeven (zie rushhour voor voorbeeld)
 
 QUOTES:
 
-Yara over Stan: hij heeft z'n appel en z'n peer door elkaar gehaald. 
+Yara over Stan: hij heeft z'n appel en z'n peer door elkaar gehaald.
