@@ -142,13 +142,31 @@ class Rushhour(object):
                 command = command.split()
                 id = command[2]
                 command = command[1].split(",")
-
-                self.move(command, id)
+                # NEW FUNCTION
+                if self.check_command(command):
+                    self.move(command, id)
             self.update_board()
             # print boards
             self.print_board()
         pass
 
+    # NEW FUNCTION
+    def check_command(self, command):
+        """Checks if the command input is valid"""
+        if len(command) == 2:
+            if int(command[0]) - int(command[1]) == 1 or -1:
+                print(int(command[0]) - int(command[1]))
+                print("haha")
+                return True
+            else:
+                return False
+
+        elif len(command) == 3:
+            if command[0] - command [1] - command[2] == 2 or -2:
+                print(hihi)
+                return True
+        else:
+            return False
 
 if __name__ == "__main__":
     rushhour = Rushhour("boards1")
