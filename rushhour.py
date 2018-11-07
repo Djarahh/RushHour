@@ -149,13 +149,9 @@ class Rushhour(object):
                 command = command.split()
                 id = command[2]
                 command = command[1].split(",")
-<<<<<<< HEAD
-                self.move(command, id)
-=======
                 # NEW FUNCTION
                 if self.check_command(command):
                     self.move(command, id)
->>>>>>> 2dbd307618066c86a80688ca7fd95df246347cca
             self.update_board()
             # print boards
             self.print_board()
