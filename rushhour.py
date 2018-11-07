@@ -105,7 +105,6 @@ class Rushhour(object):
         else:
             return False
 
-
     def update_board(self):
         """Function for updating the current board"""
         # reset board to all False in case of move
