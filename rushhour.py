@@ -149,13 +149,16 @@ class Rushhour(object):
                 command = command.split()
                 id = command[2]
                 command = command[1].split(",")
+<<<<<<< HEAD
+                self.move(command, id)
+=======
                 # NEW FUNCTION
                 if self.check_command(command):
                     self.move(command, id)
+>>>>>>> 2dbd307618066c86a80688ca7fd95df246347cca
             self.update_board()
             # print boards
             self.print_board()
-        pass
 
     # NEW FUNCTION
     def check_command(self, command):
@@ -172,5 +175,5 @@ class Rushhour(object):
 
 
 if __name__ == "__main__":
-    rushhour = Rushhour("boards1")
+    rushhour = Rushhour("board_game1")
     rushhour.play()
