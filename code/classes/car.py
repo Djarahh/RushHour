@@ -21,30 +21,16 @@ class Car(object):
     def update_coordinates(self, command):
         # command = command.split(",")
         if self.direction == "x":
-            if command == "+":
-                self.coordinate[0][1] += 1
-                self.coordinate[1][1] += 1
-            else:
-                self.coordinate[0][1] -= 1
-                self.coordinate[1][1] -= 1
+            self.coordinate[0][1] = command[0]
+            self.coordinate[1][1] = command[1]
         else:
-            if command == "+":
-                self.coordinate[0][0] -= 1
-                self.coordinate[1][0] -= 1
-            else:
-                self.coordinate[0][0] += 1
-                self.coordinate[1][0] += 1
+            self.coordinate[0][0] = command[0]
+            self.coordinate[1][0] = command[1]
         if len(self.coordinate) == 3:
             if self.direction == "x":
-                if command == "+":
-                    self.coordinate[0][2] += 1
-                else:
-                    self.coordinate[0][2] -= 1
+                self.coordinate[0][2] = command[2]
             else:
-                if command == "+":
-                    self.coordinate[2][0] -= 1
-                else:
-                    self.coordinate[2][0] += 1
+                self.coordinate[2][0] = command[2]
 
     def direction(self):
         if self.coordinate[0][0] == self.coordinate[1][0]:
@@ -55,30 +41,16 @@ class Car(object):
     def temp_coordinates(self, command):
         temp = copy.deepcopy(self.coordinate)
         if self.direction == "x":
-            if command == "+":
-                temp[0][1] += 1
-                temp[1][1] += 1
-            else:
-                temp[0][1] -= 1
-                temp[1][1] -= 1
+            temp[0][1] = command[0]
+            temp[1][1] = command[1]
         else:
-            if command == "+":
-                temp[0][0] -= 1
-                temp[1][0] -= 1
-            else:
-                temp[0][0] += 1
-                temp[1][0] += 1
+            temp[0][0] = command[0]
+            temp[1][0] = command[1]
         if len(temp) == 3:
             if self.direction == "x":
-                if command == "+":
-                    temp[0][2] += 1
-                else:
-                    temp[0][2] -= 1
+                temp[0][2] = command[2]
             else:
-                if command == "+":
-                    temp[2][0] -= 1
-                else:
-                    temp[2][0] += 1
+                temp[2][0] = command[2]
         return temp
 
     def return_coordinates(self):
