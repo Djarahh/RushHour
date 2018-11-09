@@ -68,12 +68,17 @@ class Rushhour(object):
 
         # selecting the right car
         car = self.car_list[int(id) - 1]
+
         # convert command to integers
+        move = []
+        for i in command:
+            i = int(i)
+            move.append(i)
 
         # check if coordinates are allowed
-        if self.check_move(command, id) and self.inside_boundries(id, command):
+        if self.check_move(move, id) and self.inside_boundries(id, move):
             # do the move
-            car.update_coordinates(command)
+            car.update_coordinates(move)
         else:
             print("invalid move!!")
 
@@ -198,10 +203,14 @@ class Rushhour(object):
             self.print_board()
 
     def check_command(self, command):
-        if command == "-" or command == "+":
-            return True
-        else:
-            return False
+        """Checks if the command is valid"""
+        if len(command) == 2:
+            if abs(int(command[0]) - int(command[1])) == 1:
+                return True
+        elif len(command) == 3:
+            if abs(int(command[0]) - int(command[2])) == 2:
+                return True
+        return False
 
 
 if __name__ == "__main__":
