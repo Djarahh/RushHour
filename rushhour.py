@@ -74,7 +74,6 @@ class Rushhour(object):
         for i in command:
             i = int(i)
             move.append(i)
-
         # check if coordinates are allowed
         if self.check_move(move, id) and self.inside_boundries(id, move):
             # do the move
@@ -171,6 +170,7 @@ class Rushhour(object):
                     command = command.split()
                     id = command[0]
                     command = command[1]
+                    command = command.split(",")
                     if self.check_command(command):
                         self.move(command, id)
             self.update_board()
@@ -215,4 +215,4 @@ class Rushhour(object):
 
 if __name__ == "__main__":
     rushhour = Rushhour("board_game1")
-    rushhour.willekeurig()
+    rushhour.play()
