@@ -91,7 +91,7 @@ class Rushhour(object):
             else:
                 if len(car.coordinate) == 2:
                     if car.coordinate[0][0] == car.coordinate[1][0]:
-                        for i in range(car.coordinate[0][1] - move[0]):
+                        for i in range(abs(car.coordinate[0][1] - move[0])):
                             doof = [0, 0]
                             doof[0] = i
                             doof[1] = i + 1
