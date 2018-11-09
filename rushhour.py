@@ -79,12 +79,12 @@ class Rushhour(object):
             # do the move
             self.check_path(move, id)
             car.update_coordinates(move)
+            return True
         else:
-            print("invalid move!!")
+            return False
 
     def check_move(self, move, car_id):
         """checks if the move is legal"""
-
         # counter = 0
         car = self.car_list[int(car_id) - 1]
         self.check_path(move, car_id)
@@ -92,9 +92,45 @@ class Rushhour(object):
             if car_not == car:
                 pass
             else:
-                for coordinate in car_not.coordinate:
-                    if coordinate in car.temp_coordinates(move):
-                        return False
+                if len(car.coordinate) == 2:
+                    if car.coordinate[0][0] == car.coordinate[1][0]:
+                        for i in range(abs(car.coordinate[0][1] - move[0])):
+                            print(car.coordinate[0][1] - move[0])
+                            doof = [0, 0]
+                            doof[0] = car.coordinate[0][1] + i
+                            doof[1] = car.coordinate[1][1] + i
+                            print(doof)
+                            for coordinate in car_not.coordinate:
+                                if coordinate in car.temp_coordinates(doof):
+                                    return False
+                    else:
+                        for i in range(abs(car.coordinate[0][0] - move[0])):
+                            doof = [0, 0]
+                            doof[0] = car.coordinate[0][1] + i
+                            doof[1] = car.coordinate[1][1] + i
+                            for coordinate in car_not.coordinate:
+                                if coordinate in car.temp_coordinates(doof):
+                                    return False
+                else:
+                    if car.coordinate[0][0] == car.coordinate[1][0]:
+                        for i in range(abs(car.coordinate[0][1] - move[0])):
+                            doof = [0, 0, 0]
+                            doof[0] = car.coordinate[0][0] + i
+                            doof[1] = car.coordinate[1][0] + i
+                            doof[2] = car.coordinate[2][0] + i
+                            for coordinate in car_not.coordinate:
+                                if coordinate in car.temp_coordinates(doof):
+                                    return False
+                    else:
+                        for i in range(abs(car.coordinate[0][0] - move[0])):
+                            doof = [0, 0, 0]
+                            doof[0] = car.coordinate[0][1] + i
+                            doof[1] = car.coordinate[1][1] + i
+                            doof[2] = car.coordinate[2][1] + i
+                            print(doof)
+                            for coordinate in car_not.coordinate:
+                                if coordinate in car.temp_coordinates(doof):
+                                    return False
         return True
 
     def check_path(self, command, car_id):
@@ -184,26 +220,38 @@ class Rushhour(object):
         """
         Genereert willekeurige commands voor de auto's in het spel
         """
-        # while not self.won
         counter = 0
+        # while not self.won
         while not self.won():
             # pick a random car (in case of 3 cars)
-
-            amount_cars = len(self.car_list)
+            amount_cars = len(self.car_list) - 1
             rand_id = randint(1, amount_cars)
-
-            # give a random command
-            random = randint(1,2)
-            if random == 1:
-                command = '+'
+            # find length of this car (2 or 3)
+            for car in self.car_list:
+                if int(rand_id) == int(car.id):
+                    length = int(car.length)
+            # pick a random coordinate this car should go to
+            # inside the borders of the board: 6x6
+            command = []
+            # give three coordinates if car is length 3
+            if length > 2:
+                coordinate = randint(0, 3)
+                command.append(coordinate)
+                command.append(coordinate + 1)
+                command.append(coordinate + 2)
+            # give two coordinates if car is length 2
             else:
-                command = '-'
-
+                coordinate = randint(0, 4)
+                command.append(coordinate)
+                command.append(coordinate + 1)
             self.move(command, rand_id)
-            counter += 1
-            self.update_board()
-            print(counter)
-            self.print_board()
+            if self.move(command, rand_id):
+                pass
+            else:
+                counter += 1
+                self.update_board()
+                print(counter)
+                self.print_board()
 
     def check_command(self, command):
         """Checks if the command is valid"""

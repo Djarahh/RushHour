@@ -1,5 +1,6 @@
 import os
 import sys
+import pygame as pg
 directory = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(directory, "code", "classes"))
 sys.path.append(os.path.join(directory, "data"))
@@ -17,8 +18,8 @@ class Rushhour(object):
 
     def load_board(self, filename):
         """Function for loading the board"""
-        self.board = Board([2, 5])
         self.car_list = []
+        self.grid = []
 
         # open file in read mode
         with open(filename, "r") as file:
@@ -28,11 +29,15 @@ class Rushhour(object):
                 # check if line is information on board length
                 if text_line.startswith("board"):
                     text_line = text_line.rsplit()
-                    for x in range(int(text_line[1])):
-                        for y in range(int(text_line[1])):
-                            # use board.load function to append coordinates
-                            # to the board
-                                self.board.load(Block([x, y]))
+                    for row in range(int(text_line[1])):
+                        self.grid.append([])
+                        for column in range(int(text_line[1])):
+                            self.grid[row].append(0)
+                elif text_line.startswith("entrance"):
+                    bla = text_line.rsplit()[1].rsplit(',')
+                    entrance = []
+                    entrance.append(int(bla[0]))
+                    entrance.append(int(bla[1]))
                 # the order of cars: id, length, colour, location
                 elif text_line.isdigit():
                     id = text_line
@@ -42,7 +47,7 @@ class Rushhour(object):
                 elif text_line.startswith("color"):
                     text_line = text_line.rsplit()
                     color = text_line[1]
-                    if color == "red":
+                    if color == "(255, 0, 0)":
                         car = True
                     else:
                         car = False
@@ -62,6 +67,7 @@ class Rushhour(object):
                     car = Car(id, length, color, coordinate_list, car)
                     # make list of cars
                     self.car_list.append(car)
+                self.board = Board(entrance)
 
     def move(self, command, id):
         """Function for moving the cars on the board"""
@@ -118,20 +124,11 @@ class Rushhour(object):
                         block.car_id = car.id
 
     def print_board(self):
-        counter = 0
-        for block in self.board.coordinate:
-            if block.occupied:
-                # printing car id on spot in grid
-                for car in self.car_list:
-                    for coordinate in car.coordinate:
-                        if block.coordinate == coordinate:
-                            print(car.id, end="  ")
-            else:
-                print("0", end="  ")
-            counter += 1
-            # place enter at end of the row
-            if counter % 6 == 0:
-                print("\n")
+        board = self.grid
+        for row in range(6):
+            for column in range(6):
+                print(board[row][column], end='')
+            print('\n')
 
     def inside_boundries(self, id, command):
         """checks if move is inside board"""
@@ -148,6 +145,7 @@ class Rushhour(object):
         """Lets play a game"""
 
         print("This is russhour!!")
+        self.show_board()
         while not self.won():
             command = input("> ").upper()
             # call update board function
@@ -161,39 +159,43 @@ class Rushhour(object):
             self.update_board()
             # print boards
             self.print_board()
+            self.show_board()
 
-    def willekeurig(self):
+    def show_board(self):
         """
-        Genereert willekeurige commands voor de auto's in het spel
+        Shows a visual respresentation of the board
         """
-        # while not self.won
-        counter = 0
-        while not self.won():
-            # pick a random car (in case of 3 cars)
+        WIDTH = 40
+        HEIGHT = 40
+        MARGIN = 2
 
-            amount_cars = len(self.car_list)
-            rand_id = randint(1, amount_cars)
+        pg.init()
 
-            # give a random command
-            random = randint(1,2)
-            if random == 1:
-                command = '+'
-            else:
-                command = '-'
+        WINDOW_SIZE = [255, 255]
+        screen = pg.display.set_mode(WINDOW_SIZE)
 
-            self.move(command, rand_id)
-            counter += 1
-            self.update_board()
-            print(counter)
-            self.print_board()
+        pg.display.set_caption("RushHour")
 
-    def check_command(self, command):
-        if command == "-" or command == "+":
-            return True
-        else:
-            return False
+        # fill the screen with black
+        screen.fill((0, 0, 0))
 
+        for row in range(6):
+            for column in range(6):
+                if self.grid[row][column] == 0:
+                    color = (255, 255, 255)
+                pg.draw.rect(screen,
+                                 color,
+                                 [(MARGIN + WIDTH) * column + MARGIN,
+                                  (MARGIN + HEIGHT) * row + MARGIN,
+                                  WIDTH,
+                                  HEIGHT])
+
+        pg.display.flip()
+
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
 
 if __name__ == "__main__":
     rushhour = Rushhour("board_game1")
-    rushhour.willekeurig()
+    rushhour.play()
