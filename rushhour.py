@@ -77,6 +77,7 @@ class Rushhour(object):
         # check if coordinates are allowed
         if self.check_move(move, id) and self.inside_boundries(id, move):
             # do the move
+            self.check_path(move, id)
             car.update_coordinates(move)
         else:
             print("invalid move!!")
@@ -86,6 +87,7 @@ class Rushhour(object):
 
         # counter = 0
         car = self.car_list[int(car_id) - 1]
+        self.check_path(move, car_id)
         for car_not in self.car_list:
             if car_not == car:
                 pass
@@ -98,12 +100,13 @@ class Rushhour(object):
     def check_path(self, command, car_id):
         """Checks if path is free, so no teleporting of car can happen """
         car = self.car_list[int(car_id) - 1]
-        for i in range(car.coordinate[0][0] - command[0]):
-            command[0] = command[i]
-            command[1] = command[i + 1]
-            print(command)
-            # if car.temp_coordinates(command)
-
+        print((car.coordinate[0][0] - command[0]))
+        if car.direction() == "x":
+            for i in range(car.coordinate[0][0] - command[0]):
+                command[0] = i
+                for coordinate in car.coordinate:
+                    if coordinate in car.temp_coordinates(command):
+                        print(coordinate)
 
     def won(self):
         """Win condition for the game"""
