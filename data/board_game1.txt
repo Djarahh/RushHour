@@ -3,14 +3,14 @@ entrance  2,5
 
 1
 length    2
-color     red
+color     (255, 0, 0)
 location
 2,3
 2,4
 
 2
 length    3
-color     purple
+color     (148, 0, 211)
 location
 0,2
 1,2
@@ -18,14 +18,14 @@ location
 
 3
 length    2
-color     lightblue
+color     (224, 255, 255)
 location
 0,3
 0,4
 
 4
 length    3
-color     yellow
+color     (255, 255, 0)
 location
 0,5
 1,5
@@ -33,21 +33,21 @@ location
 
 5
 length    2
-color     orange
+color     (255, 165, 0)
 location
 4,0
 5,0
 
 6
 length    2
-color     lightblue
+color     (224, 255, 255)
 location
 4,1
 4,2
 
 7
 length    3
-color     orange
+color     (255, 165, 0)
 location
 3,3
 4,3
@@ -55,14 +55,14 @@ location
 
 8
 length    2
-color     orange
+color     (255, 165, 0)
 location
 3,4
 3,5
 
 9
 length  2
-color    darkblue
+color    (0, 0, 139)
 location
 5,4
 5,5
