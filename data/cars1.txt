@@ -1,0 +1,65 @@
+1
+length    2
+color     RED
+location
+2,3
+2,4
+
+2
+length    3
+color     YELLOW
+location
+0,2
+1,2
+2,2
+
+3
+length    2
+color     GREEN
+location
+0,3
+0,4
+
+4
+length    3
+color     PURPLE
+location
+0,5
+1,5
+2,5
+
+5
+length    2
+color     BLUE
+location
+4,0
+5,0
+
+6
+length    2
+color     ORANGE
+location
+4,1
+4,2
+
+7
+length    3
+color     GREY
+location
+3,3
+4,3
+5,3
+
+8
+length    2
+color     GREEN
+location
+3,4
+3,5
+
+9
+length  2
+color    YELLOW
+location
+5,4
+5,5

@@ -68,6 +68,13 @@ class Rushhour(object):
                     # make list of cars
                     self.car_list.append(car)
                 self.board = Board(entrance)
+        # load the cars into the Grid
+        # x values are rows, y values are columns
+        for car in self.car_list:
+            for coordinate in car.coordinate:
+                row = coordinate[0]
+                column = coordinate[1]
+                self.grid[row][column] = int(car.id)
 
     def move(self, command, id):
         """Function for moving the cars on the board"""
