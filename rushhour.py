@@ -83,16 +83,54 @@ class Rushhour(object):
 
     def check_move(self, move, car_id):
         """checks if the move is legal"""
-
         # counter = 0
         car = self.car_list[int(car_id) - 1]
         for car_not in self.car_list:
             if car_not == car:
                 pass
             else:
-                for coordinate in car_not.coordinate:
-                    if coordinate in car.temp_coordinates(move):
-                        return False
+                if len(car.coordinate) == 2:
+                    if car.coordinate[0][0] == car.coordinate[1][0]:
+                        for i in range(car.coordinate[0][1] - move[0]):
+                            doof = [0, 0]
+                            doof[0] = i
+                            doof[1] = i + 1
+                            for coordinate in car_not.coordinate:
+                                if coordinate in car.temp_coordinates(doof):
+                                    return False
+                    else:
+                        for i in range(car.coordinate[0][0] - move[0]):
+                            doof = [0, 0]
+                            doof[0] = i
+                            doof[1] = i + 1
+                            for coordinate in car_not.coordinate:
+                                if coordinate in car.temp_coordinates(doof):
+                                    return False
+                                    for coordinate in car_not.coordinate:
+                                        if coordinate in car.temp_coordinates(doof):
+                                            return False
+                else:
+                    if car.coordinate[0][0] == car.coordinate[1][0]:
+                        for i in range(car.coordinate[0][1] - move[0]):
+                            doof = [0, 0, 0]
+                            doof[0] = i
+                            doof[1] = i + 1
+                            doof[3] = i + 2
+                            for coordinate in car_not.coordinate:
+                                if coordinate in car.temp_coordinates(doof):
+                                    return False
+                    else:
+                        for i in range(car.coordinate[0][0] - move[0]):
+                            doof = [0, 0]
+                            doof[0] = i
+                            doof[1] = i + 1
+                            doof[2] = i + 2
+                            for coordinate in car_not.coordinate:
+                                if coordinate in car.temp_coordinates(doof):
+                                    return False
+                                    for coordinate in car_not.coordinate:
+                                        if coordinate in car.temp_coordinates(doof):
+                                            return False
         return True
 
     def check_path(self, command, car_id):
