@@ -91,6 +91,16 @@ class Rushhour(object):
                         return False
         return True
 
+    def check_path(self, command, car_id):
+        """Checks if path is free, so no teleporting of car can happen """
+        car = self.car_list[int(car_id) - 1]
+        for i in range(car.coordinate[0][0] - command[0]):
+            command[0] = command[i]
+            command[1] = command[i + 1]
+            print(command)
+            # if car.temp_coordinates(command)
+
+
     def won(self):
         """Win condition for the game"""
         # if car 1 (red car) is on exit coordinate game is won
