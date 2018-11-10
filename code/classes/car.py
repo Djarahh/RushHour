@@ -15,46 +15,46 @@ class Car(object):
         self.coordinate = coordinate
         # direction of car
         self.direction = self.direction()
-        # whether the car is THE red car, yes or no
-        self.car = car
+        # I want another atribute in Car: depending on the direction, the
+        # coordinates must be saved as the move input (list, only x or y)
+        self.x = 0
+        self.y = 0
 
     def update_coordinates(self, command):
-        # command = command.split(",")
-        if self.direction == "x":
-            self.coordinate[0][1] = command[0]
-            self.coordinate[1][1] = command[1]
+        """Updates the coordinates"""
+        self.update_x_y(command)
+        if type(self.x) == list:
+            for i in range(len(self.x)):
+                self.coordinate[i][0] = self.x[i]
         else:
-            self.coordinate[0][0] = command[0]
-            self.coordinate[1][0] = command[1]
-        if len(self.coordinate) == 3:
-            if self.direction == "x":
-                self.coordinate[0][2] = command[2]
-            else:
-                self.coordinate[2][0] = command[2]
+            for i in range(len(self.y)):
+                self.coordinate[i][1] = self.y[i]
+
+    def update_x_y(self, command):
+        """Creates x or y function for use in the update/temp functions"""
+        if self.direction == "x":
+            self.x = command
+        else:
+            self.y = command
 
     def direction(self):
-        if self.coordinate[0][0] == self.coordinate[1][0]:
+        """Sets direction atribute"""
+        if self.coordinate[0][1] == self.coordinate[1][1]:
             return("x")
         else:
             return("y")
 
     def temp_coordinates(self, command):
+        """Function for testing if the inputted command is valid"""
+        self.update_x_y(command)
         temp = copy.deepcopy(self.coordinate)
-        if self.direction == "x":
-            temp[0][1] = command[0]
-            temp[1][1] = command[1]
+        if type(self.x) == list:
+            for i in range(len(self.x)):
+                temp[i][0] = self.x[i]
         else:
-            temp[0][0] = command[0]
-            temp[1][0] = command[1]
-        if len(temp) == 3:
-            if self.direction == "x":
-                temp[0][2] = command[2]
-            else:
-                temp[2][0] = command[2]
+            for i in range(len(self.y)):
+                temp[i][1] = self.y[i]
         return temp
-
-    def return_coordinates(self):
-        return(self.coordinate)
 
     def __str__(self):
         return(f"{self.coordinate}")

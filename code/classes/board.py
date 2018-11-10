@@ -1,18 +1,15 @@
 class Board(object):
     """ Defines a board. """
-    def __init__(self, entrance):
-        self.entrance = entrance
-        self.coordinate = []
+    def __init__(self):
+        self.entrance = []
+        self.grid = 0
+        self.length = 0
 
-    def load(self, coordinate):
-        self.coordinate.append(coordinate)
-
-    def is_occupied(self):
-        for block in self.coordinate:
-            if block:
-                return False
-            else:
-                return True
+    def set_zero(self):
+        """Sets all dictionary values of grid to 0"""
+        for y in range(self.length):
+            for x in range(self.length):
+                self.grid[x, y] = 0
 
     def __str__(self):
         return(f"{self.coordinate}")
