@@ -191,6 +191,7 @@ class Rushhour(object):
             self.update_board()
             # print boards
             self.print_board()
+            self.visualize_board()
 
     def clean_input(self, command):
         """Converts input to usable list of integers"""
@@ -303,5 +304,5 @@ class Rushhour(object):
 
 if __name__ == "__main__":
     rushhour = Rushhour("1")
-    rushhour.willekeurig()
+    rushhour.play()
     # rushhour.visualize_board()
