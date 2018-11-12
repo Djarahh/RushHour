@@ -1,6 +1,6 @@
 import os
 import sys
-import pygame as pg
+
 directory = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(directory, "code", "classes"))
 sys.path.append(os.path.join(directory, "data"))
@@ -191,7 +191,6 @@ class Rushhour(object):
             self.update_board()
             # print boards
             self.print_board()
-            self.visualize_board()
 
     def clean_input(self, command):
         """Converts input to usable list of integers"""
@@ -246,61 +245,6 @@ class Rushhour(object):
             self.print_board()
             print(counter)
             counter += 1
-
-    def visualize_board(self):
-        """
-        Shows a visual respresentation of the board
-        """
-        WIDTH = 40
-        HEIGHT = 40
-        MARGIN = 2
-
-        pg.init()
-
-        WINDOW_SIZE = [255, 255]
-        screen = pg.display.set_mode(WINDOW_SIZE)
-
-        pg.display.set_caption("RushHour")
-        done = False
-        clock = pg.time.Clock()
-
-        # -------- Main Program Loop -----------
-        while not done:
-            # update the board so all cars are loaded
-            self.update_board()
-
-            for event in pg.event.get():  # User did something
-                if event.type == pg.QUIT:  # If user clicked close
-                    done = True  # Flag that we are done so we exit this loop
-
-            # Set the screen background
-            screen.fill((0, 0, 0))
-
-            # Draw the grid
-            for y in range(self.board.length):
-                for x in range(self.board.length):
-                    if not self.board.grid[x, y] == 0:
-                        color = (255, 0, 0)
-                        # car_id = self.board.grid[x, y]
-                        # for car in self.car_list:
-                        #     if car.id == car_id:
-                        #         color = car.color
-                    else:
-                        color = (255, 255, 255)
-
-                    pg.draw.rect(screen, color, [(MARGIN + WIDTH) * x + MARGIN,
-                                (MARGIN + HEIGHT) * y + MARGIN, WIDTH, HEIGHT])
-
-            # Limit to 60 frames per second
-            clock.tick(60)
-
-            # Go ahead and update the screen with what we've drawn.
-            pg.display.flip()
-
-        # Be IDLE friendly. If you forget this line, the program will 'hang'
-        # on exit.
-        pg.quit()
-
 
 if __name__ == "__main__":
     rushhour = Rushhour("1")
