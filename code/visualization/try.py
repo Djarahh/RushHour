@@ -44,9 +44,8 @@ done = False
 clock = pygame.time.Clock()
 
 while True:
-    screen
+    screen.fill(BLACK)
 
-#ik ben bezig met code
 
 # -------- Main Program Loop -----------
 while not done:
