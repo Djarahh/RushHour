@@ -248,5 +248,5 @@ class Rushhour(object):
 
 if __name__ == "__main__":
     rushhour = Rushhour("1")
-    rushhour.play()
+    rushhour.willekeurig()
     # rushhour.visualize_board()
