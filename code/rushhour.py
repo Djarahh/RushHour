@@ -74,13 +74,14 @@ class Rushhour(object):
     def make_entrance(self, text_line):
         """Add entrance of board to self.board"""
         entrance_x_y = text_line.rsplit()[1].rsplit(',')
-        self.board.entrance.append(int(entrance_x_y[1]))
         self.board.entrance.append(int(entrance_x_y[0]))
+        self.board.entrance.append(int(entrance_x_y[1]))
 
     def won(self):
         """Win condition for the game"""
         # if car 1 (red car) is on exit coordinate game is won
-        self.move(self.board.entrance, 1)
+        command = [4, 5]
+        self.move(command, 1)
         car = self.car_list[0].coordinate
         for coordinate in car:
             if coordinate == self.board.entrance:
@@ -251,5 +252,5 @@ class Rushhour(object):
 
 if __name__ == "__main__":
     rushhour = Rushhour("2")
-    rushhour.willekeurig()
+    rushhour.play()
     # rushhour.visualize_board()
