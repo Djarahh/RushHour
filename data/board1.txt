@@ -1,2 +1,2 @@
 board    6
-entrance  2,5
+entrance  5,2
