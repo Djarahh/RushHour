@@ -9,6 +9,7 @@ from car import Car
 from board import Board
 from archive import Archive
 from random import randint
+from visualize_board import BoardVisualization
 
 
 class Rushhour(object):
@@ -208,6 +209,8 @@ class Rushhour(object):
             self.update_board()
             # print boards
             self.print_board()
+            # visualize board
+            BoardVisualization(self.board, self.car_list)
 
     def clean_input(self, command):
         """Converts input to usable list of integers"""
@@ -260,6 +263,6 @@ class Rushhour(object):
 
 
 if __name__ == "__main__":
-    rushhour = Rushhour("2")
-    rushhour.willekeurig()
+    rushhour = Rushhour("1")
+    rushhour.play()
     # rushhour.visualize_board()

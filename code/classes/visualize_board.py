@@ -4,24 +4,19 @@ import tkinter as tk
 
 
 class BoardVisualization:
-    def __init__(self):
+    def __init__(self, board, cars):
         """Visualizes a RushHour board with cars
 
            board = (Board object with .entrance, .grid, .length)
            cars = (list of cars with .id, .length, .color, .coordinate,\
             .direction)
         """
-        # self.board = board
-        # self.cars = cars
-        # self.board_length = self.board.length
-        # self.width = self.board.length
-        # self.height = self.board.length
-
-        # 40 is the width of one block
-        self.board_length = 6
+        self.board = board
+        self.cars = cars
         self.block = 40
-        self.width = self.board_length*self.block
-        self.height = self.board_length*self.block
+        self.board_length = self.board.length
+        self.width = self.board.length*self.block
+        self.height = self.board.length*self.block
         self.max_dim = self.width
 
         # Initialize a drawing surface
