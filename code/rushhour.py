@@ -90,8 +90,6 @@ class Rushhour(object):
         else:
             return False
 
-
-
     def move(self, command, id):
         """Function for moving the cars on the board"""
         # selecting the right car
@@ -251,6 +249,6 @@ class Rushhour(object):
             self.print_board()
 
 if __name__ == "__main__":
-    rushhour = Rushhour("2")
+    rushhour = Rushhour("4")
     rushhour.play()
     # rushhour.visualize_board()
