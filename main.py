@@ -1,20 +1,26 @@
+# test program for main
+
+# voeg de huidige structuur toe aan path
 import os
 import sys
+
 directory = os.path.dirname(os.path.realpath(__file__))
 sys.path.append(os.path.join(directory, "code", "classes"))
 sys.path.append(os.path.join(directory, "data"))
 sys.path.append(os.path.join(directory, "code", "algoritmes"))
 
-# importeer het spel, de algoritmes en een visualisatie
-from rushhour.py import Rushhour
-from willekeurig.py import Willekeurig
+from car import Car
+from board import Board
+from random import randint
+from willekeurig import Willekeurig
+from rushhour import Rushhour
 
 def main():
-    game = Rushhour(gamename)
+    # how to import willekeurig
+    rushhour = Rushhour("1")
+    willekeurig = Willekeurig(rushhour)
 
-    # implementeer willekeurig algoritme
-    A = Willekeurig(game)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
