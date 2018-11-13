@@ -35,8 +35,7 @@ class BoardVisualization:
                                                               fill="white")
 
         self.load_cars()
-        self.text = self.w.create_text(25, 0, anchor='nw', text="This is the\
-         solution")
+        self.text = self.w.create_text(25, 0, anchor='nw', text="This is the solution")
         self.master.update()
 
         self.master.mainloop()
@@ -54,8 +53,8 @@ class BoardVisualization:
             for coordinate in coordinates:
                 i = coordinate[0]
                 j = coordinate[1]
-                x1, y1 = self.map_coords(i*40, j*40)
-                x2, y2 = self.map_coords(i*40 + 40, j*40 + 40)
+                x1, y1 = self.map_coords(i*40, self.width - j*40)
+                x2, y2 = self.map_coords(i*40 + 40, self.width - j*40 - 40)
                 self.blocks[(i, j)] = self.w.create_rectangle(x1, y1, x2, y2,
                                                               fill=color)
 

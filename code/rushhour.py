@@ -106,7 +106,6 @@ class Rushhour(object):
             print(self.counter)
             old_board_hashed = hash(self.board)
             self.update_board()
-            self.print_board()
 
             # put all information regarding move in archive
             step = [command, id]
