@@ -209,7 +209,7 @@ class Rushhour(object):
             # print boards
             self.print_board()
             # visualize board
-            BoardVisualization(self.board, self.car_list)
+            BoardVisualization(self.board, self.car_list, self.counter)
 
     def clean_input(self, command):
         """Converts input to usable list of integers"""

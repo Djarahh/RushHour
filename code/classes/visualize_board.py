@@ -4,11 +4,12 @@ import tkinter as tk
 
 
 class BoardVisualization:
-    def __init__(self, board, cars):
-        """Visualizes a RushHour board with cars
+    def __init__(self, board, cars, counter):
+        """
+        Visualizes a RushHour board with cars
 
-           board = (Board object with .entrance, .grid, .length)
-           cars = (list of cars with .id, .length, .color, .coordinate,\
+        board = (Board object with .entrance, .grid, .length)
+        cars = (list of cars with .id, .length, .color, .coordinate,\
             .direction)
         """
         self.board = board
@@ -18,6 +19,7 @@ class BoardVisualization:
         self.width = self.board.length*self.block
         self.height = self.board.length*self.block
         self.max_dim = self.width
+        self.counter = counter
 
         # Initialize a drawing surface
         self.master = tk.Tk()
@@ -35,7 +37,8 @@ class BoardVisualization:
                                                               fill="white")
 
         self.load_cars()
-        self.text = self.w.create_text(25, 0, anchor='nw', text="This is the solution")
+        self.text = self.w.create_text(25, 0, anchor='nw',
+                                       text=self.status_string())
         self.master.update()
 
         self.master.mainloop()
@@ -60,6 +63,7 @@ class BoardVisualization:
 
     def status_string(self):
         """Returns a status string to print with the board"""
+        return (f"This is board {self.counter}")
 
 
 if __name__ == '__main__':
