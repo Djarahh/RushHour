@@ -15,6 +15,7 @@ class Rushhour(object):
     def __init__(self, game):
         self.load_cars(f"data/cars{game}.txt")
         self.load_board(f"data/board{game}.txt")
+        self.counter = 0
 
     def load_cars(self, filename):
         """Loads the cars into rushhour"""
@@ -95,6 +96,8 @@ class Rushhour(object):
         if self.check_move(car, command) and self.inside_boundries(car, command):
             # do the move
             car.update_coordinates(command)
+            self.counter += 1
+            print(self.counter)
 
     def check_move(self, car, command):
         """Checks if no other cars are in the way"""
@@ -216,7 +219,6 @@ class Rushhour(object):
         """
         Genereert willekeurige commands voor de auto's in het spel
         """
-        counter = 0
         # while not self.won
         while not self.won():
             # pick a random car (in case of 3 cars)
@@ -243,8 +245,6 @@ class Rushhour(object):
             self.move(command, rand_id)
             self.update_board()
             self.print_board()
-            print(counter)
-            counter += 1
 
 if __name__ == "__main__":
     rushhour = Rushhour("1")
