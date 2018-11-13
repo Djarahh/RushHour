@@ -161,7 +161,7 @@ class Rushhour(object):
         counter = 0
         for y in range(self.board.length):
             for x in range(self.board.length):
-                print(rushhour.board.grid[x, y], end="  ")
+                print(self.board.grid[x, y], end="  ")
                 counter += 1
                 if counter % self.board.length == 0:
                     print("\n")
