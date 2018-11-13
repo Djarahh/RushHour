@@ -1,8 +1,17 @@
 # RushHour
-Vragen:
-- Hoe kunnen we checken of onze functies doen wat we willen, aangezien we geen
-visualisatie hebben van het bord.
+
 qvdpost@gmail.com - 0634123112
+
+Done:
++ rushhour.py werkt
++ main.py werkt
++ willekeurig algoritme werkt
++ 'grote moves' werkt
+
+To do list:
++ visualisatie
++ wat gaan we opslaan uit elk algoritme en hoe visualiseren we dit?
++ won functie aanpassen zodat rode autotje een forced move maakt als de weg vrij is naar de uitgang
 
 Exploration:
 Upper Bound:
@@ -15,7 +24,7 @@ De auto's zelf hebben voor lengte 2 een bewegingsvrijheid van 5, voor een
 auto met lengte van 3 heeft een bewegingsvrijheid van 4. Afhankelijk van de
 hoeveelheid auto's op het spelbord kun je de statespace uitrekenen:
 (bewegingsvrijheid auto lengte 2)^aantal auto's lengte 2 * (bewegingsvrijheid
-auto lengte 3)^aantal auto's lengte 3. 
+auto lengte 3)^aantal auto's lengte 3.
 In andere woorden: voor een bord van lengte n met x auto's van lengte 2 en y auto's
 met lengte 3. Wordt de UB = (n- 1)^x * (m-2)^y
 
