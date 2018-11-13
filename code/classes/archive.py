@@ -1,7 +1,7 @@
 class Archive(object):
     """docstring for Archive."""
-    def __init__(self, arg):
-        self.sequency = 0
-        self.hash
-        self.parent
-        self.neighbour
+    def __init__(self, sequency, current_board, old_board):
+        self.sequency = sequency
+        self.hash = current_board
+        self.parent = old_board
+        self.neighbour = 0

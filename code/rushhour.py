@@ -7,6 +7,7 @@ sys.path.append(os.path.join(directory, "data"))
 
 from car import Car
 from board import Board
+from archive import Archive
 from random import randint
 
 
@@ -15,6 +16,7 @@ class Rushhour(object):
     def __init__(self, game):
         self.load_cars(f"../data/cars{game}.txt")
         self.load_board(f"../data/board{game}.txt")
+        self.archive_list = []
         self.counter = 0
 
     def load_cars(self, filename):
@@ -94,14 +96,22 @@ class Rushhour(object):
         """Function for moving the cars on the board"""
         # selecting the right car
         car = self.car_list[int(id) - 1]
+
         # check if coordinates are allowed
         if self.check_move(car, command) and self.inside_boundries(car, command):
             # do the move
             car.update_coordinates(command)
             self.counter += 1
             print(self.counter)
+            old_board_hashed = hash(self.board)
             self.update_board()
             self.print_board()
+
+            # put all information regarding move in archive
+            step = [command, id]
+            board_hashed = hash(self.board)
+            archive = Archive(step, board_hashed, old_board_hashed)
+            self.archive_list.append(archive)
 
     def check_move(self, car, command):
         """Checks if no other cars are in the way"""
@@ -250,6 +260,6 @@ class Rushhour(object):
 
 
 if __name__ == "__main__":
-    rushhour = Rushhour("3")
+    rushhour = Rushhour("2")
     rushhour.willekeurig()
     # rushhour.visualize_board()
