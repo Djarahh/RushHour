@@ -100,6 +100,8 @@ class Rushhour(object):
             car.update_coordinates(command)
             self.counter += 1
             print(self.counter)
+            self.update_board()
+            self.print_board()
 
     def check_move(self, car, command):
         """Checks if no other cars are in the way"""
@@ -245,10 +247,9 @@ class Rushhour(object):
                 command.append(coordinate)
                 command.append(coordinate + 1)
             self.move(command, rand_id)
-            self.update_board()
-            self.print_board()
+
 
 if __name__ == "__main__":
-    rushhour = Rushhour("4")
-    rushhour.play()
+    rushhour = Rushhour("3")
+    rushhour.willekeurig()
     # rushhour.visualize_board()

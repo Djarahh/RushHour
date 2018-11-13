@@ -6,7 +6,7 @@ location
 1,2
 
 2
-length    3
+length    2
 color     BLUE
 location
 1,0
@@ -87,5 +87,5 @@ location
 length  2
 color   GREY
 location
-5,4
 4,4
+5,4
