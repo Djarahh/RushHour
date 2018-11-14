@@ -1,74 +1,62 @@
-class Vertex(object):
-    def __init__(self, n):
-        self.name = n
-        self.neighbors = list()
-
-		self.distance = 9999
-		self.color = 'black'
-
-	def add_neighbor(self, v):
-		if v not in self.neighbors:
-			self.neighbors.append(v)
-			self.neighbors.sort()
+from collections import defaultdict, deque
 
 class Graph(object):
-	vertices = {}
 
-	def add_vertex(self, vertex):
-		if isinstance(vertex, Vertex) and vertex.name not in self.vertices:
-			self.vertices[vertex.name] = vertex
-			return True
-		else:
-			return False
+    def __init__(self, game):
+        """Initialization method that creates a dictionary to store graph."""
+        self.graph = {}
+        game = game
+        game.bfs()
 
-	def add_edge(self, u, v):
-		if u in self.vertices and v in self.vertices:
-			for key, value in self.vertices.items():
-				if key == u:
-					value.add_neighbor(v)
-				if key == v:
-					value.add_neighbor(u)
-			return True
-		else:
-			return False
+    def add_edge(self, move, board_hashed):
+        """Function that adds edge (move, board_hashed) to the graph."""
+        self.graph[move].append(board_hashed)
 
-	def print_graph(self):
-		for key in sorted(list(self.vertices.keys())):
-			print(key + str(self.vertices[key].neighbors) + "  " + str(self.vertices[key].distance))
+    def bfs(self, game):
+        """Function that print the Breadth First Traversal from the given source"""
+        # define the first board that will be played from
+        source = hash(game.board)
 
-	def bfs(self, vert):
-		q = list()
-		vert.distance = 0
-		vert.color = 'red'
-		for v in vert.neighbors:
-			self.vertices[v].distance = vert.distance + 1
-			q.append(v)
-
-		while len(q) > 0:
-			u = q.pop(0)
-			node_u = self.vertices[u]
-			node_u.color = 'red'
-
-			for v in node_u.neighbors:
-				node_v = self.vertices[v]
-				if node_v.color == 'black':
-					q.append(v)
-					if node_v.distance > node_u.distance + 1:
-						node_v.distance = node_u.distance + 1
-
-if __name__ == '__main__':
+        # iterate over all possible moves in the game and add them to the tree
+        while not game.won():
+            for move in game.possible_move():
+                board_hashed = hash(game.update_board(move))
+                add_edge(move, board_hashed)
 
 
-    g = Graph()
-    a = Vertex('A')
-    g.add_vertex(a)
-    g.add_vertex(Vertex('B'))
-    for i in range(ord('A'), ord('K')):
-    	g.add_vertex(Vertex(chr(i)))
+            visited = defaultdict(bool)
+            distance = defaultdict(int)
+            queue = deque()
+            queue.append(source)
+            visited[source] = True
+            distance[source] = 0
 
-    edges = ['AB', 'AE', 'BF', 'CG', 'DE', 'DH', 'EH', 'FG', 'FI', 'FJ', 'GJ', 'HI']
-    for edge in edges:
-    	g.add_edge(edge[:1], edge[1:])
+            while queue:
+                d = queue.popleft()
+                print(d, end=" ")
 
-    g.bfs(a)
-    g.print_graph()
+                for i in self.graph[d]:
+                    if not visited[i]:
+                        # check the move and if won
+                        # break --> a solution has been found within [distance] steps
+                        queue.append(i)
+                        visited[i] = True
+                        distance[i] = distance[d] + 1
+
+
+#
+#
+# BFS (G, s)                   #/Where G is the graph and s is the source node
+#       let Q be queue.
+#       Q.enqueue( s ) #//Inserting s in queue until all its neighbour vertices are marked.
+#
+#       mark s as visited.
+#       while ( Q is not empty)
+#            #//Removing that vertex from queue,whose neighbour will be visited now
+#            v  =  Q.dequeue( )
+#
+#           #//processing all the neighbours of v
+#           for all neighbours w of v in Graph G
+#                if w is not visited
+#                         Q.enqueue( w )             #//Stores w in Q to further visit its neighbour
+#                         mark w as visited.
