@@ -37,7 +37,7 @@ class SequenceVisualization:
             game.move(command, id)
 
             # update the visualization
-            visual.update(game.car_list)
+            visual.update(game.car_list, game.counter)
 
         # enter the main loop
         visual.done()
