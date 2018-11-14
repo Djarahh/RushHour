@@ -2,7 +2,7 @@ import os
 import sys
 
 directory = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(os.path.join(directory, "classes"))
+sys.path.append(os.path.join(directory, "code", "classes"))
 sys.path.append(os.path.join(directory, "data"))
 
 from car import Car
@@ -13,8 +13,8 @@ from random import randint
 class Rushhour(object):
     """docstring for Rushhour."""
     def __init__(self, game):
-        self.load_cars(f"../data/cars{game}.txt")
-        self.load_board(f"../data/board{game}.txt")
+        self.load_cars(f"data/cars{game}.txt")
+        self.load_board(f"data/board{game}.txt")
         self.counter = 0
 
     def load_cars(self, filename):
@@ -90,10 +90,48 @@ class Rushhour(object):
         else:
             return False
 
+    def make_possible_move(self):
+        """Creates a list with possible moves"""
+        move_list = []
+        cars = []
+        for command in [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]]:
+            for car in self.car_list:
+                option = self.check_move(car, command)
+                if option:
+                    if len(move_list) > 0:
+                        # for indices in list that start with car.id
+                        # if option in that list, do not add
+
+                        for i in move_list:
+                            if i[0] == car.id:
+                                if option[0] not in i[1]:
+                                    move_list.append([car.id, option])
+                                    break
+                            elif car.id not in cars:
+                                cars.append(car.id)
+                                move_list.append([car.id, option])
+
+                    else:
+                        move_list.append([car.id, option])
+                        cars.append(car.id)
+
+        return move_list
+
+    def make_possible_commands(self):
+        move_list = self.make_possible_move()
+        possible_commands_list = []
+        for i in range(len(move_list)):
+            id = move_list[i][0]
+            for j in range(len(move_list[i][1])):
+                thing = id, tuple(move_list[i][1][j])
+                possible_commands_list.append(thing)
+        print(possible_commands_list)
+
     def move(self, command, id):
         """Function for moving the cars on the board"""
         # selecting the right car
         car = self.car_list[int(id) - 1]
+        self.make_possible_commands()
         # check if coordinates are allowed
         if self.check_move(car, command) and self.inside_boundries(car, command):
             # do the move
@@ -107,29 +145,26 @@ class Rushhour(object):
         """Checks if no other cars are in the way"""
         for car_rest in self.car_list:
             # the car is allowed to move on its own coordinates
-            if car_rest == car:
-                pass
-            else:
+            if car_rest is not car:
                 # check all the coordinates in between the original coordinates
                 # and the inputted coordinates
+                # print(car.id, car_rest.id)
                 if not self.try_temporary_command(command, car, car_rest):
                     return False
-                # no point in moving on the spot (so making no move)
-                if car.temp_coordinates(command) == car.coordinate:
-                    return False
-        return True
+        # print(self.try_temporary_command(command, car, car_rest))
+        return self.try_temporary_command(command, car, car_rest)
 
     def try_temporary_command(self, command, car, car_rest):
         """Perform control on temporary moves"""
-        i = self.indexing_constant(car)
-        # check every coordinate in between begin and end using steps of 1
-        for step in range(abs(car.coordinate[0][i] - command[0])):
-            temp_command = self.make_temporary_command(command, car, step)
+        if car_rest is not car:
+            # check every coordinate in between begin and end using steps of 1
+            temp_command = self.make_temporary_command(command, car)
             # check temp_coordinates
-            for coordinate in car.temp_coordinates(temp_command):
-                if coordinate in car_rest.coordinate:
-                    return False
-        return True
+            for command in temp_command:
+                for coordinate in car.temp_coordinates(command):
+                    if coordinate in car_rest.coordinate:
+                        return False
+        return self.make_temporary_command(command, car)
 
     def indexing_constant(self, car):
         """Returns a integer for the indexation of the coordinate system"""
@@ -139,19 +174,21 @@ class Rushhour(object):
             i = 1
         return i
 
-    def make_temporary_command(self, command, car, step):
+    def make_temporary_command(self, command, car):
         """Function for the creation of a temporary coordinate"""
         i = self.indexing_constant(car)
         # determine the direction of the move and change the steps accordingly
-        if (car.coordinate[0][i] - command[0]) < 0:
-            step = -step
-        # calculate the next x or y coordinate in the move
-        next_x_or_y = - (car.coordinate[0][i] - command[0] - step)
-        temp_command = []
-        # create the temp_command
-        for j in range(len(car.coordinate)):
-            temp_command.append(car.coordinate[j][i] + next_x_or_y)
-        return temp_command
+        temp_command_list = []
+        for step in range(abs(car.coordinate[0][i] - command[0])):
+            step += 1
+            if range((car.coordinate[0][i] - command[0]) < 0):
+                step = -step
+            temp_command = []
+            for j in range(len(car.coordinate)):
+                temp_command.append(car.coordinate[j][i] - step)
+            if (car.coordinate[j][i] - step) is not 6:
+                temp_command_list.append(temp_command)
+        return temp_command_list
 
     def inside_boundries(self, car, command):
         """Checks if move is inside board"""
@@ -182,7 +219,10 @@ class Rushhour(object):
 
     def play(self):
         """Lets play a game"""
-
+        # update board
+        self.update_board()
+        # print boards
+        self.print_board()
         print("This is russhour!!")
         while not self.won():
             command = input("> ").upper()
@@ -194,10 +234,6 @@ class Rushhour(object):
                     command = self.clean_input(command[1])
                     if self.check_command(command):
                         self.move(command, id)
-            # update board
-            self.update_board()
-            # print boards
-            self.print_board()
 
     def clean_input(self, command):
         """Converts input to usable list of integers"""
@@ -251,5 +287,5 @@ class Rushhour(object):
 
 if __name__ == "__main__":
     rushhour = Rushhour("3")
-    rushhour.willekeurig()
+    rushhour.play()
     # rushhour.visualize_board()
