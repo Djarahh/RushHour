@@ -1,31 +1,34 @@
 from collections import defaultdict, deque
+from archive import Archive
 
 class Graph(object):
 
     def __init__(self, game):
         """Initialization method that creates a dictionary to store graph."""
-        self.graph = {}
+        self.graph = []
         game = game
-        game.bfs()
+        game.bfs(game)
 
-    def add_edge(self, move, board_hashed):
-        """Function that adds edge (move, board_hashed) to the graph."""
-        self.graph[move].append(board_hashed)
+    def add_edge(self, game, distance, visited):
+        """Function that adds edge archive to the graph."""
+        # iterate over all possible moves in the game and add them to the tree
+        for move in game.possible_move():
+            board_hashed = hash(game.board)
+            parent_hashed = hash(game.update_board())
+            archive = Archive(move, board_hashed, parent_hashed, distance, visited)
+            self.graph.append(archive)
 
     def bfs(self, game):
         """Function that print the Breadth First Traversal from the given source"""
         # define the first board that will be played from
         source = hash(game.board)
-
-        # iterate over all possible moves in the game and add them to the tree
+        self.distance = 0
+        # do find new moves while the game has not been won
         while not game.won():
-            for move in game.possible_move():
-                board_hashed = hash(game.update_board(move))
-                add_edge(move, board_hashed)
-
-
+            self.distance += 1
             visited = defaultdict(bool)
-            distance = defaultdict(int)
+            self.add_edge(game, self.distance, visited)
+
             queue = deque()
             queue.append(source)
             visited[source] = True
