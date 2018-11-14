@@ -70,8 +70,10 @@ class BoardVisualization:
         self.master.update()
 
         # Update title
+        self.w.create_text(25, 0, anchor='nw', text="")
         self.text = self.w.create_text(25, 0, anchor='nw',
                                        text=self.status_string(counter))
+
 
     def done(self):
         """Goes into the main loop"""

@@ -2,7 +2,7 @@ import os
 import sys
 
 directory = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(os.path.join(directory, "code", "classes"))
+sys.path.append(os.path.join(directory, "classes"))
 sys.path.append(os.path.join(directory, "data"))
 
 from car import Car

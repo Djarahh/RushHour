@@ -1,14 +1,14 @@
 from random import randint
 
-class Willekeurig(object):
+class Randomize(object):
     """docstring for Willekeurig."""
     def __init__(self, game):
         game = game
-        self.willekeurig(game)
+        self.randomize(game)
 
-    def willekeurig(self, game):
+    def randomize(self, game):
         """
-        Genereert willekeurige commands voor de auto's in het spel
+        Generates random commands for RushHour
         """
         counter = 0
         # while not self.won
@@ -39,8 +39,3 @@ class Willekeurig(object):
             game.print_board()
             print(counter)
             counter += 1
-
-# While not Done
-    # case.do_random
-    # case.remember_move
-    # case.visualize_move
