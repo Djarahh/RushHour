@@ -193,7 +193,7 @@ class Rushhour(object):
     def play(self):
         """Lets play a game"""
 
-        print("This is russhour!!")
+        print("This is RushHour!!")
         while not self.won():
             command = input("> ").upper()
             # call update board function
@@ -209,7 +209,8 @@ class Rushhour(object):
             # print boards
             self.print_board()
             # visualize board
-            BoardVisualization(self.board, self.car_list, self.counter)
+            visual = BoardVisualization(self.board, self.car_list, self.counter)
+            visual.done()
 
     def clean_input(self, command):
         """Converts input to usable list of integers"""

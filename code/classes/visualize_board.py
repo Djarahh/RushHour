@@ -9,9 +9,9 @@ class BoardVisualization:
         Visualizes a RushHour board with cars
 
         board = (Board object with .entrance, .grid, .length)
-        cars = (list of cars with .id, .length, .color, .coordinate,\
-            .direction)
+        cars = (list of cars with .id, .length, .color, .coordinate, .direction)
         """
+
         self.board = board
         self.cars = cars
         self.block = 40
@@ -27,21 +27,9 @@ class BoardVisualization:
         self.w.pack()
         self.master.update()
 
-        # Draw white squares
-        self.blocks = {}
-        for i in range(self.board_length):
-            for j in range(self.board_length):
-                x1, y1 = self.map_coords(i*40, j*40)
-                x2, y2 = self.map_coords(i*40 + 40, j*40 + 40)
-                self.blocks[(i, j)] = self.w.create_rectangle(x1, y1, x2, y2,
-                                                              fill="white")
+        self.update(self.cars, self.counter)
 
-        self.load_cars()
-        self.text = self.w.create_text(25, 0, anchor='nw',
-                                       text=self.status_string())
         self.master.update()
-
-        self.master.mainloop()
 
     def map_coords(self, x, y):
         """Maps grid positions to window positions (in pixels)."""
@@ -61,9 +49,33 @@ class BoardVisualization:
                 self.blocks[(i, j)] = self.w.create_rectangle(x1, y1, x2, y2,
                                                               fill=color)
 
-    def status_string(self):
+    def status_string(self, counter):
         """Returns a status string to print with the board"""
-        return (f"This is board {self.counter}")
+        return (f"This is board {counter}")
+
+    def update(self, cars, counter):
+        """Updates the board visualization"""
+
+        # Draw white blocks
+        self.blocks = {}
+        for i in range(self.board_length):
+            for j in range(self.board_length):
+                x1, y1 = self.map_coords(i*40, j*40)
+                x2, y2 = self.map_coords(i*40 + 40, j*40 + 40)
+                self.blocks[(i, j)] = self.w.create_rectangle(x1, y1, x2, y2,
+                                                              fill="white")
+        # Color in the car blocks
+        self.cars = cars
+        self.load_cars()
+        self.master.update()
+
+        # Update title
+        self.text = self.w.create_text(25, 0, anchor='nw',
+                                       text=self.status_string(counter))
+
+    def done(self):
+        """Goes into the main loop"""
+        self.master.mainloop()
 
 
 if __name__ == '__main__':
