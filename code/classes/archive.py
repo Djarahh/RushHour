@@ -4,4 +4,4 @@ class Archive(object):
         self.sequency = sequency
         self.hash = current_board
         self.parent = old_board
-        self.neighbour = 0
+        self.distance = 0
