@@ -39,3 +39,8 @@ class Willekeurig(object):
             game.print_board()
             print(counter)
             counter += 1
+
+# While not Done
+    # case.do_random
+    # case.remember_move
+    # case.visualize_move

@@ -5,6 +5,7 @@ class Board(object):
         self.grid = 0
         self.length = 0
 
+
     def set_zero(self):
         """Sets all dictionary values of grid to 0"""
         for y in range(self.length):

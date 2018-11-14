@@ -43,6 +43,10 @@ done = False
 # Used to manage how fast the screen updates
 clock = pygame.time.Clock()
 
+while True:
+    screen.fill(BLACK)
+
+
 # -------- Main Program Loop -----------
 while not done:
     for event in pygame.event.get():  # User did something

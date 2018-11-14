@@ -7,14 +7,17 @@ sys.path.append(os.path.join(directory, "data"))
 
 from car import Car
 from board import Board
+from archive import Archive
 from random import randint
+from visualize_board import BoardVisualization
 
 
 class Rushhour(object):
     """docstring for Rushhour."""
     def __init__(self, game):
-        self.load_cars(f"data/cars{game}.txt")
-        self.load_board(f"data/board{game}.txt")
+        self.load_cars(f"../data/cars{game}.txt")
+        self.load_board(f"../data/board{game}.txt")
+        self.archive_list = []
         self.counter = 0
 
     def load_cars(self, filename):
@@ -138,8 +141,14 @@ class Rushhour(object):
             car.update_coordinates(command)
             self.counter += 1
             print(self.counter)
+            old_board_hashed = hash(self.board)
             self.update_board()
-            self.print_board()
+
+            # put all information regarding move in archive
+            step = [command, id]
+            board_hashed = hash(self.board)
+            archive = Archive(step, board_hashed, old_board_hashed)
+            self.archive_list.append(archive)
 
     def check_move(self, car, command):
         """Checks if no other cars are in the way"""
@@ -234,6 +243,13 @@ class Rushhour(object):
                     command = self.clean_input(command[1])
                     if self.check_command(command):
                         self.move(command, id)
+            # update board
+            self.update_board()
+            # print boards
+            self.print_board()
+            # visualize board
+            visual = BoardVisualization(self.board, self.car_list, self.counter)
+            visual.done()
 
     def clean_input(self, command):
         """Converts input to usable list of integers"""
