@@ -1,15 +1,15 @@
-import os
-import sys
+# import os
+# import sys
+#
+# directory = os.path.dirname(os.path.realpath(__file__))
+# sys.path.append(os.path.join(directory, "classes"))
+# sys.path.append(os.path.join(directory, "data"))
 
-directory = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(os.path.join(directory, "classes"))
-sys.path.append(os.path.join(directory, "data"))
-
-from car import Car
-from board import Board
-from archive import Archive
+from classes.car import Car
+from classes.board import Board
+from classes.archive import Archive
 from random import randint
-from visualize_board import BoardVisualization
+from classes.visualize_board import BoardVisualization
 
 
 class Rushhour(object):

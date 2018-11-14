@@ -27,7 +27,11 @@ class BoardVisualization:
         self.w.pack()
         self.master.update()
 
-        self.update(self.cars, self.counter)
+        # set title
+        self.text = self.w.create_text(25, 0, anchor='nw',
+                                       text=self.status_string())
+
+        self.update(self.cars)
 
         self.master.update()
 
@@ -49,11 +53,11 @@ class BoardVisualization:
                 self.blocks[(i, j)] = self.w.create_rectangle(x1, y1, x2, y2,
                                                               fill=color)
 
-    def status_string(self, counter):
+    def status_string(self):
         """Returns a status string to print with the board"""
-        return (f"This is board {counter}")
+        return ("This is RushHour")
 
-    def update(self, cars, counter):
+    def update(self, cars):
         """Updates the board visualization"""
 
         # Draw white blocks
@@ -68,12 +72,6 @@ class BoardVisualization:
         self.cars = cars
         self.load_cars()
         self.master.update()
-
-        # Update title
-        self.w.create_text(25, 0, anchor='nw', text="")
-        self.text = self.w.create_text(25, 0, anchor='nw',
-                                       text=self.status_string(counter))
-
 
     def done(self):
         """Goes into the main loop"""
