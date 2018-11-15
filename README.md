@@ -7,11 +7,12 @@ Done:
 + 'grote moves' werkt
 + visualisatie is af
 + won functie aanpassen zodat rode autotje een forced move maakt als de weg vrij is naar de uitgang
++ lijkt erop dat alle init.py dingen werken!
++ rushhour.py aangepast zodat je m alleen nog kan runnen vanuit main
++ master voor testing
 
 To do list:
 
-+ importeren met een init.py bestand ipv met sys.path.append(blabla)
-+ niet meer rushhour.py runnen, maar alles vanuit main.py
 
 QUOTES:
 
