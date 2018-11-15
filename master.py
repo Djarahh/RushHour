@@ -1,15 +1,15 @@
+# rushhour.py but with the play function included.
+# visual also included
 from code.classes.car import Car
 from code.classes.board import Board
-# from code.classes.archive import Archive
-# from code.classes.visualize_board import BoardVisualization
-
+from code.classes.archive import Archive
+from code.classes.visualize_board import BoardVisualization
 
 class Rushhour(object):
     """docstring for Rushhour."""
     def __init__(self, game):
         self.load_cars(f"data/cars{game}.txt")
         self.load_board(f"data/board{game}.txt")
-        self.archive_list = []
         self.counter = 0
 
     def load_cars(self, filename):
@@ -88,7 +88,8 @@ class Rushhour(object):
     def make_possible_move(self):
         """Creates a list with possible moves"""
         move_list = []
-        for command in [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]]:
+        cars = []
+        for command in [[0,1], [1,2], [2,3], [3,4], [4,5]]:
             for car in self.car_list:
                 option = self.check_move(car, command)
                 if option:
@@ -118,12 +119,15 @@ class Rushhour(object):
             if car_rest is not car:
                 # check all the coordinates in between the original coordinates
                 # and the inputted coordinates
+                # print(car.id, car_rest.id)
                 if not self.try_temporary_command(command, car, car_rest):
                     return False
+        # print(self.try_temporary_command(command, car, car_rest))
         return self.try_temporary_command(command, car, car_rest)
 
     def try_temporary_command(self, command, car, car_rest):
         """Perform control on temporary moves"""
+        temp_command_list = []
         if car_rest is not car:
             # check every coordinate in between begin and end using steps of 1
             temp_command = self.make_temporary_command(command, car)
@@ -154,7 +158,7 @@ class Rushhour(object):
             temp_command = []
             for j in range(len(car.coordinate)):
                 temp_command.append(car.coordinate[j][i] - step)
-            if (car.coordinate[j][i] - step) is not self.board.length:
+            if (car.coordinate[j][i] - step) is not 6:
                 temp_command_list.append(temp_command)
         return temp_command_list
 
@@ -184,3 +188,62 @@ class Rushhour(object):
                 x = coordinate[0]
                 y = coordinate[1]
                 self.board.grid[x, y] = int(car.id)
+
+    def play(self):
+        """Lets play a game"""
+        # update board
+        self.update_board()
+        # print boards
+        self.print_board()
+        print("This is russhour!!")
+        while not self.won():
+            command = input("> ").upper()
+            # call update board function
+            if command:
+                if command[0].isdigit():
+                    command = command.split()
+                    id = command[0]
+                    command = self.clean_input(command[1])
+                    if self.check_command(command):
+                        self.move(command, id)
+            visual = BoardVisualization(self.board, self.car_list, self.counter)
+            visual.done()
+
+
+    def clean_input(self, command):
+        """Converts input to usable list of integers"""
+        command = command.split(",")
+        # convert command to integers
+        command_clean = []
+        for i in command:
+            i = int(i)
+            command_clean.append(i)
+        return command_clean
+
+    def check_command(self, command):
+        """Checks if the command is valid"""
+        if len(command) == 2:
+            if abs(int(command[0]) - int(command[1])) == 1:
+                return True
+        elif len(command) == 3:
+            if abs(int(command[0]) - int(command[2])) == 2:
+                return True
+        return False
+
+    def randomize_possible_moves(self):
+        """Chooses a random move from the move_list. The move_list contains
+        all possible moves, formatted in
+        [car.id, [coordinate[1], coordinate[2]]]"""
+        while not self.won():
+            command_list = self.make_possible_move()
+            rand_int = randint(0, len(command_list) - 1)
+            input = command_list[rand_int]
+            car_id = input[0]
+            command = input[1]
+            self.move(command, car_id)
+
+
+if __name__ == "__main__":
+    rushhour = Rushhour("1")
+    rushhour.play()
+    # rushhour.visualize_board()
