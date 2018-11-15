@@ -21,7 +21,7 @@ location
 
 4
 length    2
-color     ORANGE
+color     MAGENTA
 location
 1,1
 2,1
@@ -43,7 +43,7 @@ location
 
 7
 length    2
-color     BLUE
+color     CYAN
 location
 4,2
 4,3
@@ -57,21 +57,21 @@ location
 
 9
 length    2
-color     BLUE
+color     DARKBLUE
 location
 2,3
 3,3
 
 10
 length    2
-color     ORANGE
+color     MAGENTA
 location
 0,4
 0,5
 
 11
 length    2
-color     BLUE
+color     PINK
 location
 3,4
 3,5
