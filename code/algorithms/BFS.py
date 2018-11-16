@@ -1,45 +1,56 @@
 from collections import defaultdict, deque
-from archive import Archive
+from classes.archive import Archive
 
 class Graph(object):
 
     def __init__(self, game):
         """Initialization method that creates a dictionary to store graph."""
-        self.graph = []
+        self.archive_list = []
         game = game
         game.bfs(game)
 
-    def add_edge(self, game, distance, visited):
+    def make_queue(self, game, distance):
         """Function that adds edge archive to the graph."""
-        # iterate over all possible moves in the game and add them to the tree
+        # iterate over all possible moves and add them to a queue and archive_list
+        self.queue = []
+        car_list_parent = self.game.car_list
         for move in game.possible_move():
-            board_hashed = hash(game.board)
-            parent_hashed = hash(game.update_board())
-            archive = Archive(move, board_hashed, parent_hashed, distance, visited)
-            self.graph.append(archive)
+            archive = Archive(move, car_list_parent, distance)
+            self.archive_list.append(archive)
+            self.queue.append(archive)
 
     def bfs(self, game):
         """Function that print the Breadth First Traversal from the given source"""
         # define the first board that will be played from
-        source = hash(game.board)
-        self.distance = 0
+        source = game.return_car_list()
+        distance = 0
+        source_board = Archive("None", source, distance)
+        self.archive_list.append(source_board)
+
         # do find new moves while the game has not been won
         while not game.won():
-            self.distance += 1
-            visited = defaultdict(bool)
-            self.add_edge(game, self.distance, visited)
+            distance += 1
+            command_list = game.make_possible_move()
 
-            queue = deque()
-            queue.append(source)
-            visited[source] = True
-            distance[source] = 0
+            for input in command_list:
+                car_id = input[0]
+                command = input[1]
+                child_car_list = game.move(command, car_id)
 
-            while queue:
-                d = queue.popleft()
-                print(d, end=" ")
+
+
+        while not game.won():
+            distance += 1
+
+            # add all possible moves to the queue and add to archive
+            self.make_queue(game, distance)
+
+            while self.queue:
+                d = self.queue.popleft()
+                # print(d, end=" ")
 
                 for i in self.graph[d]:
-                    if not visited[i]:
+                    if not self.visited[i]:
                         # check the move and if won
                         # break --> a solution has been found within [distance] steps
                         queue.append(i)

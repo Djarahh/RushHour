@@ -12,6 +12,5 @@ def main():
     rushhour = Rushhour(car_list, board)
     Randomize(rushhour)
 
-
 if __name__ == "__main__":
     main()
