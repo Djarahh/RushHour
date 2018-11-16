@@ -12,6 +12,10 @@ Done:
 + master voor testing
 
 To do list:
+- (Tula) testje maken om de visualisatie uiteindelijk via main te runnen met
+  sequenties in een .txt bestand in mapje data
+- (Yara en Stan) BFS algoritme maken
+- Branch & bound algorithm proberen
 
 QUOTES:
 

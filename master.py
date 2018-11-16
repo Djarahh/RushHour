@@ -2,7 +2,6 @@
 # visual also included
 from code.classes.car import Car
 from code.classes.board import Board
-from code.classes.archive import Archive
 from code.classes.visualize_board import BoardVisualization
 
 class Rushhour(object):
