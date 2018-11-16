@@ -1,20 +1,10 @@
 # test program for main
 
-# voeg de huidige structuur toe aan path
-import os
-import sys
-
-directory = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(os.path.join(directory, "data"))
-sys.path.append(os.path.join(directory, "code"))
-sys.path.append(os.path.join(directory, "code", "algoritmes"))
-sys.path.append(os.path.join(directory, "code", "classes"))
-
-from car import Car
-from board import Board
+from code.classes.car import Car
+from code.classes.board import Board
 from random import randint
-from willekeurig import Willekeurig
-from rushhour import Rushhour
+from code.algorithm.willekeurig import Willekeurig
+from code.rushhour import Rushhour
 
 def main():
     # how to import willekeurig
