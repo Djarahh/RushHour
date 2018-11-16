@@ -13,7 +13,6 @@ Done:
 
 To do list:
 
-
 QUOTES:
 
 Yara over Stan: hij heeft z'n appel en z'n peer door elkaar gehaald.
