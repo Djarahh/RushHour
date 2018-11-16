@@ -1,22 +1,8 @@
 # Class that visualizes a sequence of RushHour Boards
-<<<<<<< HEAD:code/visualize_sequence.py
-from code.classes.load_cars import LoadCars
-import os
-import sys
-
-directory = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(os.path.join(directory, "classes"))
-
-import tkinter as tk
-from visualize_board import BoardVisualization
-import time
-from code.rushhour import Rushhour
-=======
 
 from code.classes.visualize_board import BoardVisualization
 import time
 from master import Rushhour
->>>>>>> e161c06683e519ebae0ef545ca2a4c5a7d4a2856:visualize_sequence.py
 
 
 class SequenceVisualization:
@@ -43,12 +29,8 @@ class SequenceVisualization:
             # do the move
             command = move.split()
             id = command[0]
-<<<<<<< HEAD:code/visualize_sequence.py
-            # command = game.clean_input(command[1])
-=======
             command = game.clean_input(command[1])
             print(command)
->>>>>>> e161c06683e519ebae0ef545ca2a4c5a7d4a2856:visualize_sequence.py
             game.move(command, id)
 
             # update the visualization
