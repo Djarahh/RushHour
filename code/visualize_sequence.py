@@ -1,5 +1,5 @@
 # Class that visualizes a sequence of RushHour Boards
-
+from code.classes.load_cars import LoadCars
 import os
 import sys
 
@@ -9,7 +9,7 @@ sys.path.append(os.path.join(directory, "classes"))
 import tkinter as tk
 from visualize_board import BoardVisualization
 import time
-from rushhour import Rushhour
+from code.rushhour import Rushhour
 
 
 class SequenceVisualization:
@@ -24,8 +24,11 @@ class SequenceVisualization:
         self.sequence = sequence
         self.game_id = game_id
         self.counter = 0
+        things = LoadCars("3")
+        car_list = things.car_list
+        board = things.board
 
-        game = Rushhour(game_id)
+        game = Rushhour(car_list, board)
         visual = BoardVisualization(game.board, game.car_list, game.counter)
         for move in self.sequence:
             # wait a few seconds
@@ -33,7 +36,7 @@ class SequenceVisualization:
             # do the move
             command = move.split()
             id = command[0]
-            command = game.clean_input(command[1])
+            # command = game.clean_input(command[1])
             game.move(command, id)
 
             # update the visualization
