@@ -1,5 +1,6 @@
 from random import randint
 
+
 class Randomize(object):
     """docstring for Willekeurig."""
     def __init__(self, game):
