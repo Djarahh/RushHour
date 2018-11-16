@@ -1,15 +1,8 @@
 # Class that visualizes a sequence of RushHour Boards
 
-import os
-import sys
-
-directory = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(os.path.join(directory, "classes"))
-
-import tkinter as tk
-from visualize_board import BoardVisualization
+from code.classes.visualize_board import BoardVisualization
 import time
-from rushhour import Rushhour
+from master import Rushhour
 
 
 class SequenceVisualization:
@@ -34,6 +27,7 @@ class SequenceVisualization:
             command = move.split()
             id = command[0]
             command = game.clean_input(command[1])
+            print(command)
             game.move(command, id)
 
             # update the visualization
@@ -44,5 +38,5 @@ class SequenceVisualization:
 
 
 if __name__ == '__main__':
-    sequence = ["2 0,1", "4 0,1", "3 2,3", "5 2,3", "7 0,1", "6 0,1,2", "1 0,1", "9 4,5", "11 2,3", "12 1,2", "13 1,2", "11 4,5", "9 2,3", "6 3,4,5", "1 4,5"]
-    visual = SequenceVisualization(sequence, "3")
+    sequence = ["5 0,1", "6 0,1", "2 3,4,5", "3 1,2", "1 0,1", "2 1,2,3", "7 1,2,3", "6 4,5", "2 3,4,5", "1 1,2", "5 4,5", "1 0,1", "3 0,1", "2 0,1,2", "7 0,1,2", "8 0,1", "4 1,2,3", "2 3,4,5", "7 1,2,3", "3 4,5", "7 3,4,5", "1 3,4", "2 0,1,2", "8 1,2", "5 0,1", "8 0,1", "2 3,4,5", "1 0,1", "2 0,1,2", "7 0,1,2", "6 0,1", "9 0,1", "2 3,4,5", "7 3,4,5", "4 3,4,5", "1 4,5"]
+    visual = SequenceVisualization(sequence, "1")
