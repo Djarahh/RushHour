@@ -1,6 +1,7 @@
 # Class that visualizes a sequence of RushHour Boards
 
 from code.classes.visualize_board import BoardVisualization
+from code.classes.load_cars import LoadCars
 import time
 from master import Rushhour
 
@@ -17,11 +18,7 @@ class SequenceVisualization:
         self.sequence = sequence
         self.game_id = game_id
         self.counter = 0
-        things = LoadCars("3")
-        car_list = things.car_list
-        board = things.board
-
-        game = Rushhour(car_list, board)
+        game = Rushhour(game_id)
         visual = BoardVisualization(game.board, game.car_list, game.counter)
         for move in self.sequence:
             # wait a few seconds
