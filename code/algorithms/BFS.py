@@ -5,16 +5,15 @@ class Graph(object):
 
     def __init__(self, game):
         """Initialization method that creates a dictionary to store graph."""
+        self.queue = deque()
         self.archive_list = []
         game = game
         game.bfs(game)
 
-    def make_queue(self, game, distance):
+    def make_queue(self, game, distance, car_list_parent):
         """Function that adds edge archive to the graph."""
         # iterate over all possible moves and add them to a queue and archive_list
-        self.queue = []
-        car_list_parent = self.game.car_list
-        for move in game.possible_move():
+        for move in game.make_possible_move():
             archive = Archive(move, car_list_parent, distance)
             self.archive_list.append(archive)
             self.queue.append(archive)
@@ -27,50 +26,26 @@ class Graph(object):
         source_board = Archive("None", source, distance)
         self.archive_list.append(source_board)
 
-        # do find new moves while the game has not been won
-        while not game.won():
-            distance += 1
-            command_list = game.make_possible_move()
+        # put the first possible moves into the queue
+        self.make_queue(game, distance)
 
-            for input in command_list:
-                car_id = input[0]
-                command = input[1]
-                child_car_list = game.move(command, car_id)
+        # play all possible moves from queue while the game has not been won
+        while self.queue:
+            d = self.queue.popleft()
+            move = self.archive_list[d].move
+            car_list_parent = self.archive_list[d].parent
+            car_id = move.split()[2]
+            command = move.split()[1]
+            move(car_id, command, car_list_parent)
+            child_car_list = game.return_car_list()
 
+            # if the game has been won by performing the last move return the
+            # amount of steps that were performed and break, else put the options
+            # that are made in the queue
+            if game.won():
+                return print(f"the solution was found in {self.archive_list[d].distance} steps")
+            else:
+                self.make_queue(game, self.archive_list[d].distance + 1, child_car_list)
 
-
-        while not game.won():
-            distance += 1
-
-            # add all possible moves to the queue and add to archive
-            self.make_queue(game, distance)
-
-            while self.queue:
-                d = self.queue.popleft()
-                # print(d, end=" ")
-
-                for i in self.graph[d]:
-                    if not self.visited[i]:
-                        # check the move and if won
-                        # break --> a solution has been found within [distance] steps
-                        queue.append(i)
-                        visited[i] = True
-                        distance[i] = distance[d] + 1
-
-
-#
-#
-# BFS (G, s)                   #/Where G is the graph and s is the source node
-#       let Q be queue.
-#       Q.enqueue( s ) #//Inserting s in queue until all its neighbour vertices are marked.
-#
-#       mark s as visited.
-#       while ( Q is not empty)
-#            #//Removing that vertex from queue,whose neighbour will be visited now
-#            v  =  Q.dequeue( )
-#
-#           #//processing all the neighbours of v
-#           for all neighbours w of v in Graph G
-#                if w is not visited
-#                         Q.enqueue( w )             #//Stores w in Q to further visit its neighbour
-#                         mark w as visited.
+            # hash the parent board to save space
+            self.archive_list[d].parent = hash(self.archive_list[d].parent)
