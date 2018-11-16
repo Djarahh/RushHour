@@ -8,6 +8,5 @@ def main():
     rushhour = Rushhour("3")
     Randomize(rushhour)
 
-
 if __name__ == "__main__":
     main()
