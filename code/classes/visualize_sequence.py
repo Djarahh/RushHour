@@ -20,7 +20,7 @@ class SequenceVisualization:
         visual = BoardVisualization(game.board, game.car_list, game.counter)
         for move in self.sequence:
             # wait a few seconds
-            time.sleep(0.2)
+            time.sleep(0.05)
             # do the move
             command = move.split()
             id = command[0]

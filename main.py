@@ -1,7 +1,7 @@
 from code.rushhour import Rushhour
 from code.algorithms.random_possible_moves import Randomize
 from code.classes.load_cars import LoadCars
-# from code.classes.visualize_sequence import SequenceVisualization
+from code.classes.visualize_sequence import SequenceVisualization
 from code.classes.solution_txt import TxtSolution
 
 
@@ -19,13 +19,11 @@ def main(game_id):
     A = Randomize(rushhour)
     solution = A.randomize()
 
-    print(len(solution))
-
     # Make a .txt file with the solution
     TxtSolution(game_id, solution)
 
-    # # Visualize the solution that the algorithm made
-    # SequenceVisualization(game_id)
+    # Visualize the solution that the algorithm made
+    SequenceVisualization(game_id)
 
 
 if __name__ == "__main__":
