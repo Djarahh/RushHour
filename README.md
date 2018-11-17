@@ -16,6 +16,7 @@ To do list:
   sequenties in een .txt bestand in mapje data
 - (Yara en Stan) BFS algoritme maken
 - Branch & bound algorithm proberen
+- bij alle functies specificeren wat de input is (bijv. game_id = string (number of the gameboard))
 
 QUOTES:
 

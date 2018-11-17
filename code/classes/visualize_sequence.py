@@ -1,28 +1,26 @@
 # Class that visualizes a sequence of RushHour Boards
 
 from code.classes.visualize_board import BoardVisualization
-from code.classes.load_cars import LoadCars
 import time
 from master import Rushhour
 
 
 class SequenceVisualization:
-    def __init__(self, sequence, game_id):
+    def __init__(self, game_id):
         """
         Visualizes a sequence of RushHour boards
 
-        sequence = (a list of moves)
-        start_board = (starting board)
+        game_id = string (number of the gameboard)
         """
 
-        self.sequence = sequence
+        self.sequence = self.load_sequence(f"results/solution{game_id}.txt")
         self.game_id = game_id
         self.counter = 0
         game = Rushhour(game_id)
         visual = BoardVisualization(game.board, game.car_list, game.counter)
         for move in self.sequence:
             # wait a few seconds
-            time.sleep(0.5)
+            time.sleep(0.2)
             # do the move
             command = move.split()
             id = command[0]
@@ -36,7 +34,15 @@ class SequenceVisualization:
         # enter the main loop
         visual.done()
 
+    def load_sequence(self, filename):
+        """
+        Loads in the sequence that leads to the solution of a game
 
-if __name__ == '__main__':
-    sequence = ["5 0,1", "6 0,1", "2 3,4,5", "3 1,2", "1 0,1", "2 1,2,3", "7 1,2,3", "6 4,5", "2 3,4,5", "1 1,2", "5 4,5", "1 0,1", "3 0,1", "2 0,1,2", "7 0,1,2", "8 0,1", "4 1,2,3", "2 3,4,5", "7 1,2,3", "3 4,5", "7 3,4,5", "1 3,4", "2 0,1,2", "8 1,2", "5 0,1", "8 0,1", "2 3,4,5", "1 0,1", "2 0,1,2", "7 0,1,2", "6 0,1", "9 0,1", "2 3,4,5", "7 3,4,5", "4 3,4,5", "1 4,5"]
-    visual = SequenceVisualization(sequence, "1")
+        filename = string (filename of the solutions .txt file)
+        """
+        sequence = []
+
+        with open(filename, 'r') as file:
+            for text_line in file:
+                sequence.append(text_line.strip())
+        return sequence
