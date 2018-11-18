@@ -21,4 +21,4 @@ class TxtSolution(object):
             for move in self.solution:
                 car_id = move[0]
                 command = move[1]
-                output.write(f"{car_id} " + f"{command[0]}" + "," + f"{command[1]}\n")
+                output.write(f"{car_id} {command[0]},{command[1]}\n")
