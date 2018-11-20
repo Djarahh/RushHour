@@ -1,2 +1,14 @@
-board   6
-entrance  5,2
+1
+length    2
+color     red
+location
+2,2
+2,3
+
+2
+length    3
+color     yellow
+location
+2,5
+3,5
+4,5

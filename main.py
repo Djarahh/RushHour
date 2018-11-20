@@ -28,7 +28,7 @@ def main(game_id):
 
     # Let the BFS algorthm work
     B = Graph(rushhour)
-    solution = B.bfs()
+    B.bfs()
 
     # # Make a .txt file with the solution
     # TxtSolution(game_id, solution)
