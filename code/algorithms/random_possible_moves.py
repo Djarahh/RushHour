@@ -5,6 +5,8 @@ class Randomize(object):
     """The randomize class contains an algorith which chooses random numbers
     from a list of possible moves"""
     def __init__(self, game):
+        """Initialization of Randomize function
+        game = string, only one number"""
         self.game = game
 
     def randomize(self):

@@ -6,11 +6,14 @@ class LoadCars(object):
     """Creates a string containing the cars for the initialization of the
     game. Requires a txt file of the cars"""
     def __init__(self, game):
+        """Initialization of LoadCars object
+        game = string, only a single number"""
         self.car_list = self.load_cars(f"data/cars{game}.txt")
         self.board = self.load_board(f"data/board{game}.txt")
 
     def load_cars(self, filename):
-        """Loads the cars into rushhour"""
+        """Loads the cars into rushhour
+        filename = string"""
         car_list = []
         with open(filename, 'r') as file:
             for text_line in file:
@@ -23,12 +26,13 @@ class LoadCars(object):
                     color = text_line.rsplit()[1]
                 elif text_line.startswith("location"):
                     coordinate_list = self.make_car_coordinate_list(file)
-                    car = Car(id, length, color, coordinate_list, False)
+                    car = Car(id, length, color, coordinate_list)
                     car_list.append(car)
         return car_list
 
     def make_car_coordinate_list(self, file):
-        """Makes list of coordinates of the car"""
+        """Makes list of coordinates of the car
+        file = file"""
         coordinate_list = []
         while True:
             coordinate = file.readline().strip().split(",")
@@ -41,7 +45,8 @@ class LoadCars(object):
         return coordinate_list
 
     def load_board(self, filename):
-        """Function for loading the board"""
+        """Function for loading the board
+        filename = string"""
         self.board = Board()
         with open(filename, "r") as file:
             for text_line in file:
@@ -54,7 +59,8 @@ class LoadCars(object):
         return self.board
 
     def make_grid(self, text_line):
-        """Make the grid of the board, consisting of a dictionary"""
+        """Make the grid of the board, consisting of a dictionary
+        text_line = line of text in file"""
         coordinate = {}
         text_line = text_line.rsplit()
         self.board.length = int(text_line[1])
@@ -66,7 +72,8 @@ class LoadCars(object):
         self.board.grid = coordinate
 
     def make_entrance(self, text_line):
-        """Add entrance of board to self.board"""
+        """Add entrance of board to self.board
+        text_line = line of text in file"""
         entrance_x_y = text_line.rsplit()[1].rsplit(',')
         self.board.entrance.append(int(entrance_x_y[0]))
         self.board.entrance.append(int(entrance_x_y[1]))

@@ -1,10 +1,16 @@
 import copy
 
+
 class Car(object):
     """
     Describes a car object.
     """
-    def __init__(self, id, length, color, coordinate, car):
+    def __init__(self, id, length, color, coordinate):
+        """Initialization of a car object.
+        id = numeric
+        length = numeric
+        color = string
+        coordinate = list, x and y coordinates of the car"""
         # id of the car
         self.id = id
         # length of the car, amount of blocks
@@ -21,7 +27,8 @@ class Car(object):
         self.y = 0
 
     def update_coordinates(self, command):
-        """Updates the coordinates"""
+        """Updates the coordinates
+        command = list"""
         self.update_x_y(command)
         if type(self.x) == list:
             for i in range(len(self.x)):
@@ -31,7 +38,8 @@ class Car(object):
                 self.coordinate[i][1] = self.y[i]
 
     def update_x_y(self, command):
-        """Creates x or y function for use in the update/temp functions"""
+        """Creates x or y function for use in the update/temp functions.
+        command = list"""
         if self.direction == "x":
             self.x = command
         else:
@@ -45,7 +53,8 @@ class Car(object):
             return("y")
 
     def temp_coordinates(self, command):
-        """Function for testing if the inputted command is valid"""
+        """Function for testing if the inputted command is valid.
+        command = list"""
         self.update_x_y(command)
         temp = copy.deepcopy(self.coordinate)
         if type(self.x) == list:
