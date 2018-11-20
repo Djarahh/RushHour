@@ -7,13 +7,14 @@ class Graph(object):
         """Initialization method that creates a dictionary to store graph."""
         self.queue = deque()
         self.archive_list = []
-        game = game
-        game.bfs(game)
+        self.game = game
+        self.bfs(game)
 
-    def make_queue(self, game, distance, car_list_parent):
+    def make_queue(self, distance, car_list_parent):
         """Function that adds edge archive to the graph."""
         # iterate over all possible moves and add them to a queue and archive_list
-        for move in self.game.make_possible_move():
+        command_list = self.game.make_possible_move()
+        for move in command_list:
             archive = Archive(move, car_list_parent, distance)
             self.archive_list.append(archive)
             self.queue.append(archive)
@@ -27,26 +28,26 @@ class Graph(object):
         self.archive_list.append(source_board)
 
         # put the first possible moves into the queue
-        self.make_queue(game, distance)
+        self.make_queue(distance + 1, source)
 
         # play all possible moves from queue while the game has not been won
         while self.queue:
             d = self.queue.popleft()
-            move = self.archive_list[d].move
-            car_list_parent = self.archive_list[d].parent
-            car_id = move.split()[2]
-            command = move.split()[1]
-            move(car_id, command, car_list_parent)
+            move = d.move
+            car_list_parent = d.parent
+            car_id = move[0]
+            command = move[1]
+            self.game.move(car_id, command, car_list_parent)
             child_car_list = self.game.return_car_list()
 
             # if the game has been won by performing the last move return the
             # amount of steps that were performed and break, else put the options
             # that are made in the queue
             if self.game.won():
-                print(f"the solution was found in {self.archive_list[d].distance} steps")
-                return print(f"the solution was found in {self.archive_list[d].distance} steps")
+                print(f"the solution was found in {d.distance} steps")
+                return print(f"the solution was found in {d.distance} steps")
             else:
-                self.make_queue(game, self.archive_list[d].distance + 1, child_car_list)
+                self.make_queue(d.distance + 1, child_car_list)
 
             # hash the parent board to save space
-            self.archive_list[d].parent = hash(self.archive_list[d].parent)
+            d.parent = hash(d.parent)

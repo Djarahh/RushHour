@@ -7,7 +7,7 @@ class Archive(object):
         distance = int, dinstance to the original board"""
         self.move = move
         self.parent = car_list_parent
-        self.child = car_list_self
+        self.child = "None"
         self.distance = 0
 
     def children_made(self, bool):
