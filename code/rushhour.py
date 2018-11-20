@@ -1,6 +1,10 @@
 class Rushhour(object):
     """docstring for Rushhour."""
     def __init__(self, car_list, board):
+        """Initalization for Rushhour.
+        Takes two command line arguments, car_list and board.
+        car_list = list, contains car objects
+        board = board object"""
         self.car_list = car_list
         self.board = board
         self.counter = 0
@@ -31,10 +35,11 @@ class Rushhour(object):
         return move_list
 
     def move(self, command, id):
-        """Function for moving the cars on the board"""
+        """Function for moving the cars on the board
+        command = list, contains either x or y coordinates
+        id = int, represents the car"""
         # selecting the right car
         car = self.car_list[int(id) - 1]
-        self.make_possible_move()
         # check if coordinates are allowed
         if self.check_move(car, command) and self.inside_boundries(car, command):
             # do the move
@@ -45,7 +50,9 @@ class Rushhour(object):
             self.print_board()
 
     def check_move(self, car, command):
-        """Checks if no other cars are in the way"""
+        """Checks if no other cars are in the way
+        command = list, contains either x or y coordinates
+        car = car object"""
         for car_rest in self.car_list:
             # the car is allowed to move on its own coordinates
             if car_rest is not car:
@@ -56,7 +63,10 @@ class Rushhour(object):
         return self.try_temporary_command(command, car, car_rest)
 
     def try_temporary_command(self, command, car, car_rest):
-        """Perform control on temporary moves"""
+        """Perform control on temporary moves
+        command = list, contains either x or y coordinates
+        car = car object
+        car_rest = car object, from the car_list"""
         if car_rest is not car:
             # check every coordinate in between begin and end using steps of 1
             temp_command = self.make_temporary_command(command, car)
@@ -68,7 +78,8 @@ class Rushhour(object):
         return self.make_temporary_command(command, car)
 
     def indexing_constant(self, car):
-        """Returns a integer for the indexation of the coordinate system"""
+        """Returns a integer for the indexation of the coordinate system
+        car = car object"""
         if car.direction == "x":
             i = 0
         else:
@@ -76,7 +87,9 @@ class Rushhour(object):
         return i
 
     def make_temporary_command(self, command, car):
-        """Function for the creation of a temporary coordinate"""
+        """Function for the creation of a temporary coordinate
+        command = list, contains either x or y coordinates
+        car = car object"""
         i = self.indexing_constant(car)
         # determine the direction of the move and change the steps accordingly
         temp_command_list = []
@@ -92,7 +105,9 @@ class Rushhour(object):
         return temp_command_list
 
     def inside_boundries(self, car, command):
-        """Checks if move is inside board"""
+        """Checks if move is inside board
+        command = list, contains either x or y coordinates
+        car = car object"""
         for coordinate in car.temp_coordinates(command):
             if tuple(coordinate) not in self.board.grid:
                 return False
