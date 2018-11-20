@@ -1,7 +1,10 @@
 from collections import deque
 from code.classes.archive import Archive
 from copy import deepcopy
+<<<<<<< HEAD
 
+=======
+>>>>>>> b924fe37b94132313a4f822ed51e975727b04844
 
 class Graph(object):
 
@@ -10,7 +13,6 @@ class Graph(object):
         self.queue = deque()
         self.archive_list = []
         self.game = game
-        self.bfs(game)
 
     def make_queue(self, distance, car_list_parent):
         """Function that adds edge archive to the graph."""
@@ -21,7 +23,7 @@ class Graph(object):
             self.archive_list.append(archive)
             self.queue.append(archive)
 
-    def bfs(self, game):
+    def bfs(self):
         """Function that print the Breadth First Traversal from the given source"""
         # define the first board that will be played from
         source = self.game.return_car_list()
@@ -39,6 +41,8 @@ class Graph(object):
             car_list_parent = d.parent
             car_id = move[0]
             command = move[1]
+            for car in car_list_parent:
+                print(car)
             self.game.move(command, car_id, car_list_parent)
             child_car_list = self.game.return_car_list()
             # if the game has been won by performing the last move return the
