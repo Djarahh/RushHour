@@ -24,7 +24,7 @@ class Graph(object):
         # define the first board that will be played from
         source = self.game.return_car_list()
         distance = 0
-        source_board = Archive("None", source, distance)
+        source_board = Archive(None, source, distance)
         self.archive_list.append(source_board)
 
         # put the first possible moves into the queue
