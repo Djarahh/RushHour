@@ -38,4 +38,4 @@ def main(game_id):
 
 
 if __name__ == "__main__":
-    main("6")
+    main("2")

@@ -15,7 +15,9 @@ UB = (n- 1)^x * (n-2)^y
 Objective function:
 
 For every car that's in the way of the little red car at least one or more moves
-has to be done. This is the lower bound. 
+has to be done. This is the lower bound.
+
+LB = 
 
 If you add the constraint of only using a certain composition of the cars one
 time, the upper bound is the same as the upper bound of the state space.
