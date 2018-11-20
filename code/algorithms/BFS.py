@@ -37,7 +37,7 @@ class Graph(object):
             car_list_parent = d.parent
             car_id = move[0]
             command = move[1]
-            self.game.move(car_id, command, car_list_parent)
+            self.game.move(command, car_id, car_list_parent)
             child_car_list = self.game.return_car_list()
 
             # if the game has been won by performing the last move return the
@@ -50,4 +50,4 @@ class Graph(object):
                 self.make_queue(d.distance + 1, child_car_list)
 
             # hash the parent board to save space
-            d.parent = hash(d.parent)
+            d.children_made(True)
