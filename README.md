@@ -10,13 +10,14 @@ Done:
 + lijkt erop dat alle init.py dingen werken!
 + rushhour.py aangepast zodat je m alleen nog kan runnen vanuit main
 + master voor testing
++ visualisatie via main runnen
 
 To do list:
-- (Tula) testje maken om de visualisatie uiteindelijk via main te runnen met
-  sequenties in een .txt bestand in mapje data
+- (Tula) verwijzing uit visualisatie halen naar master.py (dus zelf de functie clean_input in visualisation zetten)
 - (Yara en Stan) BFS algoritme maken
 - Branch & bound algorithm proberen
 - bij alle functies specificeren wat de input is (bijv. game_id = string (number of the gameboard))
+-
 
 QUOTES:
 

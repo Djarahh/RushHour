@@ -1,6 +1,6 @@
 # Class that visualizes a sequence of RushHour Boards
 
-from code.classes.visualize_board import BoardVisualization
+from code.visualization.visualize_board import BoardVisualization
 import time
 from master import Rushhour
 

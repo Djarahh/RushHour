@@ -14,6 +14,8 @@ class TxtSolution(object):
     def make_file(self, output_file):
         """
         Opens a .txt file with the solution
+
+        output_file = string (filename of new .txt file)
         """
         with open(output_file, 'w') as output:
             # write a string of the car_id + command in "car_id command"
