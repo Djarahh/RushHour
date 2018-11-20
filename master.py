@@ -5,7 +5,11 @@ from code.classes.board import Board
 from code.classes.visualize_board import BoardVisualization
 
 class Rushhour(object):
-    """docstring for Rushhour."""
+    """
+    docstring for Rushhour.
+
+    game = string (number of gameboard)
+    """
     def __init__(self, game):
         self.load_cars(f"data/cars{game}.txt")
         self.load_board(f"data/board{game}.txt")

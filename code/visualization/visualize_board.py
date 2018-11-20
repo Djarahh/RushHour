@@ -8,8 +8,9 @@ class BoardVisualization:
         """
         Visualizes a RushHour board with cars
 
-        board = (Board object with .entrance, .grid, .length)
-        cars = (list of cars with .id, .length, .color, .coordinate, .direction)
+        board = Board object (with .entrance, .grid, .length)
+        cars = list (cars with .id, .length, .color, .coordinate, .direction)
+        counter = integer
         """
 
         self.board = board
@@ -36,7 +37,13 @@ class BoardVisualization:
         self.master.update()
 
     def map_coords(self, x, y):
-        """Maps grid positions to window positions (in pixels)."""
+        """
+        Maps grid positions to window positions (in pixels).
+
+        x = integer (x position on the game board)
+        y = integer (y position on the game board)
+
+        """
         return (250 + 450 * ((x - self.width / 2.0) / self.max_dim),
                 250 + 450 * ((self.height / 2.0 - y) / self.max_dim))
 
@@ -54,12 +61,20 @@ class BoardVisualization:
                                                               fill=color)
 
     def status_string(self, counter):
-        """Returns a status string to print with the board"""
+        """
+        Returns a status string to print with the board
+
+        counter = integer (counts the moves)
+        """
         return (f"This is board {counter}")
 
     def draw_board(self, cars):
-        """Draws the board"""
+        """
+        Draws the board
 
+        cars = list (of cars)
+
+        """
         # Draw white blocks
         self.blocks = {}
         for i in range(self.board_length):
@@ -74,8 +89,12 @@ class BoardVisualization:
         self.master.update()
 
     def update(self, cars, counter):
-        """Updates the board visualization"""
+        """
+        Updates the board visualization
 
+        cars = list (of cars)
+        counter = integer (counts the moves)
+        """
         # Draw the board
         self.draw_board(cars)
 
