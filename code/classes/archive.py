@@ -14,4 +14,4 @@ class Archive(object):
         """Hash function for the car_list.
         bool = bool"""
         if bool:
-            self.parent = hash(self.parent)
+            self.parent = hash(tuple(self.parent))

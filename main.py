@@ -34,7 +34,7 @@ def main(game_id):
     TxtSolution(game_id, solution)
 
     # Visualize the solution that the algorithm made
-    SequenceVisualization(game_id)
+    SequenceVisualization(game_id, rushhour)
 
 
 if __name__ == "__main__":
