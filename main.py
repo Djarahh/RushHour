@@ -1,9 +1,9 @@
 from code.rushhour import Rushhour
 # from code.algorithms.random_possible_moves import Randomize
-from code.algorithms.BFS import Graph
+from code.algorithms.BFS_archive import Graph
 from code.classes.load_cars import LoadCars
-from code.visualization.visualize_sequence import SequenceVisualization
-from code.classes.solution_txt import TxtSolution
+# from code.visualization.visualize_sequence import SequenceVisualization
+# from code.classes.solution_txt import TxtSolution
 
 
 def main(game_id):
@@ -38,4 +38,4 @@ def main(game_id):
 
 
 if __name__ == "__main__":
-    main("2")
+    main("6")

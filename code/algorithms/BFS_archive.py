@@ -7,6 +7,7 @@ class Graph(object):
     def __init__(self, game):
         """Initialization method that creates a dictionary to store graph."""
         self.queue = deque()
+        self.archive_dict = {}
         self.archive_list = []
         self.game = game
 
@@ -16,6 +17,7 @@ class Graph(object):
         command_list = self.game.make_possible_move()
         for move in command_list:
             archive = Archive(move, deepcopy(car_list_parent), distance)
+            # self.archive_dict.append[hash(tuple(deepcopy(car_list_parent)))] = archive
             self.archive_list.append(archive)
             self.queue.append(archive)
 
@@ -50,3 +52,4 @@ class Graph(object):
 
             # hash the parent board to save space
             d.children_made(True)
+            print(d.parent)
