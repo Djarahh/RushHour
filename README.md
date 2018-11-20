@@ -11,14 +11,14 @@ Done:
 + rushhour.py aangepast zodat je m alleen nog kan runnen vanuit main
 + master voor testing
 + visualisatie via main runnen
++ (Yara en Stan) BFS algoritme maken
 
 To do list:
-- (Tula) verwijzing uit visualisatie halen naar master.py (dus zelf de functie clean_input in visualisation zetten)
-- (Yara en Stan) BFS algoritme maken
 - Branch & bound algorithm proberen
 - bij alle functies specificeren wat de input is (bijv. game_id = string (number of the gameboard))
 - de won functie checken, want soms werkt ie niet!
-- randomize aanpassen op dat move ook een car_list nodig heeft! 
+- randomize aanpassen op dat move ook een car_list nodig heeft!
+- een archief aanmaken in randomize, zodat de moves die tot eenzelfde bord leiden geskipt worden
 
 QUOTES:
 
