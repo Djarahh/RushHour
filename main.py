@@ -1,12 +1,18 @@
 from code.rushhour import Rushhour
 from code.algorithms.random_possible_moves import Randomize
 from code.classes.load_cars import LoadCars
-from code.classes.visualize_sequence import SequenceVisualization
+from code.visualization.visualize_sequence import SequenceVisualization
 from code.classes.solution_txt import TxtSolution
 
 
 def main(game_id):
+    """
+    Uses algorithms to solve a RushHour board.
+    Makes .txt files with the solution.
+    Visualizes the solution.
 
+    game_id = string (number of gameboard)
+    """
     # Load the cars and the board
     things = LoadCars(game_id)
     car_list = things.car_list
