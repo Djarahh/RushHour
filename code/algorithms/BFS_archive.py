@@ -8,7 +8,6 @@ class Graph(object):
         """Initialization method that creates a dictionary to store graph."""
         self.queue = deque()
         self.archive_dict = {}
-        self.archive_list = []
         self.game = game
 
     def make_queue(self, distance, car_list_parent):
@@ -17,17 +16,16 @@ class Graph(object):
         command_list = self.game.make_possible_move()
         for move in command_list:
             archive = Archive(move, deepcopy(car_list_parent), distance)
-            # self.archive_dict.append[hash(tuple(deepcopy(car_list_parent)))] = archive
-            self.archive_list.append(archive)
-            self.queue.append(archive)
+            if not archive.hash_parent() in self.archive_dict:
+                self.queue.append(archive)
 
     def bfs(self):
         """Function that print the Breadth First Traversal from the given source"""
         # define the first board that will be played from
         source = self.game.return_car_list()
         distance = 0
-        source_board = Archive("None", deepcopy(source), distance)
-        self.archive_list.append(source_board)
+        # source_board = Archive("None", deepcopy(source), distance)
+        # self.archive_dict[source_board.hash_parent()] = source_board
 
         # put the first possible moves into the queue
         self.make_queue(distance + 1, source)
@@ -45,11 +43,12 @@ class Graph(object):
             # amount of steps that were performed and break, else put the options
             # that are made in the queue
             if self.game.won():
-                print(f"the solution was found in {d.distance} steps")
                 return print(f"the solution was found in {d.distance} steps")
             else:
                 self.make_queue(d.distance + 1, child_car_list)
 
-            # hash the parent board to save space
-            d.children_made(True)
-            print(d.parent)
+            # hash the parent board and add to archive dict
+            self.archive_dict[d.hash_parent()] = d
+            # print(self.archive_dict)
+
+        print(f"No solution was found")
