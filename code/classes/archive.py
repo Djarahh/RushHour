@@ -10,8 +10,9 @@ class Archive(object):
         self.child = "None"
         self.distance = distance
 
-    def children_made(self, bool):
+    def hash_parent(self):
         """Hash function for the car_list.
         bool = bool"""
-        if bool:
-            self.parent = hash(tuple(self.parent))
+
+        hash_archive = hash(tuple(self.parent))
+        return hash_archive

@@ -1,6 +1,7 @@
 from code.rushhour import Rushhour
-# from code.algorithms.random_possible_moves import Randomize
-from code.algorithms.BFS_archive import Graph
+from code.algorithms.random_possible_moves import Randomize
+# from code.algorithms.BFS import Graph
+from code.algorithms.DFS import Tree
 from code.classes.load_cars import LoadCars
 # from code.visualization.visualize_sequence import SequenceVisualization
 # from code.classes.solution_txt import TxtSolution
@@ -26,9 +27,13 @@ def main(game_id):
     # A = Randomize(rushhour)
     # solution = A.randomize()
 
-    # Let the BFS algorthm work
-    B = Graph(rushhour)
-    B.bfs()
+    # # Let the BFS algorthm work
+    # B = Graph(rushhour)
+    # B.bfs()
+
+    # Let the DFS algorithm work it
+    C = Tree(rushhour)
+    C.dfs()
 
     # # Make a .txt file with the solution
     # TxtSolution(game_id, solution)
