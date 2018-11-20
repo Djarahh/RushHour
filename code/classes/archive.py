@@ -8,7 +8,7 @@ class Archive(object):
         self.move = move
         self.parent = car_list_parent
         self.child = "None"
-        self.distance = 0
+        self.distance = distance
 
     def children_made(self, bool):
         """Hash function for the car_list.
