@@ -1,5 +1,6 @@
 from collections import deque
 from code.classes.archive import Archive
+from copy import deepcopy
 
 class Graph(object):
 
@@ -8,21 +9,20 @@ class Graph(object):
         self.queue = deque()
         self.archive_list = []
         self.game = game
-        self.bfs(game)
 
     def make_queue(self, distance, car_list_parent):
         """Function that adds edge archive to the graph."""
         # iterate over all possible moves and add them to a queue and archive_list
         command_list = self.game.make_possible_move()
         for move in command_list:
-            archive = Archive(move, car_list_parent, distance)
+            archive = Archive(move, deepcopy(car_list_parent), distance)
             self.archive_list.append(archive)
             self.queue.append(archive)
 
-    def bfs(self, game):
+    def bfs(self):
         """Function that print the Breadth First Traversal from the given source"""
         # define the first board that will be played from
-        source = game.return_car_list()
+        source = self.game.return_car_list()
         distance = 0
         source_board = Archive("None", source, distance)
         self.archive_list.append(source_board)
@@ -37,6 +37,8 @@ class Graph(object):
             car_list_parent = d.parent
             car_id = move[0]
             command = move[1]
+            for car in car_list_parent:
+                print(car)
             self.game.move(command, car_id, car_list_parent)
             child_car_list = self.game.return_car_list()
 
