@@ -2,11 +2,10 @@
 
 from code.visualization.visualize_board import BoardVisualization
 import time
-from master import Rushhour
 
 
 class SequenceVisualization:
-    def __init__(self, game_id):
+    def __init__(self, game_id, game):
         """
         Visualizes a sequence of RushHour boards
 
@@ -16,16 +15,15 @@ class SequenceVisualization:
         self.sequence = self.load_sequence(f"results/solution{game_id}.txt")
         self.game_id = game_id
         self.counter = 0
-        game = Rushhour(game_id)
-        visual = BoardVisualization(game.board, game.car_list, game.counter)
+        game = game
+        visual = BoardVisualization(game)
         for move in self.sequence:
             # wait a few seconds
             time.sleep(0.05)
             # do the move
             command = move.split()
             id = command[0]
-            command = game.clean_input(command[1])
-            print(command)
+            command = self.clean_input(command[1])
             game.move(command, id)
 
             # update the visualization
@@ -46,3 +44,15 @@ class SequenceVisualization:
             for text_line in file:
                 sequence.append(text_line.strip())
         return sequence
+
+    def clean_input(self, command):
+        """
+        Converts input to usable list of integers
+
+        command = string (a, b)
+        """
+        command = command.split(",")
+        command_clean = []
+        for i in command:
+            command_clean.append(int(i))
+        return command_clean

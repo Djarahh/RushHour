@@ -4,7 +4,7 @@ import tkinter as tk
 
 
 class BoardVisualization:
-    def __init__(self, board, cars, counter):
+    def __init__(self, game):
         """
         Visualizes a RushHour board with cars
 
@@ -13,14 +13,14 @@ class BoardVisualization:
         counter = integer
         """
 
-        self.board = board
-        self.cars = cars
+        self.board = game.board
+        self.cars = game.cars
         self.block = 40
         self.board_length = self.board.length
         self.width = self.board.length*self.block
         self.height = self.board.length*self.block
         self.max_dim = self.width
-        self.counter = counter
+        self.counter = game.counter
 
         # Initialize a drawing surface
         self.master = tk.Tk()
