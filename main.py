@@ -30,11 +30,11 @@ def main(game_id):
     B = Graph(rushhour)
     solution = B.bfs()
 
-    # Make a .txt file with the solution
-    TxtSolution(game_id, solution)
-
-    # Visualize the solution that the algorithm made
-    SequenceVisualization(game_id, rushhour)
+    # # Make a .txt file with the solution
+    # TxtSolution(game_id, solution)
+    #
+    # # Visualize the solution that the algorithm made
+    # SequenceVisualization(game_id, rushhour)
 
 
 if __name__ == "__main__":
