@@ -13,7 +13,7 @@ class Rushhour(object):
         """Win condition for the game"""
         # if car 1 (red car) is on exit coordinate game is won
         command = [4, 5]
-        self.move(command, 1)
+        self.move(command, 1, self.car_list)
         car = self.car_list[0].coordinate
         for coordinate in car:
             if coordinate == self.board.entrance:

@@ -14,7 +14,7 @@ class BoardVisualization:
         """
 
         self.board = game.board
-        self.cars = game.cars
+        self.cars = game.car_list
         self.block = 40
         self.board_length = self.board.length
         self.width = self.board.length*self.block

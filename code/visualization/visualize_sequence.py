@@ -24,7 +24,7 @@ class SequenceVisualization:
             command = move.split()
             id = command[0]
             command = self.clean_input(command[1])
-            game.move(command, id)
+            game.move(command, id, game.car_list)
 
             # update the visualization
             visual.update(game.car_list, game.counter)

@@ -17,7 +17,8 @@ To do list:
 - (Yara en Stan) BFS algoritme maken
 - Branch & bound algorithm proberen
 - bij alle functies specificeren wat de input is (bijv. game_id = string (number of the gameboard))
--
+- de won functie checken, want soms werkt ie niet!
+- randomize aanpassen op dat move ook een car_list nodig heeft! 
 
 QUOTES:
 
