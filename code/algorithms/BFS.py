@@ -24,7 +24,7 @@ class Graph(object):
         # define the first board that will be played from
         source = self.game.return_car_list()
         distance = 0
-        source_board = Archive(None, source, distance)
+        source_board = Archive("None", deepcopy(source), distance)
         self.archive_list.append(source_board)
 
         # put the first possible moves into the queue
@@ -41,7 +41,6 @@ class Graph(object):
                 print(car)
             self.game.move(command, car_id, car_list_parent)
             child_car_list = self.game.return_car_list()
-
             # if the game has been won by performing the last move return the
             # amount of steps that were performed and break, else put the options
             # that are made in the queue
