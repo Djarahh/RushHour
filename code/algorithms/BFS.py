@@ -1,5 +1,7 @@
 from collections import deque
 from code.classes.archive import Archive
+from copy import deepcopy
+
 
 class Graph(object):
 
@@ -15,16 +17,16 @@ class Graph(object):
         # iterate over all possible moves and add them to a queue and archive_list
         command_list = self.game.make_possible_move()
         for move in command_list:
-            archive = Archive(move, car_list_parent, distance)
+            archive = Archive(move, deepcopy(car_list_parent), distance)
             self.archive_list.append(archive)
             self.queue.append(archive)
 
     def bfs(self, game):
         """Function that print the Breadth First Traversal from the given source"""
         # define the first board that will be played from
-        source = game.return_car_list()
+        source = self.game.return_car_list()
         distance = 0
-        source_board = Archive("None", source, distance)
+        source_board = Archive("None", deepcopy(source), distance)
         self.archive_list.append(source_board)
 
         # put the first possible moves into the queue
@@ -39,7 +41,6 @@ class Graph(object):
             command = move[1]
             self.game.move(command, car_id, car_list_parent)
             child_car_list = self.game.return_car_list()
-
             # if the game has been won by performing the last move return the
             # amount of steps that were performed and break, else put the options
             # that are made in the queue
