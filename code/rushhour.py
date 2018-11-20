@@ -34,11 +34,12 @@ class Rushhour(object):
                             move_list.append([car.id, i])
         return move_list
 
-    def move(self, command, id):
+    def move(self, command, id, car_list):
         """Function for moving the cars on the board
         command = list, contains either x or y coordinates
         id = int, represents the car"""
         # selecting the right car
+        self.car_list = car_list
         car = self.car_list[int(id) - 1]
         # check if coordinates are allowed
         if self.check_move(car, command) and self.inside_boundries(car, command):
