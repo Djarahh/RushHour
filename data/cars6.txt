@@ -12,3 +12,11 @@ location
 5,2
 5,3
 5,4
+
+3
+length 2
+color blue
+location
+4,1
+4,2
+4,3

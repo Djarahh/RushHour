@@ -1,5 +1,3 @@
-from copy import deepcopy
-
 class Archive(object):
     """docstring for Archive."""
     def __init__(self, move, car_list_parent, distance):
@@ -9,14 +7,14 @@ class Archive(object):
         distance = int, dinstance to the original board"""
         self.move = move
         self.parent = car_list_parent
-        self.child = "None"
+        self.child = None
         self.distance = distance
 
-    def hash_parent(self):
+    def hash_parent(self, move):
         """Hash function for the car_list.
         bool = bool"""
         coordinates = []
-        for item in self.parent:
-            coordinates.append(item.coordinate)
+        for car in self.parent:
+            coordinates.append(car.coordinate)
         hash_code = hash(str(coordinates))
         return hash_code
