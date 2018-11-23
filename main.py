@@ -25,23 +25,23 @@ def main(game_id):
     rushhour = Rushhour(car_list, board)
 
     # Let the randomize algorithm run and return a solution
-    A = Randomize(deepcopy(rushhour))
-    solution = A.randomize()
+    # A = Randomize(deepcopy(rushhour))
+    # solution = A.randomize()
 
     # Let the BFS algorthm work
-    # B = Graph(rushhour)
-    # B.bfs()
+    B = Graph(rushhour)
+    B.bfs()
 
     # # Let the DFS algorithm work it
     # C = Tree(rushhour)
     # C.dfs()
 
-    # Make a .txt file with the solution
-    TxtSolution(game_id, solution)
-    #
-    # # Visualize the solution that the algorithm made
-    SequenceVisualization(game_id, rushhour)
+    # # Make a .txt file with the solution
+    # TxtSolution(game_id, solution)
+    # #
+    # # # Visualize the solution that the algorithm made
+    # SequenceVisualization(game_id, rushhour)
 
 
 if __name__ == "__main__":
-    main("2")
+    main("7")

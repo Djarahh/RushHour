@@ -37,6 +37,7 @@ class Graph(object):
             car_list_parent = d.parent
             car_id = move[0]
             command = move[1]
+            print(move)
             self.game.move(command, car_id, car_list_parent)
             child_car_list = self.game.return_car_list()
             # if the game has been won by performing the last move return the
