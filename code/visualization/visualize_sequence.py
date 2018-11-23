@@ -25,9 +25,10 @@ class SequenceVisualization:
             id = command[0]
             command = self.clean_input(command[1])
             game.move(command, id, game.car_list)
+            self.counter += 1
 
             # update the visualization
-            visual.update(game.car_list, game.counter)
+            visual.update(game.car_list, self.counter)
 
         # enter the main loop
         visual.done()

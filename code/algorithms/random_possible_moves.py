@@ -14,8 +14,7 @@ class Randomize(object):
         all possible moves, formatted in
         [car.id, [coordinate[1], coordinate[2]]]"""
         sequence = []
-        # while not self.game.won():
-        for i in range(10):
+        while not self.game.won():
             command_list = self.game.make_possible_move()
             rand_int = randint(0, len(command_list) - 1)
             input = command_list[rand_int]

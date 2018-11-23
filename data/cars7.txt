@@ -1,0 +1,22 @@
+1
+length    2
+color     red
+location
+2,2
+3,2
+
+2
+length    3
+color     yellow
+location
+5,2
+5,3
+5,4
+
+3
+length    3
+color     green
+location
+4,2
+4,3
+4,4
