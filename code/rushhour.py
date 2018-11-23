@@ -19,8 +19,7 @@ class Rushhour(object):
             if coordinate == self.board.entrance:
                 print("Congratulations, you won the game!")
                 return True
-        else:
-            return False
+        return False
 
     def make_possible_move(self):
         """Creates a list with possible moves"""
@@ -49,6 +48,7 @@ class Rushhour(object):
             print(self.counter)
             self.update_board()
             self.print_board()
+            return True
 
     def check_move(self, car, command):
         """Checks if no other cars are in the way
