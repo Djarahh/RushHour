@@ -20,3 +20,10 @@ location
 4,2
 4,3
 4,4
+
+4
+length    2
+color     orange
+location
+0,2
+1,2

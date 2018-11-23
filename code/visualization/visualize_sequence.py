@@ -19,15 +19,16 @@ class SequenceVisualization:
         visual = BoardVisualization(game)
         for move in self.sequence:
             # wait a few seconds
-            time.sleep(0.05)
+            time.sleep(0.1)
             # do the move
             command = move.split()
             id = command[0]
             command = self.clean_input(command[1])
             game.move(command, id, game.car_list)
+            self.counter += 1
 
             # update the visualization
-            visual.update(game.car_list, game.counter)
+            visual.update(game.car_list, self.counter)
 
         # enter the main loop
         visual.done()

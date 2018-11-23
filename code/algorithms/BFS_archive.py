@@ -48,7 +48,8 @@ class Graph(object):
                 self.make_queue(d.distance + 1, child_car_list)
 
             # hash the parent board and add to archive dict
+            # print(d.hash_parent())
             self.archive_dict[d.hash_parent()] = d
-            # print(self.archive_dict)
+            # print(len(self.archive_dict))
 
         print(f"No solution was found")
