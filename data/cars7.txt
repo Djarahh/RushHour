@@ -9,9 +9,9 @@ location
 length    3
 color     yellow
 location
+5,0
+5,1
 5,2
-5,3
-5,4
 
 3
 length    3
@@ -22,8 +22,13 @@ location
 4,4
 
 4
+<<<<<<< HEAD
+length 2
+color orange
+=======
 length    2
 color     orange
+>>>>>>> 6a7a74431e7ca55a7b671c1d6eeb6bf09ded3b99
 location
 0,2
 1,2
