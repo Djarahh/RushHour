@@ -9,9 +9,9 @@ location
 length    3
 color     yellow
 location
+5,0
+5,1
 5,2
-5,3
-5,4
 
 3
 length    3
@@ -20,3 +20,10 @@ location
 4,2
 4,3
 4,4
+
+4
+length 2
+color orange
+location
+0,2
+1,2

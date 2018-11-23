@@ -16,27 +16,29 @@ class Graph(object):
         command_list = self.game.make_possible_move()
         for move in command_list:
             archive = Archive(move, deepcopy(car_list_parent), distance)
-            if not archive.hash_parent() in self.archive_dict:
-                self.queue.append(archive)
+            # if not archive.hash_parent() in self.archive_dict:
+            self.queue.append(archive)
 
     def bfs(self):
         """Function that print the Breadth First Traversal from the given source"""
         # define the first board that will be played from
         source = self.game.return_car_list()
         distance = 0
-        # source_board = Archive("None", deepcopy(source), distance)
-        # self.archive_dict[source_board.hash_parent()] = source_board
+        source_board = Archive("None", deepcopy(source), distance)
+        self.archive_dict[self.hashh(source)] = source_board
 
         # put the first possible moves into the queue
         self.make_queue(distance + 1, source)
 
         # play all possible moves from queue while the game has not been won
-        while self.queue:
+        # while self.queue:
+        for i in range(10):
             d = self.queue.popleft()
             move = d.move
             car_list_parent = d.parent
             car_id = move[0]
             command = move[1]
+            print(move)
             self.game.move(command, car_id, car_list_parent)
             child_car_list = self.game.return_car_list()
             # if the game has been won by performing the last move return the
@@ -48,7 +50,14 @@ class Graph(object):
                 self.make_queue(d.distance + 1, child_car_list)
 
             # hash the parent board and add to archive dict
-            self.archive_dict[d.hash_parent()] = d
-            # print(self.archive_dict)
+            self.archive_dict[self.hashh(child_car_list)] = d
+            print(self.archive_dict)
+
+    def hashh(self, car_list):
+        coordinates = []
+        for item in car_list:
+            coordinates.append(item.coordinate)
+        hash_code = hash(str(coordinates))
+        return hash_code
 
         print(f"No solution was found")
