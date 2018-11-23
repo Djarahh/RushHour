@@ -20,6 +20,11 @@ To do list:
 - randomize aanpassen op dat move ook een car_list nodig heeft!
 - een archief aanmaken in randomize, zodat de moves die tot eenzelfde bord leiden geskipt worden
 
+VRAGEN VOOR QUINTEN:
+
++ waarom werkt de self.won functie van RushHour niet?
++ hoe kunnen we het beste het archief aanpakken
+
 QUOTES:
 
 Yara over Stan: hij heeft z'n appel en z'n peer door elkaar gehaald.

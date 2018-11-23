@@ -23,4 +23,7 @@ class TxtSolution(object):
             for move in self.solution:
                 car_id = move[0]
                 command = move[1]
-                output.write(f"{car_id} {command[0]},{command[1]}\n")
+                if len(command) > 2:
+                    output.write(f"{car_id} {command[0]},{command[1]},{command[2]}\n")
+                else:
+                    output.write(f"{car_id} {command[0]},{command[1]}\n")
