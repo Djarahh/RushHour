@@ -5,14 +5,15 @@ import time
 
 
 class SequenceVisualization:
-    def __init__(self, game_id, game):
+    def __init__(self, game_id, game, algorithm):
         """
         Visualizes a sequence of RushHour boards
 
         game_id = string (number of the gameboard)
         """
 
-        self.sequence = self.load_sequence(f"results/solution{game_id}.txt")
+        self.algorithm = algorithm
+        self.sequence = self.load_sequence(f"results/{self.algorithm}solution{game_id}.txt")
         self.game_id = game_id
         self.counter = 0
         game = game
