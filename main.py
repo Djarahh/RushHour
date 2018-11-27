@@ -44,4 +44,4 @@ def main(game_id):
 
 
 if __name__ == "__main__":
-    main("2")
+    main("7")
