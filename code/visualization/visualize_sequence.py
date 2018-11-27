@@ -12,8 +12,7 @@ class SequenceVisualization:
         game_id = string (number of the gameboard)
         """
 
-        self.algorithm = algorithm
-        self.sequence = self.load_sequence(f"results/{self.algorithm}solution{game_id}.txt")
+        self.sequence = self.load_sequence(f"results/{algorithm}solution{game_id}.txt")
         self.game_id = game_id
         self.counter = 0
         game = game
