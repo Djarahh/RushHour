@@ -39,11 +39,31 @@ def main(game_id):
     # C = Tree(rushhour)
     # C.dfs()
 
+<<<<<<< HEAD
     # Make a .txt file with the solution
     TxtSolution(game_id, solution, algorithm)
 
     # Visualize the solution that the algorithm made
     SequenceVisualization(game_id, rushhour, algorithm)
+=======
+<<<<<<< HEAD
+    # Make a .txt file with the solution
+    # TxtSolution(game_id, solution)
+    #
+    # Visualize the solution that the algorithm made
+=======
+    # # Make a .txt file with the solution
+    # TxtSolution(game_id, solution)
+    # #
+    # # # Visualize the solution that the algorithm made
+
+    # Make a .txt file with the solution
+    # TxtSolution(game_id, solution)
+    #
+    # # Visualize the solution that the algorithm made
+>>>>>>> f08af26ca7e355dbe36b843c0f597252685421ea
+    # SequenceVisualization(game_id, rushhour)
+>>>>>>> a3b9e0e5a76d8301936630bc2eebeb67d69e2c3a
 
 
 if __name__ == "__main__":
