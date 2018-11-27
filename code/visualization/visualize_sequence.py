@@ -20,7 +20,7 @@ class SequenceVisualization:
         visual = BoardVisualization(game)
         for move in self.sequence:
             # wait a few seconds
-            time.sleep(0.1)
+            time.sleep(0.5)
             # do the move
             command = move.split()
             id = command[0]

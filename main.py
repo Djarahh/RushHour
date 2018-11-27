@@ -25,15 +25,15 @@ def main(game_id):
     # Initiate a RushHour game
     rushhour = Rushhour(car_list, board)
 
-    # # Let the randomize algorithm run and return a solution
-    # A = Randomize(deepcopy(rushhour))
-    # solution = A.randomize()
-    #algorithm = "RANDOM"
+    # Let the randomize algorithm run and return a solution
+    A = Randomize(deepcopy(rushhour))
+    solution = A.randomize()
+    algorithm = "RANDOM"
 
-    # Let the BFS algorthm work
-    B = Graph(deepcopy(rushhour))
-    solution = B.bfs()
-    algorithm = "BFS"
+    # # Let the BFS algorthm work
+    # B = Graph(deepcopy(rushhour))
+    # solution = B.bfs()
+    # algorithm = "BFS"
 
     # # Let the DFS algorithm work it
     # C = Tree(rushhour)
@@ -46,4 +46,4 @@ def main(game_id):
     SequenceVisualization(game_id, rushhour, algorithm)
 
 if __name__ == "__main__":
-    main("7")
+    main("4")

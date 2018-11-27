@@ -20,9 +20,11 @@ has to be done. This is the lower bound.
 n = red car
 alpha = amount of cars in front of red car
 beta = amount of cars in front of alpha
-gamma = 
+gamma = amount of cars in front of gamma
+(...)
+x = amount of cars in front of x-1
 
-LB = alpha + beta
+LB = alpha + beta + gamma + ... + x
 
 If you add the constraint of only using a certain composition of the cars one
 time, the upper bound is the same as the upper bound of the state space.
