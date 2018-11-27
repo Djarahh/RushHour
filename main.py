@@ -29,30 +29,19 @@ def main(game_id):
     # solution = A.randomize()
 
     # Let the BFS algorthm work
-<<<<<<< HEAD
-    B = Graph(rushhour)
-=======
     B = Graph(deepcopy(rushhour))
->>>>>>> d52e56a2a632dc66ff5ecf9ab11a0a6f21e8c471
     B.bfs()
 
     # # Let the DFS algorithm work it
     # C = Tree(rushhour)
     # C.dfs()
 
-<<<<<<< HEAD
-    # # Make a .txt file with the solution
-    # TxtSolution(game_id, solution)
-    # #
-    # # # Visualize the solution that the algorithm made
-=======
     # Make a .txt file with the solution
     # TxtSolution(game_id, solution)
     #
-    # # Visualize the solution that the algorithm made
->>>>>>> d52e56a2a632dc66ff5ecf9ab11a0a6f21e8c471
+    # Visualize the solution that the algorithm made
     # SequenceVisualization(game_id, rushhour)
 
 
 if __name__ == "__main__":
-    main("7")
+    main("2")
