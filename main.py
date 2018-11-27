@@ -5,6 +5,7 @@ from code.algorithms.BFS_archive import Graph
 from code.classes.load_cars import LoadCars
 from code.visualization.visualize_sequence import SequenceVisualization
 from code.classes.solution_txt import TxtSolution
+from code.algorithms.iterative import Iterative
 from copy import deepcopy
 
 
@@ -22,12 +23,16 @@ def main(game_id):
     board = things.board
 
     # Initiate a RushHour game
-    rushhour = Rushhour(car_list, board)
+    rushhour = Rushhour(deepcopy(car_list), deepcopy(board))
 
     # Let the randomize algorithm run and return a solution
-    A = Randomize(deepcopy(rushhour))
+    A = Randomize(rushhour)
     solution = A.randomize()
-
+    final_car_list = rushhour.return_car_list()
+    # use iterative function
+    rushhour.return_car_list
+    rushhour = Rushhour(deepcopy(car_list), deepcopy(board))
+    I = Iterative(deepcopy(car_list), final_car_list, rushhour)
     # Let the BFS algorthm work
     # B = Graph(rushhour)
     # B.bfs()
