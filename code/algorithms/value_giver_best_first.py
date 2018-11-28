@@ -12,9 +12,11 @@ class ValueGiver(object):
         if self.final_car_list:
             for car in self.inital_car_list:
                 if car.direction == "x":
-                    difference = abs(car.coordinate[0][0] - self.final_car_list[int(car.id) - 1].coordinate[0][0])
+                    difference = abs(car.coordinate[0][0] - self.final_car_list
+                                     [int(car.id) - 1].coordinate[0][0])
                     self.board_value += difference
                 else:
-                    difference = abs(car.coordinate[0][1] - self.final_car_list[int(car.id) - 1].coordinate[0][1])
+                    difference = abs(car.coordinate[0][1] - self.final_car_list
+                                     [int(car.id) - 1].coordinate[0][1])
                     self.board_value += difference
         print(self.board_value)
