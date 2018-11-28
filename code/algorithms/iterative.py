@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 
 class Iterative(object):
     """docstring for Iterative."""
@@ -12,16 +14,25 @@ class Iterative(object):
         self.current_car_list = car_list
 
     def compare_value(self):
-        """Compares the dict made in assign_value() with the final dict"""
+        """Compares the dict made in assign_value() with the final dict.
+        If the values match give a possitive value to the value_dict"""
+        self.board_value = 0
         self.update_car_list(self.game.car_list)
         final_dict = self.compare_i_f()
         comparison_dict = self.assign_value()
         keys = list(comparison_dict.keys())
         for key in keys:
             if comparison_dict[key] == final_dict[key[0]]:
-                print(comparison_dict[key], final_dict[key[0]], key[1])
-                self.game.move(list(key[1]), key[0], self.current_car_list)
-                # self.game.move(command, id, self.current_car_list)
+                # increase the value
+                self.board_value += 1
+            else:
+                # decrease the value
+                self.board_value -= 1
+        # move = max(self.value_dict, key=self.value_dict.get)
+        # do the move
+        print(self.board_value)
+        # self.game.move(list(move[1]), move[0], self.current_car_list)
+
 
     def assign_value(self):
         """Retrieves finalized board"""
@@ -79,4 +90,5 @@ class Iterative(object):
     def iterative(self):
         while not self.game.won():
             self.compare_value()
+            break
         pass

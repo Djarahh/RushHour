@@ -7,6 +7,7 @@ from code.classes.load_cars import LoadCars
 from code.visualization.visualize_sequence import SequenceVisualization
 from code.classes.solution_txt import TxtSolution
 from copy import deepcopy
+from code.algorithms.iterative import Iterative
 
 
 def main(game_id):
@@ -14,7 +15,6 @@ def main(game_id):
     Uses algorithms to solve a RushHour board.
     Makes .txt files with the solution.
     Visualizes the solution.
-
     game_id = string (number of gameboard)
     """
     # Load the cars and the board
@@ -23,14 +23,24 @@ def main(game_id):
     board = things.board
 
     # Initiate a RushHour game
-    rushhour = Rushhour(car_list, board)
+    rushhour = Rushhour(deepcopy(car_list), deepcopy(board))
 
     # # Let the randomize algorithm run and return a solution
+<<<<<<< HEAD
     # A = Randomize(deepcopy(rushhour))
     # solution = A.randomize()
     # algorithm = "RANDOM"
+=======
+    A = Randomize((rushhour))
+    solution = A.randomize()
+    #algorithm = "RANDOM"
+    final_board = rushhour.return_car_list()
+    # use this algorithm for the final board of rushhour
+    rush = Rushhour(deepcopy(car_list), deepcopy(board))
+    B = Iterative(deepcopy(car_list), deepcopy(final_board), rush)
+>>>>>>> 76f930308c4dcade1c2ccc80afaa929d78ce3995
 
-    # # Let the BFS algorthm work
+    # Let the BFS algorithm work
     # B = Graph(deepcopy(rushhour))
     # solution = B.bfs()
     # algorithm = "BFS"
@@ -40,6 +50,7 @@ def main(game_id):
     # solution = C.dfs()
     # algorithm = "DFS"
 
+<<<<<<< HEAD
     # # Branch and Bound algorithm
     # D = Branches(deepcopy(rushhour))
     # solution = D.bnb()
@@ -53,3 +64,17 @@ def main(game_id):
 
 if __name__ == "__main__":
     main("2")
+=======
+    # # Make a .txt file with the solution
+    # TxtSolution(game_id, solution)
+
+    # # Visualize the solution that the algorithm made
+    # SequenceVisualization(game_id, rushhour)
+
+    # Visualize the solution that the algorithm made
+    # SequenceVisualization(game_id, rushhour, algorithm)
+
+
+if __name__ == "__main__":
+    main("7")
+>>>>>>> 76f930308c4dcade1c2ccc80afaa929d78ce3995
