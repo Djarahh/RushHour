@@ -17,10 +17,10 @@ class SequenceVisualization:
         self.counter = 0
         game = game
         visual = BoardVisualization(game)
-        for i in range(0):
-        # for move in self.sequence:
+
+        for move in self.sequence:
             # wait a few seconds
-            time.sleep(0.5)
+            time.sleep(0.0001)
             # do the move
             command = move.split()
             id = command[0]

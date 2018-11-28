@@ -12,6 +12,12 @@ n = board length
 
 UB = (n- 1)^x * (n-2)^y
 
+If there are multiple cars on the same row, the options of both these cars decrease.
+x = amount of options
+b(x) = amount of cars with x amount of options
+
+UB = product(x^b(x))
+
 Objective function:
 
 For every car that's in the way of the little red car at least one or more moves
@@ -33,3 +39,27 @@ TO DO:
 - overzicht van de kwaliteiten verschillende algoritmes
 - analyse van onze probleem instanties
   - hoe meer bewegingsvrijheid op een bord, hoe moeilijker het bord
+
+game1:
+UB = 1E6
+empty% = 0.42
+
+game2:
+UB = 1E9
+empty% = 0.25
+
+game3:
+UB = 1E7
+empty% = 0.25
+
+game4:
+UB = 7.2E14
+empty% = 0.33
+
+game5:
+UB = 8.4E18
+empty% = 0.33
+
+game6:
+UB = 5.5E19
+empty% = 0.25
