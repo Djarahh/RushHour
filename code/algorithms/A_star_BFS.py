@@ -4,9 +4,10 @@ from copy import deepcopy
 from code.rushhour import Rushhour
 import heapq
 
+
 class Graph(object):
 
-    def __init__(self, game):
+    def __init__(self, game, final_board):
         """Initialization method that creates a dictionary to store graph."""
         self.heap = []
         self.archive_dict = {}
@@ -15,7 +16,7 @@ class Graph(object):
         self.archive = None
         self.solution = None
         self.won = False
-        self.final_car_list = random
+        self.final_car_list = final_board
 
     def bfs(self):
 
@@ -51,7 +52,7 @@ class Graph(object):
 
             if not self.hashh(child_car_list) in self.archive_dict:
                 archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
-                value = self.valuegiver()
+                value = self.value_giver(self.final_car_list, child_car_list)
                 heapq.heappush(self.heap, (value, self.hashh(child_car_list)))
                 self.archive_dict[self.hashh(child_car_list)] = archive
 
@@ -77,14 +78,14 @@ class Graph(object):
     def value_giver(self, final_car_list, inital_car_list):
         """Calculates the difference between xi and xf"""
         self.board_value = 0
-        if self.final_car_list:
-            for car in self.inital_car_list:
+        if final_car_list:
+            for car in inital_car_list:
                 if car.direction == "x":
-                    difference = abs(car.coordinate[0][0] - self.final_car_list
+                    difference = abs(car.coordinate[0][0] - final_car_list
                                      [int(car.id) - 1].coordinate[0][0])
                     self.board_value += difference
                 else:
-                    difference = abs(car.coordinate[0][1] - self.final_car_list
+                    difference = abs(car.coordinate[0][1] - final_car_list
                                      [int(car.id) - 1].coordinate[0][1])
                     self.board_value += difference
         return self.board_value
