@@ -26,6 +26,7 @@ class Graph(object):
             print(f"Queue: {len(self.queue)}")
             current = self.queue.popleft()
             if self.game.won():
+                self.make_solution()
                 return print(f"the solution was found in {self.archive.distance + 1} steps.")
             else:
                 self.make_possible_babies(current.current, current.distance + 1)

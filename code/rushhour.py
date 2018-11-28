@@ -42,7 +42,6 @@ class Rushhour(object):
         car = self.car_list[int(id) - 1]
         # check if coordinates are allowed
         if self.check_move(car, command) and self.inside_boundries(car, command):
-            print(123)
             # do the move
             car.update_coordinates(command)
             self.counter += 1
