@@ -33,6 +33,7 @@ class Branches(object):
                 current = self.stack.popleft()
             self.make_possible_babies(current.current, current.distance + 1)
             print(f"Stack: {len(self.stack)}")
+        print("bound!")
         return print(self.solution)
 
     def make_possible_babies(self, parent, distance):
@@ -45,13 +46,13 @@ class Branches(object):
             self.game.move(command, car_id, deepcopy(parent))
             child_car_list = self.game.return_car_list()
             if self.game.won():
-                print(self.bound)
-                time.sleep(3)
                 self.archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
                 self.update_bound(distance)
+                print(f"Bound: {self.bound}")
                 self.solution = self.make_solution()
-            else:
-                self.check_baby(child_car_list, distance)
+                time.sleep(2)
+                break
+            elif self.check_baby(child_car_list, distance):
                 archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
                 self.stack.appendleft(archive)
                 self.archive_dict[self.hashh(child_car_list)] = archive
@@ -72,7 +73,7 @@ class Branches(object):
         return hash_code
 
     def update_bound(self, distance):
-        self.bound = distance
+        self.bound = distance - 5
 
     def make_solution(self):
         solution = deque()

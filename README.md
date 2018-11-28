@@ -11,15 +11,18 @@ Done:
 + rushhour.py aangepast zodat je m alleen nog kan runnen vanuit main
 + master voor testing
 + visualisatie via main runnen
-+ (Yara en Stan) BFS algoritme maken
++ BFS algoritme
++ DFS algoritme
++ Branch and Bound algoritme
++ Best first search, (BeFS)
 
 To do list:
-- Branch & bound algorithm proberen
 - bij alle functies specificeren wat de input is (bijv. game_id = string (number of the gameboard))
-- een archief aanmaken in randomize, zodat de moves die tot eenzelfde bord leiden geskipt worden
 - profile gebruiken om dingen sneller te maken
-- best first search, A*
-- LB van Objective Function in een formule zetten 
+- LB van Objective Function in een formule zetten
+- Entrance dehardcoden in move, won, make_possible_move
+- timer in de algoritmes/in main.py zetten
+- Beam Search? 
 
 VRAGEN VOOR QUINTEN:
 
