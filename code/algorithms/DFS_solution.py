@@ -26,15 +26,20 @@ class Tree(object):
         self.make_possible_babies(source, distance + 1)
         # print(f"Stack: {len(self.stack)}")
 
-        while self.stack:
+        while not self.won:
             current = self.stack.popleft()
-            if self.won:
-                print("YAY, you have won!")
-                return self.solution
-            else:
-                self.make_possible_babies(current.current, current.distance + 1)
-                print(f"Stack: {len(self.stack)}")
-        print("No solution was found")
+            self.make_possible_babies(current.current, current.distance + 1)
+            print(f"Stack: {len(self.stack)}")
+        print("YAY you have won")
+        # while self.stack:
+        #     current = self.stack.popleft()
+        #     if self.won:
+        #         print("YAY, you have won!")
+        #         return self.solution
+        #     else:
+        #         self.make_possible_babies(current.current, current.distance + 1)
+        #         print(f"Stack: {len(self.stack)}")
+        # print("No solution was found")
 
     def make_possible_babies(self, parent, distance):
         self.game = Rushhour(parent, self.board)
@@ -50,7 +55,8 @@ class Tree(object):
                 self.archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
                 # print(f"Depth: {distance}")
                 self.solution = self.make_solution()
-            if self.check_baby(child_car_list, distance):
+                break
+            elif self.check_baby(child_car_list, distance):
                 archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
                 self.stack.appendleft(archive)
                 self.archive_dict[self.hashh(child_car_list)] = archive
