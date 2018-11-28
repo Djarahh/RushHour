@@ -17,7 +17,19 @@ Objective function:
 For every car that's in the way of the little red car at least one or more moves
 has to be done. This is the lower bound.
 
-LB = 
+n = red car
+alpha = amount of cars in front of red car
+beta = amount of cars in front of alpha
+gamma = amount of cars in front of gamma
+(...)
+x = amount of cars in front of x-1
+
+LB = alpha + beta + gamma + ... + x
 
 If you add the constraint of only using a certain composition of the cars one
 time, the upper bound is the same as the upper bound of the state space.
+
+TO DO:
+- overzicht van de kwaliteiten verschillende algoritmes
+- analyse van onze probleem instanties
+  - hoe meer bewegingsvrijheid op een bord, hoe moeilijker het bord

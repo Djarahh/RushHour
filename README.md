@@ -16,15 +16,21 @@ Done:
 To do list:
 - Branch & bound algorithm proberen
 - bij alle functies specificeren wat de input is (bijv. game_id = string (number of the gameboard))
-- de won functie checken, want soms werkt ie niet!
-- randomize aanpassen op dat move ook een car_list nodig heeft!
 - een archief aanmaken in randomize, zodat de moves die tot eenzelfde bord leiden geskipt worden
+- profile gebruiken om dingen sneller te maken
+- best first search, A*
+- LB van Objective Function in een formule zetten 
 
 VRAGEN VOOR QUINTEN:
 
-+ waarom werkt de self.won functie van RushHour niet?
-+ hoe kunnen we het beste het archief aanpakken
+
 
 QUOTES:
 
 Yara over Stan: hij heeft z'n appel en z'n peer door elkaar gehaald.
+
+PUNTEN:
+
+Infra/Data = 5/5
+Exploratie = 2/5
+Algoritme = 3*/5

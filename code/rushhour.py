@@ -45,9 +45,9 @@ class Rushhour(object):
             # do the move
             car.update_coordinates(command)
             self.counter += 1
-            print(self.counter)
+            # print(self.counter)
             self.update_board()
-            self.print_board()
+            # self.print_board()
             return True
 
     def check_move(self, car, command):

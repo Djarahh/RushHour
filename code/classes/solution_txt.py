@@ -1,5 +1,5 @@
 class TxtSolution(object):
-    def __init__(self, game_id, solution):
+    def __init__(self, game_id, solution, algorithm):
         """
         Makes a .txt file from the solution found by the algorithm
 
@@ -9,7 +9,8 @@ class TxtSolution(object):
         """
         self.game_id = game_id
         self.solution = solution
-        self.make_file(f"results/solution{self.game_id}.txt")
+        self.algorithm = algorithm
+        self.make_file(f"results/{self.algorithm}solution{self.game_id}.txt")
 
     def make_file(self, output_file):
         """
