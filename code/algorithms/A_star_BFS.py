@@ -77,15 +77,15 @@ class Graph(object):
 
     def value_giver(self, final_car_list, inital_car_list):
         """Calculates the difference between xi and xf"""
-        self.board_value = 0
+        board_value = 0
         if final_car_list:
             for car in inital_car_list:
                 if car.direction == "x":
                     difference = abs(car.coordinate[0][0] - final_car_list
                                      [int(car.id) - 1].coordinate[0][0])
-                    self.board_value += difference
+                    board_value += difference
                 else:
                     difference = abs(car.coordinate[0][1] - final_car_list
                                      [int(car.id) - 1].coordinate[0][1])
-                    self.board_value += difference
-        return self.board_value
+                    board_value += difference
+        return board_value

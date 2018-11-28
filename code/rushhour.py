@@ -18,6 +18,8 @@ class Rushhour(object):
         for coordinate in car:
             if coordinate == self.board.entrance:
                 print("Congratulations, you won the game!")
+                self.update_board()
+                self.print_board()
                 return True
         return False
 
