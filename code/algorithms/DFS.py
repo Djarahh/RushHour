@@ -15,11 +15,11 @@ class Tree(object):
     def make_stack(self, distance, car_list_parent):
         """Function that adds to the stack"""
         command_list = self.game.make_possible_move()
+        print(command_list)
         for move in command_list:
             archive = Archive(move, deepcopy(car_list_parent), distance)
-            if not archive.hash_parent(move) in self.archive_dict.keys():
-                print("YAY")
             self.stack.appendleft(archive)
+        print(f"Stack: {len(self.stack)}")
 
     def check_child(self):
         """Function to check child for stack"""
