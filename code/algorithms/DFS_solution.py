@@ -3,18 +3,20 @@ from code.classes.archive import Archive
 from copy import deepcopy
 from code.rushhour import Rushhour
 
-class Graph(object):
 
+class Tree(object):
     def __init__(self, game):
-        """Initialization method that creates a dictionary to store graph."""
-        self.queue = deque()
-        self.archive_dict = {}
+        """
+        Initializes a tree object to use for depth first search
+        """
+        self.stack = deque()
         self.game = game
         self.board = game.board
+        self.archive_dict = {}
         self.solution = None
         self.won = False
 
-    def bfs(self):
+    def dfs(self):
 
         source = self.game.return_car_list()
         distance = 0
@@ -22,19 +24,22 @@ class Graph(object):
         self.archive_dict[self.hashh(source)] = source_board
 
         self.make_possible_babies(source, distance + 1)
+        # print(f"Stack: {len(self.stack)}")
 
-        while self.queue:
-            current = self.queue.popleft()
+        while self.stack:
+            current = self.stack.popleft()
             if self.won:
-                print(f"The solution was found in {self.archive.distance + 1} steps.")
+                print("YAY, you have won!")
                 return self.solution
             else:
                 self.make_possible_babies(current.current, current.distance + 1)
+                print(f"Stack: {len(self.stack)}")
         print("No solution was found")
 
     def make_possible_babies(self, parent, distance):
         self.game = Rushhour(parent, self.board)
         command_list = self.game.make_possible_move()
+        # print(command_list)
         for move in command_list:
             car_id = move[0]
             command = move[1]
@@ -43,12 +48,20 @@ class Graph(object):
             if self.game.won():
                 self.won = True
                 self.archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
+                # print(f"Depth: {distance}")
                 self.solution = self.make_solution()
-
-            if not self.hashh(child_car_list) in self.archive_dict:
+            if self.check_baby(child_car_list, distance):
                 archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
-                self.queue.append(archive)
+                self.stack.appendleft(archive)
                 self.archive_dict[self.hashh(child_car_list)] = archive
+
+    def check_baby(self, child_car_list, distance):
+        if self.hashh(child_car_list) in self.archive_dict:
+            check = self.archive_dict[self.hashh(child_car_list)]
+            if check.distance > distance:
+                return True
+        else:
+            return True
 
     def hashh(self, car_list):
         coordinates = []
@@ -61,7 +74,6 @@ class Graph(object):
         solution = deque()
         cursor = self.archive
         while True:
-            # while not end of solution
             solution.appendleft(cursor.move)
             cursor = self.archive_dict[self.hashh(cursor.parent)]
             if cursor.parent == None:
