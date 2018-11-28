@@ -12,21 +12,20 @@ class Rushhour(object):
     def won(self):
         """Win condition for the game"""
         # if car 1 (red car) is on exit coordinate game is won
-        command = [4, 5]
+        command = [(self.board.entrance[0] - 1), self.board.entrance[0]]
         self.move(command, 1, self.car_list)
         car = self.car_list[0].coordinate
         for coordinate in car:
             if coordinate == self.board.entrance:
                 print("Congratulations, you won the game!")
-                self.update_board()
-                self.print_board()
                 return True
         return False
 
     def make_possible_move(self):
         """Creates a list with possible moves"""
         move_list = []
-        for command in [[0, 1], [1, 2], [2, 3], [3, 4], [4, 5]]:
+        for i in range(self.board.length):
+            command = [i, (i + 1)]
             for car in self.car_list:
                 option = self.check_move(car, command)
                 if option:
