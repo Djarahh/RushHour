@@ -15,6 +15,7 @@ class Graph(object):
         self.archive = None
         self.solution = None
         self.won = False
+        self.final_car_list = random
 
     def bfs(self):
 
@@ -72,3 +73,18 @@ class Graph(object):
                 solution.append([1, [4,5]])
                 break
         return solution
+
+    def value_giver(self, final_car_list, inital_car_list):
+        """Calculates the difference between xi and xf"""
+        self.board_value = 0
+        if self.final_car_list:
+            for car in self.inital_car_list:
+                if car.direction == "x":
+                    difference = abs(car.coordinate[0][0] - self.final_car_list
+                                     [int(car.id) - 1].coordinate[0][0])
+                    self.board_value += difference
+                else:
+                    difference = abs(car.coordinate[0][1] - self.final_car_list
+                                     [int(car.id) - 1].coordinate[0][1])
+                    self.board_value += difference
+        return self.board_value
