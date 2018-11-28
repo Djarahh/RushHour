@@ -58,15 +58,15 @@ location
 length    2
 color     orange
 location
-5,2
-5,3
+4,2
+4,3
 
 10
 length    2
 color     lightblue
 location
-6,2
-6,3
+5,2
+5,3
 
 11
 length    2
