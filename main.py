@@ -1,6 +1,7 @@
 from code.rushhour import Rushhour
 from code.algorithms.random_possible_moves import Randomize
-from code.algorithms.BFS_archive_check import Graph
+# from code.algorithms.BFS_archive_check import Graph
+from code.algorithms.BFS_solution import Graph
 # from code.algorithms.DFS import Tree
 from code.classes.load_cars import LoadCars
 from code.visualization.visualize_sequence import SequenceVisualization
@@ -25,23 +26,36 @@ def main(game_id):
     rushhour = Rushhour(car_list, board)
 
     # Let the randomize algorithm run and return a solution
-    # A = Randomize(deepcopy(rushhour))
-    # solution = A.randomize()
+    A = Randomize(deepcopy(rushhour))
+    solution = A.randomize()
+    algorithm = "RANDOM"
 
-    # Let the BFS algorthm work
-    B = Graph(deepcopy(rushhour))
-    B.bfs()
+    # # Let the BFS algorthm work
+    # B = Graph(deepcopy(rushhour))
+    # solution = B.bfs()
+    # algorithm = "BFS"
 
     # # Let the DFS algorithm work it
     # C = Tree(rushhour)
     # C.dfs()
 
+<<<<<<< HEAD
     # # Make a .txt file with the solution
     # TxtSolution(game_id, solution)
 
     # # Visualize the solution that the algorithm made
     # SequenceVisualization(game_id, rushhour)
+=======
+    # Make a .txt file with the solution
+    TxtSolution(game_id, solution, algorithm)
+>>>>>>> c75985304e0f405d92025f451f539d80511abf35
 
+    # Visualize the solution that the algorithm made
+    SequenceVisualization(game_id, rushhour, algorithm)
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     main("1")
+=======
+    main("4")
+>>>>>>> c75985304e0f405d92025f451f539d80511abf35

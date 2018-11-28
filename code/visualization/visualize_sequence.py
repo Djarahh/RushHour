@@ -5,21 +5,21 @@ import time
 
 
 class SequenceVisualization:
-    def __init__(self, game_id, game):
+    def __init__(self, game_id, game, algorithm):
         """
         Visualizes a sequence of RushHour boards
 
         game_id = string (number of the gameboard)
         """
 
-        self.sequence = self.load_sequence(f"results/solution{game_id}.txt")
+        self.sequence = self.load_sequence(f"results/{algorithm}solution{game_id}.txt")
         self.game_id = game_id
         self.counter = 0
         game = game
         visual = BoardVisualization(game)
         for move in self.sequence:
             # wait a few seconds
-            time.sleep(0.1)
+            time.sleep(0.5)
             # do the move
             command = move.split()
             id = command[0]
