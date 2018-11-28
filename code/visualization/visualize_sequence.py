@@ -17,7 +17,8 @@ class SequenceVisualization:
         self.counter = 0
         game = game
         visual = BoardVisualization(game)
-        for move in self.sequence:
+        for i in range(0):
+        # for move in self.sequence:
             # wait a few seconds
             time.sleep(0.5)
             # do the move
