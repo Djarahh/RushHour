@@ -24,10 +24,10 @@ class Iterative(object):
         for key in keys:
             if comparison_dict[key] == final_dict[key[0]]:
                 # increase the value
-                self.board_value += 1
+                self.board_value -= 1
             else:
                 # decrease the value
-                self.board_value -= 1
+                self.board_value += 1
         # move = max(self.value_dict, key=self.value_dict.get)
         # do the move
         print(self.board_value)
