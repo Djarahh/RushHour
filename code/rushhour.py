@@ -18,6 +18,8 @@ class Rushhour(object):
         for coordinate in car:
             if coordinate == self.board.entrance:
                 print("Congratulations, you won the game!")
+                self.update_board()
+                self.print_board()
                 return True
         return False
 
@@ -44,11 +46,11 @@ class Rushhour(object):
         if self.check_move(car, command) and self.inside_boundries(car, command):
             # do the move
             car.update_coordinates(command)
-            self.counter += 1
-            print(self.counter)
-            self.update_board()
-            self.print_board()
-            return True
+            # self.counter += 1
+            # print(self.counter)
+            # self.update_board()
+            # self.print_board()
+            # return True
 
     def check_move(self, car, command):
         """Checks if no other cars are in the way

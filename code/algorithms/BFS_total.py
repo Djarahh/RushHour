@@ -41,6 +41,9 @@ class Graph(object):
             command = move[1]
             self.game.move(command, car_id, deepcopy(parent))
             child_car_list = self.game.return_car_list()
+            if self.game.won():
+                self.archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
+                self.make_solution()
 
             if not self.hashh(child_car_list) in self.archive_dict:
                 self.archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
@@ -55,3 +58,9 @@ class Graph(object):
             coordinates.append(item.coordinate)
         hash_code = hash(str(coordinates))
         return hash_code
+
+    def make_solution(self):
+        sequence = deque()
+        cursor = self.archive
+        sequence.appendleft(cursor.move)
+        
