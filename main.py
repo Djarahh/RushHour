@@ -7,7 +7,7 @@ from code.classes.load_cars import LoadCars
 from code.visualization.visualize_sequence import SequenceVisualization
 from code.classes.solution_txt import TxtSolution
 from copy import deepcopy
-from code.algorithms.iterative import Iterative
+from code.algorithms.value_giver_best_first import ValueGiver
 
 
 def main(game_id):
@@ -32,7 +32,9 @@ def main(game_id):
     final_board = rushhour.return_car_list()
     # use this algorithm for the final board of rushhour
     rush = Rushhour(deepcopy(car_list), deepcopy(board))
-    B = Iterative(deepcopy(car_list), deepcopy(final_board), rush)
+    B = ValueGiver(deepcopy(car_list), deepcopy(final_board), rush)
+    w = B.compare_i_f()
+    print(B.board_value)
 
     # Let the BFS algorithm work
     # B = Graph(deepcopy(rushhour))
