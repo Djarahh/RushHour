@@ -7,6 +7,7 @@ from code.classes.load_cars import LoadCars
 from code.visualization.visualize_sequence import SequenceVisualization
 from code.classes.solution_txt import TxtSolution
 from copy import deepcopy
+from code.algorithms.iterative import Iterative
 
 
 def main(game_id):
@@ -22,44 +23,35 @@ def main(game_id):
     board = things.board
 
     # Initiate a RushHour game
-    rushhour = Rushhour(car_list, board)
+    rushhour = Rushhour(deepcopy(car_list), deepcopy(board))
 
     # # Let the randomize algorithm run and return a solution
-    # A = Randomize(deepcopy(rushhour))
-    # solution = A.randomize()
+    A = Randomize((rushhour))
+    solution = A.randomize()
     #algorithm = "RANDOM"
+    final_board = rushhour.return_car_list()
+    # use this algorithm for the final board of rushhour
+    rush = Rushhour(deepcopy(car_list), deepcopy(board))
+    B = Iterative(deepcopy(car_list), deepcopy(final_board), rush)
 
-    # Let the BFS algorthm work
-    B = Graph(deepcopy(rushhour))
-    solution = B.bfs()
-    algorithm = "BFS"
+    # Let the BFS algorithm work
+    # B = Graph(deepcopy(rushhour))
+    # solution = B.bfs()
+    # algorithm = "BFS"
 
     # # Let the DFS algorithm work it
     # C = Tree(rushhour)
     # C.dfs()
 
-<<<<<<< HEAD
     # # Make a .txt file with the solution
     # TxtSolution(game_id, solution)
 
     # # Visualize the solution that the algorithm made
     # SequenceVisualization(game_id, rushhour)
-=======
-    # Make a .txt file with the solution
-    TxtSolution(game_id, solution, algorithm)
->>>>>>> c75985304e0f405d92025f451f539d80511abf35
 
     # Visualize the solution that the algorithm made
-    SequenceVisualization(game_id, rushhour, algorithm)
+    # SequenceVisualization(game_id, rushhour, algorithm)
 
 
 if __name__ == "__main__":
-<<<<<<< HEAD
-main("7")
-=======
-<<<<<<< HEAD
-    main("1")
-=======
-    main("4")
->>>>>>> c75985304e0f405d92025f451f539d80511abf35
->>>>>>> c68b24585ebfcca67979ae7c9d371c9ec994a741
+    main("7")

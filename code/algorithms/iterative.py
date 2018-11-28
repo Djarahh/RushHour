@@ -16,7 +16,7 @@ class Iterative(object):
     def compare_value(self):
         """Compares the dict made in assign_value() with the final dict.
         If the values match give a possitive value to the value_dict"""
-        self.value_dict = {}
+        self.board_value = 0
         self.update_car_list(self.game.car_list)
         final_dict = self.compare_i_f()
         comparison_dict = self.assign_value()
@@ -24,43 +24,15 @@ class Iterative(object):
         for key in keys:
             if comparison_dict[key] == final_dict[key[0]]:
                 # increase the value
-                self.value_dict[key] = 0
-                self.value_dict[key] += 1
+                self.board_value += 1
             else:
                 # decrease the value
-                self.value_dict[key] = 0
-                self.value_dict[key] += -1
-            self.free_others(key, comparison_dict)
-        # determine the key with highest heuristic value
-        move = max(self.value_dict, key=self.value_dict.get)
+                self.board_value -= 1
+        # move = max(self.value_dict, key=self.value_dict.get)
         # do the move
-        print(self.value_dict)
-        self.game.move(list(move[1]), move[0], self.current_car_list)
+        print(self.board_value)
+        # self.game.move(list(move[1]), move[0], self.current_car_list)
 
-    def free_others(self, key, comparison_dict):
-        """Function to check if other cars are freed by the move"""
-        # retrieve possible moves: deepcopy the current game, check if
-        # an extra car id is available
-        command_list_old = self.game.make_possible_move()
-        game = deepcopy(self.game)
-        car_list = deepcopy(self.current_car_list)
-        game.move(list(key[1]), key[0], car_list)
-        command_list = game.make_possible_move()
-        # now you have a list with possible moves for this very key!!
-        # time to change to the value dict!
-        keys = list(comparison_dict.keys())
-        id_list = []
-        for j in keys:
-            id_list.append(j[0])
-        if len(command_list) > len(command_list_old):
-            self.value_dict[key] += 1
-        else:
-            # print("chocolate")
-            for i in command_list:
-                # print(i[0], id_list)
-                if i[0] not in id_list:
-                    # print(self.value_dict[key], "sowhat")
-                    self.value_dict[key] += 1
 
     def assign_value(self):
         """Retrieves finalized board"""
@@ -118,4 +90,5 @@ class Iterative(object):
     def iterative(self):
         while not self.game.won():
             self.compare_value()
+            break
         pass
