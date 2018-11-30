@@ -51,7 +51,6 @@ class Branches(object):
                 print(f"Bound: {self.bound}")
                 self.solution = self.make_solution()
                 time.sleep(2)
-                break
             elif self.check_baby(child_car_list, distance):
                 archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
                 self.stack.appendleft(archive)
@@ -73,7 +72,7 @@ class Branches(object):
         return hash_code
 
     def update_bound(self, distance):
-        self.bound = distance - 5
+        self.bound = distance - 10
 
     def make_solution(self):
         solution = deque()

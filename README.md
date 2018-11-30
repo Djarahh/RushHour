@@ -15,14 +15,14 @@ Done:
 + DFS algoritme
 + Branch and Bound algoritme
 + Best first search, (BeFS)
++ Entrance dehardcoden in move, won, make_possible_move
 
 To do list:
-- bij alle functies specificeren wat de input is (bijv. game_id = string (number of the gameboard))
-- profile gebruiken om dingen sneller te maken
+- bij alle functies specificeren wat de input is (bijv. game_id = string (number of the gameboard)) & dingen weggooien
+- profile gebruiken om dingen sneller te maken (StanlyMan)
 - LB van Objective Function in een formule zetten
-- Entrance dehardcoden in move, won, make_possible_move
 - timer in de algoritmes/in main.py zetten
-- Beam Search? 
+- Beam Search?
 
 VRAGEN VOOR QUINTEN:
 
