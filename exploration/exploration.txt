@@ -38,7 +38,8 @@ time, the upper bound is the same as the upper bound of the state space.
 TO DO:
 - overzicht van de kwaliteiten verschillende algoritmes
 - analyse van onze probleem instanties
-  - hoe meer bewegingsvrijheid op een bord, hoe moeilijker het bord
+  - hoe meer bewegingsvrijheid op een bord, hoe moeilijker het bord?
+  - is er een 'chokingpoint?'
 
 game1:
 UB = 1E6
