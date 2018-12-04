@@ -6,7 +6,8 @@ from code.rushhour import Rushhour
 class Graph(object):
 
     def __init__(self, game):
-        """Initialization method that creates a dictionary to store graph."""
+        """Initialization method that creates a dictionary to store graph, a
+        queue to iterate over the graph and initialize the game."""
         self.queue = deque()
         self.archive_dict = {}
         self.game = game
@@ -15,7 +16,7 @@ class Graph(object):
         self.won = False
 
     def bfs(self):
-
+        """Iterates over the graph and retuns solution when game is won"""
         source = self.game.return_car_list()
         distance = 0
         source_board = Archive(None, None, deepcopy(source), distance)
@@ -33,6 +34,7 @@ class Graph(object):
         print("No solution was found")
 
     def make_possible_babies(self, parent, distance):
+        """Creates a queue and """
         self.game = Rushhour(parent, self.board)
         command_list = self.game.make_possible_move()
         for move in command_list:
