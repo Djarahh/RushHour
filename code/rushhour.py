@@ -45,8 +45,8 @@ class Rushhour(object):
         if self.check_move(car, command) and self.inside_boundries(car, command):
             # do the move
             car.update_coordinates(command)
-            self.counter += 1
-            print(self.counter)
+            # self.counter += 1
+            # print(self.counter)
             # self.update_board()
             # self.print_board()
             # return True
@@ -74,7 +74,21 @@ class Rushhour(object):
             temp_command = self.make_temporary_command(command, car)
             # check temp_coordinates
             for command in temp_command:
-                for coordinate in car.temp_coordinates(command):
+                # combine this with grid idea
+                if car.direction == "y":
+                    # get x coordinate
+                    x = car.coordinate[0][0]
+                    # [x,y] and [x,y]...
+                    coordinate_list = [x, command[0]], [x, command[1]]
+                    if car.length == 3:
+                        coordinate_list = [[x, command[0]], [x, command[1]], [x, command[1] + 1]]
+
+                else:
+                    y = car.coordinate[0][1]
+                    coordinate_list = [[command[0], y], [command[1], y]]
+                    if car.length == 3:
+                        coordinate_list = [[command[0], y], [command[1], y], [command[1] + 1, y]]
+                for coordinate in coordinate_list:
                     if coordinate in car_rest.coordinate:
                         return False
         return self.make_temporary_command(command, car)
