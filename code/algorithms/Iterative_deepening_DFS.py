@@ -2,9 +2,10 @@ from collections import deque
 from code.classes.archive import Archive
 from copy import deepcopy
 from code.rushhour import Rushhour
+import time
 
 
-class Tree(object):
+class Iterative(object):
     def __init__(self, game):
         """
         Initializes a tree object to use for depth first search
@@ -14,9 +15,10 @@ class Tree(object):
         self.board = game.board
         self.archive_dict = {}
         self.solution = None
+        self.bound = 15
         self.won = False
 
-    def dfs(self):
+    def bnb(self):
 
         source = self.game.return_car_list()
         distance = 0
@@ -24,12 +26,25 @@ class Tree(object):
         self.archive_dict[self.hashh(source)] = source_board
 
         self.make_possible_babies(source, distance + 1)
-        # print(f"Stack: {len(self.stack)}")
 
         while not self.won:
+            if len(self.stack) == 0:
+                self.update_bound()
+                self.start_again()
             current = self.stack.popleft()
+            while current.distance > self.bound:
+                current = self.stack.popleft()
             self.make_possible_babies(current.current, current.distance + 1)
+
+        print(f"Bound: {self.bound}")
         return self.solution
+
+    def update_bound(self):
+        self.bound = self.bound + 10
+
+    def start_again(self):
+        self.archive_dict = {}
+        self.bnb()
 
     def make_possible_babies(self, parent, distance):
         self.game = Rushhour(parent, self.board)
@@ -43,9 +58,7 @@ class Tree(object):
             if self.game.won():
                 self.won = True
                 last_board = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
-                print(f"Depth: {distance}")
                 self.solution = self.make_solution(last_board)
-                break
             elif self.check_baby(child_car_list, distance):
                 archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
                 self.stack.appendleft(archive)
