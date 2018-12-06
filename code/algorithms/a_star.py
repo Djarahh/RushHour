@@ -5,7 +5,7 @@ from code.rushhour import Rushhour
 import heapq
 
 
-class BestFirst(object):
+class AStar(object):
 
     def __init__(self, game, final_board):
         """Initialization method that creates a dictionary to store graph."""
@@ -18,7 +18,7 @@ class BestFirst(object):
         self.won = False
         self.final_car_list = final_board
 
-    def bfs(self):
+    def a_star(self):
 
         source = self.game.return_car_list()
         distance = 0
@@ -52,7 +52,7 @@ class BestFirst(object):
 
             if not self.hashh(child_car_list) in self.archive_dict:
                 archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
-                value = self.value_giver(self.final_car_list, child_car_list)
+                value = self.value_giver(self.final_car_list, child_car_list, distance)
                 heapq.heappush(self.heap, (value, self.hashh(child_car_list)))
                 self.archive_dict[self.hashh(child_car_list)] = archive
 
@@ -75,9 +75,10 @@ class BestFirst(object):
                 break
         return solution
 
-    def value_giver(self, final_car_list, inital_car_list):
+    def value_giver(self, final_car_list, inital_car_list, distance):
         """Calculates the difference between xi and xf"""
         board_value = 0
+        board_value += 0
         if final_car_list:
             for car in inital_car_list:
                 if car.direction == "x":

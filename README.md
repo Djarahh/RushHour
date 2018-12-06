@@ -22,15 +22,11 @@ To do list:
 - profile gebruiken om dingen sneller te maken (StanlyMan)
 - LB van Objective Function in een formule zetten
 - timer in de algoritmes/in main.py zetten
-<<<<<<< HEAD
 <!-- - Beam Search?  -->wachten tot we resultaten hebben
 - deepcopies proberen te verwijderen
 - overbodige code verwijderen
 - namen van algoritmes precies opschrijven (geen dubbele namen)
 - "metingen" met cProfile/snakeviz van huidige algorithms
-=======
-- Beam Search?
->>>>>>> f2b1ff34f57da5d10c5597db8902e96c32633b73
 
 VRAGEN VOOR QUINTEN:
 
