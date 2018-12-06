@@ -1,5 +1,6 @@
 # RushHour
 
+<<<<<<< HEAD
 Done:
 + rushhour.py werkt
 + main.py werkt
@@ -19,6 +20,8 @@ Done:
 + Namen van algoritmes precies opschrijven (geen dubbele namen)
 + LB van Objective Function in een formule zetten
 
+=======
+>>>>>>> 417f2adba863ba81fb5259b091ec065afae3c94e
 To do list:
 - bij alle functies specificeren wat de input is (bijv. game_id = string (number of the gameboard)) & dingen weggooien
 - profile gebruiken om dingen sneller te maken (StanlyMan)
@@ -28,9 +31,12 @@ To do list:
 - overbodige code verwijderen
 - "metingen" met cProfile/snakeviz van huidige algorithms
 - Beam Search?
+<<<<<<< HEAD
 
 VRAGEN VOOR QUINTEN:
 Timer?
+=======
+>>>>>>> 417f2adba863ba81fb5259b091ec065afae3c94e
 
 
 QUOTES:

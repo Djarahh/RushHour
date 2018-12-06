@@ -1,16 +1,7 @@
 Exploration:
 
+
 State space:
-
-Every car on a RushHour board has 4 or 5 options, depending on it's length.
-This is how we came up with the following formula to calculate the
-upper bound(UB) of the state space:
-
-x = cars of length 2
-y = cars of length 3
-n = board length
-
-UB = (n- 1)^x * (n-2)^y
 
 If there are multiple cars on the same row, the options of both these cars decrease.
 x = amount of options
@@ -18,10 +9,11 @@ b(x) = amount of cars with x amount of options
 
 UB = product(x^b(x))
 
+
 Objective function:
 
 For every car that's in the way of the little red car at least one or more moves
-has to be done. This is the lower bound.
+have to be done. This is the lower bound.
 
 n = red car
 alpha = amount of cars in front of red car
@@ -35,20 +27,50 @@ LB = alpha + beta + gamma + ... + x
 If you add the constraint of only using a certain composition of the cars one
 time, the upper bound is the same as the upper bound of the state space.
 
-TO DO:
-- overzicht van de kwaliteiten verschillende algoritmes
-- analyse van onze probleem instanties
-  - hoe meer bewegingsvrijheid op een bord, hoe moeilijker het bord
+
+Analysis of algorithms
+
+Random possible moves
+- amount of states searched: len(solution)
+- quality of solution: relative
+
+Breadth First Search
+- amount of states searched = len(archive) - len(queue)
+- quality of solution: the best!
+
+Depth First Search
+- amount of states searched = len(archive) - len(stack)
+- quality of solution: unknown
+
+Branch and Bound
+- amount of states searched = len(archive) - len(stack)
+- quality of solution: depends on running time,
+    infinite time --> if bound = len(solution) - x,
+    then solution found is max x moves longer than the shortest solution.
+
+Best First Search
+- amount of states searched = len(archive) - len(heap)
+- quality of solution: depends on random solution and relative to shortest solution.
+
+A* algorithm
+Beam Search with Iterative Widening
+
+
+Analysis of problem instances:
 
 game1:
+shortest solution found = 33
 UB = 1E6
 empty% = 0.42
+chocking point?
 
 game2:
+shortest solution found = 15
 UB = 1E9
 empty% = 0.25
 
 game3:
+shortest solution found = 21
 UB = 1E7
 empty% = 0.25
 
