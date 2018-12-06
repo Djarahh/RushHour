@@ -4,10 +4,11 @@ from random import randint
 class Randomize(object):
     """The randomize class contains an algorith which chooses random numbers
     from a list of possible moves"""
-    def __init__(self, game):
+    def __init__(self, game, initial_car_list):
         """Initialization of Randomize function
         game = string, only one number"""
         self.game = game
+        self.initial_car_list = initial_car_list
 
     def randomize(self):
         """Chooses a random move from the move_list. The move_list contains
@@ -23,4 +24,6 @@ class Randomize(object):
             self.game.move(command, car_id, self.game.car_list)
             move = [car_id, command]
             sequence.append(move)
+            if self.game.car_list == self.initial_car_list:
+                sequence = []
         return sequence

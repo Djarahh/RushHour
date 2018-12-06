@@ -34,6 +34,19 @@ class Rushhour(object):
                             move_list.append([car.id, i])
         return move_list
 
+    def make_possible_move_with_input(self, car_list):
+        """Creates a list with possible moves"""
+        move_list = []
+        for i in range(self.board.length):
+            command = [i, (i + 1)]
+            for car in car_list:
+                option = self.check_move_with_input(car, command, car_list)
+                if option:
+                    for i in option:
+                        if [car.id, i] not in move_list:
+                            move_list.append([car.id, i])
+        return move_list
+
     def move(self, command, id, car_list):
         """Function for moving the cars on the board
         command = list, contains either x or y coordinates
@@ -56,6 +69,19 @@ class Rushhour(object):
         command = list, contains either x or y coordinates
         car = car object"""
         for car_rest in self.car_list:
+            # the car is allowed to move on its own coordinates
+            if car_rest is not car:
+                # check all the coordinates in between the original coordinates
+                # and the inputted coordinates
+                if not self.try_temporary_command(command, car, car_rest):
+                    return False
+        return self.try_temporary_command(command, car, car_rest)
+
+    def check_move_with_input(self, car, command, car_list):
+        """Checks if no other cars are in the way
+        command = list, contains either x or y coordinates
+        car = car object"""
+        for car_rest in car_list:
             # the car is allowed to move on its own coordinates
             if car_rest is not car:
                 # check all the coordinates in between the original coordinates

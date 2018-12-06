@@ -62,6 +62,8 @@ class BestFirst(object):
             if not self.hashh(child_car_list) in self.archive_dict:
                 archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
                 value = self.value_giver(self.final_car_list, child_car_list)
+                # free = self.freeing_cars(parent, child_car_list)
+                # value = value - free
                 heapq.heappush(self.heap, (value, self.hashh(child_car_list)))
                 self.archive_dict[self.hashh(child_car_list)] = archive
 
@@ -97,7 +99,22 @@ class BestFirst(object):
                                      [int(car.id) - 1].coordinate[0][0])
                     board_value += difference
                 else:
-                    difference = abs(car.coordinate[0][1] - final_car_list
-                                     [int(car.id) - 1].coordinate[0][1])
+                    difference = abs(car.coordinate[0][1] - final_car_list[int(car.id) - 1].coordinate[0][1])
                     board_value += difference
         return board_value
+
+    def freeing_cars(self, current_car_list, child_car_list):
+        """Heuristic for freeing other cars"""
+        heur_value = 0
+        current_command_list = self.game.make_possible_move_with_input(current_car_list)
+        child_command_list = self.game.make_possible_move_with_input(child_car_list)
+        # if len(child_command_list) > len(current_command_list):
+        #     heur_value = -(len(child_command_list) - len(current_command_list
+        car_id_list = []
+        for move in current_command_list:
+            car_id_list.append(move[0])
+        for move in child_command_list:
+            if move[0] in car_id_list:
+                heur_value += 1
+        # print(heur_value)
+        return(heur_value)

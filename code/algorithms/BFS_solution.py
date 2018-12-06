@@ -46,6 +46,8 @@ class Graph(object):
                 self.won = True
                 self.archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
                 self.solution = self.make_solution()
+                self.final_board = child_car_list
+
 
             if not self.hashh(child_car_list) in self.archive_dict:
                 archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
@@ -70,3 +72,6 @@ class Graph(object):
                 solution.append([1, [4,5]])
                 break
         return solution
+
+    def return_car_list(self):
+        return self.final_board
