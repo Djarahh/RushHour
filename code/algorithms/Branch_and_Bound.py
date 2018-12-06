@@ -15,7 +15,7 @@ class Branches(object):
         self.board = game.board
         self.archive_dict = {}
         self.solution = None
-        self.bound = 180
+        self.bound = 40
 
     def bnb(self):
         """

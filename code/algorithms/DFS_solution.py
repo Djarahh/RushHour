@@ -72,6 +72,6 @@ class Tree(object):
             solution.appendleft(cursor.move)
             cursor = self.archive_dict[self.hashh(cursor.parent)]
             if cursor.parent == None:
-                solution.append([1, [4,5]])
+                solution.append([1,[(self.game.board.entrance[0] - 1), self.game.board.entrance[0]]])
                 break
         return solution
