@@ -18,7 +18,9 @@ class Branches(object):
         self.bound = 180
 
     def bnb(self):
+        """
 
+        """
         source = self.game.return_car_list()
         distance = 0
         source_board = Archive(None, None, deepcopy(source), distance)
@@ -32,9 +34,9 @@ class Branches(object):
             while current.distance > self.bound:
                 current = self.stack.popleft()
             self.make_possible_babies(current.current, current.distance + 1)
-            print(f"Stack: {len(self.stack)}")
-        print("bound!")
-        return print(self.solution)
+            # print(f"Stack: {len(self.stack)}")
+        print(f"Length archive:{len(self.archive_dict)}")
+        return self.solution
 
     def make_possible_babies(self, parent, distance):
         self.game = Rushhour(parent, self.board)
@@ -72,7 +74,7 @@ class Branches(object):
         return hash_code
 
     def update_bound(self, distance):
-        self.bound = distance - 10
+        self.bound = distance - 30
 
     def make_solution(self):
         solution = deque()

@@ -8,7 +8,10 @@ import heapq
 class BestFirst(object):
 
     def __init__(self, game, final_board):
-        """Initialization method that creates a dictionary to store graph."""
+        """Initialization method that creates a dictionary to store graph, a
+        heap as queue
+        game = rushhour
+        final_board = list, from a previous algorthm."""
         self.heap = []
         self.archive_dict = {}
         self.game = game
@@ -19,7 +22,8 @@ class BestFirst(object):
         self.final_car_list = final_board
 
     def bfs(self):
-
+        """Function that iterates over the graph of parent boards and children
+        It pops an archive object from the queue (heap) has the lowest value"""
         source = self.game.return_car_list()
         distance = 0
         source_board = Archive(None, None, deepcopy(source), distance)
@@ -38,6 +42,11 @@ class BestFirst(object):
         print("No solution was found")
 
     def make_possible_babies(self, parent, distance):
+        """Puts archive object on the heap and checks and checks if the game
+        is won.
+        parent =  list, contains car objects of the parent
+        distance = a single number
+        """
         self.game = Rushhour(parent, self.board)
         command_list = self.game.make_possible_move()
         for move in command_list:
@@ -57,6 +66,8 @@ class BestFirst(object):
                 self.archive_dict[self.hashh(child_car_list)] = archive
 
     def hashh(self, car_list):
+        """Hashes a car list (configuration of a board).
+        car_list = list, contains car object of the current board"""
         coordinates = []
         for item in car_list:
             coordinates.append(item.coordinate)
@@ -64,6 +75,7 @@ class BestFirst(object):
         return hash_code
 
     def make_solution(self):
+        """Traces the solution back and returns the solution"""
         solution = deque()
         cursor = self.archive
         while True:
@@ -71,7 +83,7 @@ class BestFirst(object):
             solution.appendleft(cursor.move)
             cursor = self.archive_dict[self.hashh(cursor.parent)]
             if cursor.parent == None:
-                solution.append([1, [4,5]])
+                solution.append([1, [(self.game.board.entrance[0] - 1), self.game.board.entrance[0]]])
                 break
         return solution
 
