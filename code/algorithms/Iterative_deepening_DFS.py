@@ -67,8 +67,7 @@ class Iterative(object):
     def check_baby(self, child_car_list, distance):
         if self.hashh(child_car_list) in self.archive_dict:
             check = self.archive_dict[self.hashh(child_car_list)]
-            if check.distance > distance:
-                return True
+            return check.distance > distance
         else:
             return True
 
