@@ -23,13 +23,13 @@ class Find_pattern(object):
     def compare(self, solution):
         print(f"Length: {len(solution)}")
         for i in range(len(solution)):
-            if solution[i][0] == 7 and solution[i][1] == [0,1,2]:
+            if solution[i][0] == 2 and solution[i][1] == [3,4,5]:
                 print("yay")
                 print(i)
                 print(solution[i])
                 set = i
                 for i in range(set, len(solution)):
-                    if solution[i][0] == 8 and not solution[i][1] == [4,5]:
+                    if solution[i][0] == 3 and not solution[i][1] != [3,4]:
                         print("woopdiedoo")
                         print(i)
                         print(solution[i])
