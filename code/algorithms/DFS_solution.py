@@ -54,8 +54,7 @@ class Tree(object):
     def check_baby(self, child_car_list, distance):
         if self.hashh(child_car_list) in self.archive_dict:
             check = self.archive_dict[self.hashh(child_car_list)]
-            if check.distance > distance:
-                return True
+            return check.distance > distance
         else:
             return True
 
@@ -73,6 +72,6 @@ class Tree(object):
             solution.appendleft(cursor.move)
             cursor = self.archive_dict[self.hashh(cursor.parent)]
             if cursor.parent == None:
-                solution.append([1, [4,5]])
+                solution.append([1,[(self.game.board.entrance[0] - 1), self.game.board.entrance[0]]])
                 break
         return solution

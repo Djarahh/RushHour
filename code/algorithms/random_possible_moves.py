@@ -22,6 +22,8 @@ class Randomize(object):
             car_id = input[0]
             command = input[1]
             self.game.move(command, car_id, self.game.car_list)
+            if self.initial_car_list == self.game.car_list:
+                sequence = []
             move = [car_id, command]
             sequence.append(move)
             if self.game.car_list == self.initial_car_list:

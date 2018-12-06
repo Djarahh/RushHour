@@ -34,7 +34,8 @@ class Graph(object):
         print("No solution was found")
 
     def make_possible_babies(self, parent, distance):
-        """Creates a queue and """
+        """Creates a queue and puts all board states that have not yet been
+        visited in the archive. Parent = list of car objects, distance = integer """
         self.game = Rushhour(parent, self.board)
         command_list = self.game.make_possible_move()
         for move in command_list:
@@ -55,6 +56,8 @@ class Graph(object):
                 self.archive_dict[self.hashh(child_car_list)] = archive
 
     def hashh(self, car_list):
+        """Hashes the coordinates of a board
+        car_list = list of car objects"""
         coordinates = []
         for item in car_list:
             coordinates.append(item.coordinate)
@@ -62,6 +65,7 @@ class Graph(object):
         return hash_code
 
     def make_solution(self):
+        """Tracks the solution back and returns the solution"""
         solution = deque()
         cursor = self.archive
         while True:
@@ -69,7 +73,7 @@ class Graph(object):
             solution.appendleft(cursor.move)
             cursor = self.archive_dict[self.hashh(cursor.parent)]
             if cursor.parent == None:
-                solution.append([1, [4,5]])
+                solution.append([1, [(self.game.board.entrance[0] - 1), self.game.board.entrance[0]]])
                 break
         return solution
 

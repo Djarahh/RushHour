@@ -15,11 +15,12 @@ class Branches(object):
         self.board = game.board
         self.archive_dict = {}
         self.solution = None
-        self.bound = 180
+        self.bound = 40
 
     def bnb(self):
         """
-
+        Searches the tree untill a solution is found, and resets the bound to
+        the depth of that solution. And starts iterating over the tree again
         """
         source = self.game.return_car_list()
         distance = 0
@@ -39,6 +40,10 @@ class Branches(object):
         return self.solution
 
     def make_possible_babies(self, parent, distance):
+        """Creates a stack and puts all board states that have not yet been
+        visited in the archive.
+        Parent = list of car objects
+        distance = integer """
         self.game = Rushhour(parent, self.board)
         command_list = self.game.make_possible_move()
         # print(command_list)
@@ -59,14 +64,16 @@ class Branches(object):
                 self.archive_dict[self.hashh(child_car_list)] = archive
 
     def check_baby(self, child_car_list, distance):
+        """Checks if the boards of children are already in the archive"""
         if self.hashh(child_car_list) in self.archive_dict:
             check = self.archive_dict[self.hashh(child_car_list)]
-            if check.distance > distance:
-                return True
+            return check.distance > distance
         else:
             return True
 
     def hashh(self, car_list):
+        """Hashes the coordinates of a board
+        car_list = list of car objects"""
         coordinates = []
         for item in car_list:
             coordinates.append(item.coordinate)
@@ -74,15 +81,17 @@ class Branches(object):
         return hash_code
 
     def update_bound(self, distance):
+        """Updates the bound"""
         self.bound = distance - 30
 
     def make_solution(self):
+        """Tracks the solution back and returns the solution"""
         solution = deque()
         cursor = self.archive
         while True:
             solution.appendleft(cursor.move)
             cursor = self.archive_dict[self.hashh(cursor.parent)]
             if cursor.parent == None:
-                solution.append([1, [4,5]])
+                solution.append([1, [(self.game.board.entrance[0] - 1), self.game.board.entrance[0]]])
                 break
         return solution
