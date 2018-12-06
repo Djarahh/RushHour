@@ -2,21 +2,24 @@ from collections import deque
 from code.classes.archive import Archive
 from copy import deepcopy
 from code.rushhour import Rushhour
+import heapq
 
-class Graph(object):
 
-    def __init__(self, game):
-        """Initialization method that creates a dictionary to store graph, a
-        queue to iterate over the graph and initialize the game."""
-        self.queue = deque()
+class AStar(object):
+
+    def __init__(self, game, final_board):
+        """Initialization method that creates a dictionary to store graph."""
+        self.heap = []
         self.archive_dict = {}
         self.game = game
         self.board = game.board
+        self.archive = None
         self.solution = None
         self.won = False
+        self.final_car_list = final_board
 
-    def bfs(self):
-        """Iterates over the graph and retuns solution when game is won"""
+    def a_star(self):
+
         source = self.game.return_car_list()
         distance = 0
         source_board = Archive(None, None, deepcopy(source), distance)
@@ -24,8 +27,9 @@ class Graph(object):
 
         self.make_possible_babies(source, distance + 1)
 
-        while self.queue:
-            current = self.queue.popleft()
+        while self.heap:
+            queueobject = heapq.heappop(self.heap)
+            current = self.archive_dict[queueobject[1]]
             if self.won:
                 print(f"The solution was found in {self.archive.distance + 1} steps.")
                 return self.solution
@@ -34,8 +38,6 @@ class Graph(object):
         print("No solution was found")
 
     def make_possible_babies(self, parent, distance):
-        """Creates a queue and puts all board states that have not yet been
-        visited in the archive. Parent = list of car objects, distance = integer """
         self.game = Rushhour(parent, self.board)
         command_list = self.game.make_possible_move()
         for move in command_list:
@@ -50,12 +52,11 @@ class Graph(object):
 
             if not self.hashh(child_car_list) in self.archive_dict:
                 archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
-                self.queue.append(archive)
+                value = self.value_giver(self.final_car_list, child_car_list, distance)
+                heapq.heappush(self.heap, (value, self.hashh(child_car_list)))
                 self.archive_dict[self.hashh(child_car_list)] = archive
 
     def hashh(self, car_list):
-        """Hashes the coordinates of a board
-        car_list = list of car objects"""
         coordinates = []
         for item in car_list:
             coordinates.append(item.coordinate)
@@ -63,7 +64,6 @@ class Graph(object):
         return hash_code
 
     def make_solution(self):
-        """Tracks the solution back and returns the solution"""
         solution = deque()
         cursor = self.archive
         while True:
@@ -71,6 +71,22 @@ class Graph(object):
             solution.appendleft(cursor.move)
             cursor = self.archive_dict[self.hashh(cursor.parent)]
             if cursor.parent == None:
-                solution.append([1, [(self.game.board.entrance[0] - 1), self.game.board.entrance[0]]])
+                solution.append([1, [4,5]])
                 break
         return solution
+
+    def value_giver(self, final_car_list, inital_car_list, distance):
+        """Calculates the difference between xi and xf"""
+        board_value = 0
+        board_value += 0
+        if final_car_list:
+            for car in inital_car_list:
+                if car.direction == "x":
+                    difference = abs(car.coordinate[0][0] - final_car_list
+                                     [int(car.id) - 1].coordinate[0][0])
+                    board_value += difference
+                else:
+                    difference = abs(car.coordinate[0][1] - final_car_list
+                                     [int(car.id) - 1].coordinate[0][1])
+                    board_value += difference
+        return board_value
