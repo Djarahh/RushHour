@@ -3,11 +3,11 @@ Exploration:
 
 State space:
 
-If there are multiple cars on the same row, the options of both these cars decrease.
-x = amount of options
-b(x) = amount of cars with x amount of options
+If there are multiple cars on the same row, the freedom of movement of both these cars decrease.
+x = amount of freedom
+b(x) = amount of cars with x amount of freedom
 
-UB = product(x^b(x))
+UB = product of all(x^b(x))
 
 
 Objective function:
@@ -25,7 +25,7 @@ x = amount of cars in front of x-1
 LB = alpha + beta + gamma + ... + x
 
 If you add the constraint of only using a certain composition of the cars one
-time, the upper bound is the same as the upper bound of the state space.
+time, the upper bound of the objective function is the same as the upper bound of the state space.
 
 
 Analysis of algorithms
@@ -46,7 +46,7 @@ Branch and Bound
 - amount of states searched = len(archive) - len(stack)
 - quality of solution: depends on running time,
     infinite time --> if new_bound = len(solution) - x,
-    then solution found is max x moves longer than the shortest solution.
+    then the solution found is max x moves longer than the shortest solution.
 
 Best First Search
 - amount of states searched = len(archive) - len(heap)
@@ -54,32 +54,73 @@ Best First Search
 
 Analysis of problem instances:
 
+There are two factors that increase the difficulty of a RushHour board:
+1. Length of the shortest solution (the depth of the tree)
+
+The length of the solution is influenced by the amount of hindrance caused by cars
+in the y-direction, because these cars can directly block the red car from
+exiting the game board.
+
+2. Amount of possible moves per level of the tree (breadth of the tree)
+
+The amount of possible moves from each configuration of the game board is
+influenced by the freedom of movement of every car.
+
+For every game we calculated the shortest solution, the upperbound of the state space,
+the percentage of the board that is empty, the total amount of cars and the amount of cars in the y-direction.
+
+Score system for 6x6 boards:
+Length of solution --> len(solution)/2
+Empty --> blocks empty/blocks total
+Every car of length 3 in y-direction --> 10 points
+Every row with two cars of length 2 in y-direction --> 5 points
+Every car of length 2 in y-direction --> 2 points
+
+SCORE1 = points*empty
+SCORE2 = points*empty (without length points)
+
+
 game1:
 shortest solution found = 33
-UB = 1E6
-empty% = 0.42
+UB = 1E6 = 6
+empty = 0.42
+amount of cars = 9
 4 cars in the y-direction (3 of len3, 1 of len2)
+
+SCORE = 20.37
+
+SCORE = 13.44
 
 game2:
 shortest solution found = 15
-UB = 1E9
-empty% = 0.25
+UB = 1E9 = 9
+empty = 0.25
+amount of cars = 13
 4 cars in the y-direction (1 of len3, 3 of len2)
+
+SCORE = 5.88
+
+SCORE = 4
 
 game3:
 shortest solution found = 21
-UB = 1E7
-empty% = 0.25
+UB = 1E7 = 7
+empty = 0.25
+amount of cars = 13
 5 cars in the y-direction (5 of len2, 2 in the same row)
+
+SCORE = 5.38
+
+SCORE = 2,75
 
 game4:
 UB = 7.2E14
-empty% = 0.33
+empty = 0.33
 
 game5:
 UB = 8.4E18
-empty% = 0.33
+empty = 0.33
 
 game6:
 UB = 5.5E19
-empty% = 0.25
+empty = 0.25
