@@ -24,6 +24,7 @@ location
 4
 length 3
 color MediumPurple1
+location
 5,4
 5,5
 5,6
