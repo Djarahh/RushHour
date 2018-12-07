@@ -28,7 +28,7 @@ If you add the constraint of only using a certain composition of the cars one
 time, the upper bound of the objective function is the same as the upper bound of the state space.
 
 
-Analysis of algorithms
+Analysis of algorithms and their solutions
 
 Random possible moves
 - amount of states searched: len(solution)
@@ -52,16 +52,24 @@ Best First Search
 - amount of states searched = len(archive) - len(heap)
 - quality of solution: depends on random solution and relative to shortest solution.
 
+In the case of game boards that cannot be solved with the BFS, which means that the shortest solution is unknown,
+the relative quality of the BeFS can be estimated by extrapolating the difference between the BFS and the BeFS of the
+6x6 game boards(see Exploration.png).
+
+
 Analysis of problem instances:
 
 There are two factors that increase the difficulty of a RushHour board:
 1. Length of the shortest solution (the depth of the tree)
 
+- more cars can mean larger depth of tree due to more possible sequences
+
 The length of the solution is influenced by the amount of hindrance caused by cars
-in the y-direction, because these cars can directly block the red car from
-exiting the game board.
+that move in perpendicular paths.
 
 2. Amount of possible moves per level of the tree (breadth of the tree)
+
+- more empty spaces can mean more possible moves, creating a wider tree
 
 The amount of possible moves from each configuration of the game board is
 influenced by the freedom of movement of every car.
@@ -87,9 +95,9 @@ empty = 0.42
 amount of cars = 9
 4 cars in the y-direction (3 of len3, 1 of len2)
 
-SCORE = 20.37
+SCORE1 = 20.37
 
-SCORE = 13.44
+SCORE2 = 13.44
 
 game2:
 shortest solution found = 15
@@ -98,9 +106,9 @@ empty = 0.25
 amount of cars = 13
 4 cars in the y-direction (1 of len3, 3 of len2)
 
-SCORE = 5.88
+SCORE1 = 5.88
 
-SCORE = 4
+SCORE2 = 4
 
 game3:
 shortest solution found = 21
@@ -109,9 +117,9 @@ empty = 0.25
 amount of cars = 13
 5 cars in the y-direction (5 of len2, 2 in the same row)
 
-SCORE = 5.38
+SCORE1 = 5.38
 
-SCORE = 2,75
+SCORE2 = 2.75
 
 game4:
 UB = 7.2E14
