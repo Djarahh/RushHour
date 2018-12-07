@@ -45,16 +45,12 @@ Depth First Search
 Branch and Bound
 - amount of states searched = len(archive) - len(stack)
 - quality of solution: depends on running time,
-    infinite time --> if bound = len(solution) - x,
+    infinite time --> if new_bound = len(solution) - x,
     then solution found is max x moves longer than the shortest solution.
 
 Best First Search
 - amount of states searched = len(archive) - len(heap)
 - quality of solution: depends on random solution and relative to shortest solution.
-
-A* algorithm
-Beam Search with Iterative Widening
-
 
 Analysis of problem instances:
 
@@ -62,17 +58,19 @@ game1:
 shortest solution found = 33
 UB = 1E6
 empty% = 0.42
-chocking point?
+4 cars in the y-direction (3 of len3, 1 of len2)
 
 game2:
 shortest solution found = 15
 UB = 1E9
 empty% = 0.25
+4 cars in the y-direction (1 of len3, 3 of len2)
 
 game3:
 shortest solution found = 21
 UB = 1E7
 empty% = 0.25
+5 cars in the y-direction (5 of len2, 2 in the same row)
 
 game4:
 UB = 7.2E14
