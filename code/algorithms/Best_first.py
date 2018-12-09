@@ -20,6 +20,7 @@ class BestFirst(object):
         self.solution = None
         self.won = False
         self.final_car_list = final_board
+        self.counter = 0
 
     def bfs(self):
         """Function that iterates over the graph of parent boards and children
@@ -36,6 +37,7 @@ class BestFirst(object):
             current = self.archive_dict[queueobject[1]]
             if self.won:
                 print(f"The solution was found in {self.archive.distance + 1} steps.")
+                print(f"Calls to possible_babies: {self.counter}")
                 return self.solution
             else:
                 self.make_possible_babies(current.current, current.distance + 1)
@@ -47,6 +49,7 @@ class BestFirst(object):
         parent =  list, contains car objects of the parent
         distance = a single number
         """
+        self.counter += 1
         self.game = Rushhour(parent, self.board)
         command_list = self.game.make_possible_move()
         for move in command_list:
@@ -96,8 +99,7 @@ class BestFirst(object):
         if final_car_list:
             for car in inital_car_list:
                 if car.direction == "x":
-                    difference = abs(car.coordinate[0][0] - final_car_list
-                                     [int(car.id) - 1].coordinate[0][0])
+                    difference = abs(car.coordinate[0][0] - final_car_list[int(car.id) - 1].coordinate[0][0])
                     board_value += difference
                 else:
                     difference = abs(car.coordinate[0][1] - final_car_list[int(car.id) - 1].coordinate[0][1])

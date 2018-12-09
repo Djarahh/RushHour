@@ -7,7 +7,7 @@ class LoadSolution(object):
     def __init__(self, game):
         """Initialization of LoadCars object
         game = string, only a single number"""
-        self.car_list = self.load_cars(f"data/solutioncars{game}.txt")
+        self.car_list = self.load_solution(f"data/solutioncars{game}.txt")
 
     def load_solution(self, filename):
         """Loads the cars into rushhour
@@ -27,3 +27,17 @@ class LoadSolution(object):
                     car = Car(id, length, color, coordinate_list)
                     car_list.append(car)
         return car_list
+
+    def make_car_coordinate_list(self, file):
+        """Makes list of coordinates of the car
+        file = file"""
+        coordinate_list = []
+        while True:
+            coordinate = file.readline().strip().split(",")
+            if coordinate[0] is not "":
+                row = int(coordinate[0])
+                column = int(coordinate[1])
+                coordinate_list.append([row, column])
+            else:
+                break
+        return coordinate_list
