@@ -13,12 +13,15 @@ class Rushhour(object):
         """Win condition for the game"""
         # if car 1 (red car) is on exit coordinate game is won
         command = [(self.board.entrance[0] - 1), self.board.entrance[0]]
-        self.move(command, 1, self.car_list)
-        car = self.car_list[0].coordinate
-        for coordinate in car:
-            if coordinate == self.board.entrance:
-                print("Congratulations, you won the game!")
-                return True
+        car = self.car_list[0]
+        if self.check_move(car, command) and self.inside_boundries(car, command):
+
+            self.move(command, 1, self.car_list)
+
+            for coordinate in car.coordinate:
+                if coordinate == self.board.entrance:
+                    print("Congratulations, you won the game!")
+                    return True
         return False
 
     def make_possible_move(self):
@@ -52,17 +55,20 @@ class Rushhour(object):
         command = list, contains either x or y coordinates
         id = int, represents the car"""
         # selecting the right car
+
         self.car_list = car_list
         car = self.car_list[int(id) - 1]
         # check if coordinates are allowed
-        if self.check_move(car, command) and self.inside_boundries(car, command):
+        # if self.check_move(car, command) and self.inside_boundries(car, command):
             # do the move
-            car.update_coordinates(command)
+        car.update_coordinates(command)
             # self.counter += 1
             # print(self.counter)
-            # self.update_board()
-            # self.print_board()
-            # return True
+        # self.update_board()
+        # self.print_board()
+        #     # return True
+        # else:
+        #     print("not valid you cunt", id, command)
 
     def check_move(self, car, command):
         """Checks if no other cars are in the way
@@ -178,3 +184,34 @@ class Rushhour(object):
     def return_car_list(self):
         """Returns the self.car_list"""
         return self.car_list
+
+    def try_solution(self, solution):
+        """Tries using a list of moves as input"""
+        for move in solution:
+            command_list = move.split()
+            command = command_list[1].split(",")
+            command = [int(command[0]), int(command[1])]
+            self.move(command, int(command_list[0]), self.car_list)
+            if self.won():
+                return True
+        return False
+
+    def print_board(self):
+        """Prints the board in the terminal"""
+        counter = 0
+        for y in range(self.board.length):
+            for x in range(self.board.length):
+                print(self.board.grid[x, y], end="  ")
+                counter += 1
+                if counter % self.board.length == 0:
+                    print("\n")
+
+    def update_board(self):
+        """Sets the value of the coordinates to the id of the car occupying
+        the coordinate"""
+        self.board.set_zero()
+        for car in self.car_list:
+            for coordinate in car.coordinate:
+                x = coordinate[0]
+                y = coordinate[1]
+                self.board.grid[x, y] = int(car.id)

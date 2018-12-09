@@ -58,6 +58,7 @@ class BestFirst(object):
                 self.won = True
                 self.archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
                 self.solution = self.make_solution()
+                self.car_list = child_car_list
 
             if not self.hashh(child_car_list) in self.archive_dict:
                 archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
@@ -118,3 +119,6 @@ class BestFirst(object):
                 heur_value += 1
         # print(heur_value)
         return(heur_value)
+
+    def return_car_list(self):
+        return self.car_list

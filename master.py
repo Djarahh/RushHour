@@ -29,7 +29,7 @@ class Rushhour(object):
                     color = text_line.rsplit()[1]
                 elif text_line.startswith("location"):
                     coordinate_list = self.make_car_coordinate_list(file)
-                    car = Car(id, length, color, coordinate_list, False)
+                    car = Car(id, length, color, coordinate_list)
                     self.car_list.append(car)
 
     def make_car_coordinate_list(self, file):
@@ -78,7 +78,7 @@ class Rushhour(object):
     def won(self):
         """Win condition for the game"""
         # if car 1 (red car) is on exit coordinate game is won
-        command = [4, 5]
+        command = [7, 8]
         self.move(command, 1)
         car = self.car_list[0].coordinate
         for coordinate in car:
@@ -208,9 +208,9 @@ class Rushhour(object):
                     id = command[0]
                     command = self.clean_input(command[1])
                     if self.check_command(command):
-                        self.move(command, id)
-            visual = BoardVisualization(self.board, self.car_list, self.counter)
-            visual.done()
+                        self.move(command, id, self.car_list)
+            # visual = BoardVisualization(self.board, self.car_list, self.counter)
+            # visual.done()
 
 
     def clean_input(self, command):
@@ -247,6 +247,6 @@ class Rushhour(object):
 
 
 if __name__ == "__main__":
-    rushhour = Rushhour("1")
+    rushhour = Rushhour("5")
     rushhour.play()
     # rushhour.visualize_board()
