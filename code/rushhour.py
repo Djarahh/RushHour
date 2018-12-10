@@ -148,7 +148,7 @@ class Rushhour(object):
             temp_command = []
             for j in range(len(car.coordinate)):
                 temp_command.append(car.coordinate[j][i] - step)
-            if (car.coordinate[j][i] - step) is not self.board.length:
+            if (car.coordinate[j][i] - step) < self.board.length:
                 temp_command_list.append(temp_command)
         return temp_command_list
 

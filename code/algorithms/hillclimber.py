@@ -29,6 +29,11 @@ class Hillclimber(object):
         # if occurs more often
         # try not doing the first move if same direction
 
+        # two moves in range of 10 steps of same car in same direction, skip the first
+        for move in self.solution:
+            # determine car id and direction of move
+            if self.game.car_list
+
     def read_solution(self, filename):
         """reads solution (which is a .txt) and converts it back to an array"""
         sequence = []
