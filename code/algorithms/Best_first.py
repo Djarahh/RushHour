@@ -20,6 +20,7 @@ class BestFirst(object):
         self.solution = None
         self.won = False
         self.final_car_list = final_board
+        self.counter = 0
 
     def bfs(self):
         """Function that iterates over the graph of parent boards and children
@@ -36,9 +37,11 @@ class BestFirst(object):
             current = self.archive_dict[queueobject[1]]
             if self.won:
                 print(f"The solution was found in {self.archive.distance + 1} steps.")
+                print(f"Calls to possible_babies: {self.counter}")
                 return self.solution
             else:
                 self.make_possible_babies(current.current, current.distance + 1)
+                current.current = self.hashh(current.current)
         print("No solution was found")
 
     def make_possible_babies(self, parent, distance):
@@ -47,6 +50,9 @@ class BestFirst(object):
         parent =  list, contains car objects of the parent
         distance = a single number
         """
+        self.counter += 1
+        if self.counter % 1000 == 0:
+            print(self.counter)
         self.game = Rushhour(parent, self.board)
         command_list = self.game.make_possible_move()
         for move in command_list:
@@ -56,11 +62,12 @@ class BestFirst(object):
             child_car_list = self.game.return_car_list()
             if self.game.won():
                 self.won = True
-                self.archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
+                self.archive = Archive(move, self.hashh(parent), deepcopy(child_car_list), distance)
                 self.solution = self.make_solution()
+                self.car_list = child_car_list
 
             if not self.hashh(child_car_list) in self.archive_dict:
-                archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
+                archive = Archive(move, self.hashh(parent), deepcopy(child_car_list), distance)
                 value = self.value_giver(self.final_car_list, child_car_list)
                 # free = self.freeing_cars(parent, child_car_list)
                 # value = value - free
@@ -83,7 +90,7 @@ class BestFirst(object):
         while True:
             # while not end of solution
             solution.appendleft(cursor.move)
-            cursor = self.archive_dict[self.hashh(cursor.parent)]
+            cursor = self.archive_dict[cursor.parent]
             if cursor.parent == None:
                 solution.append([1, [(self.game.board.entrance[0] - 1), self.game.board.entrance[0]]])
                 break
@@ -117,3 +124,6 @@ class BestFirst(object):
                 heur_value += 1
         # print(heur_value)
         return(heur_value)
+
+    def return_car_list(self):
+        return self.car_list
