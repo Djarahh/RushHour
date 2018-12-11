@@ -11,12 +11,3 @@ class Archive(object):
         self.parent = car_list_parent
         self.current = current
         self.distance = distance
-
-    def hash_parent(self):
-        """Hash function for the car_list.
-        bool = bool"""
-        coordinates = []
-        for item in self.parent:
-            coordinates.append(item.coordinate)
-        hash_code = hash(str(coordinates))
-        return hash_code

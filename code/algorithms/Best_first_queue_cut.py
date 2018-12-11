@@ -33,7 +33,7 @@ class BestFirst(object):
         self.make_possible_babies(source, distance + 1)
 
         while self.heap:
-            if len(self.heap) > 100:
+            if len(self.heap) > 200:
                 self.heap = heapq.nsmallest(100, self.heap)
             print(len(self.heap))
             queueobject = heapq.heappop(self.heap)
