@@ -18,26 +18,25 @@ def main(game_id):
     rushhour = cd.cs.Rushhour(deepcopy(car_list), deepcopy(board))
 
     # Let the randomize algorithm run and return a solution
-    # A = cd.alg.Randomize(deepcopy(rushhour), deepcopy(car_list))
-    # solution= A.randomize()
-    # algorithm = "RANDOM"
-    # #
-    # final_board = rushhour.return_car_list()
-    # cd.cs.TxtSolution(game_id, solution, algorithm)
-
-    # s = LoadSolution(game_id)
-    # solved_board = s.car_list
+    A = cd.alg.Randomize(deepcopy(rushhour), deepcopy(car_list))
+    solution= A.randomize()
+    algorithm = "RANDOM"
     #
-    # rush = cd.cs.Rushhour(deepcopy(car_list), deepcopy(board))
-    # B = cd.alg.BestFirst(rush, final_board)
-    # solution = B.bfs()
-    # algorithm = "BEST"
+    final_board = A.game.return_car_list()
+    cd.cs.TxtSolution(game_id, solution, algorithm)
 
+    s = cd.cs.LoadSolution(game_id)
+    solved_board = s.car_list
 
-    # Let the BFS algorithm work
-    B = cd.alg.Graph(deepcopy(rushhour))
+    B = cd.alg.BestFirst(deepcopy(rushhour), final_board)
     solution = B.bfs()
-    algorithm = "BFS"
+    algorithm = "BEST"
+
+
+    # # Let the BFS algorithm work
+    # B = cd.alg.Graph(deepcopy(rushhour))
+    # solution = B.bfs()
+    # algorithm = "BFS"
 
 
     # # Let the DFS algorithm work it
