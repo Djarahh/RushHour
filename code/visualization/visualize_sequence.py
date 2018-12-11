@@ -20,7 +20,7 @@ class SequenceVisualization:
 
         for move in self.sequence:
             # wait a few seconds
-            time.sleep(0.1)
+            time.sleep(0.0005)
             # do the move
             command = move.split()
             id = command[0]
