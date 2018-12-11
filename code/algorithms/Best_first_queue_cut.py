@@ -13,7 +13,6 @@ class BestFirst(object):
         game = rushhour
         final_board = list, from a previous algorthm."""
         self.heap = []
-        self.queue = deque()
         self.archive_dict = {}
         self.game = game
         self.board = game.board
@@ -33,14 +32,11 @@ class BestFirst(object):
 
         self.make_possible_babies(source, distance + 1)
 
-        while self.queue:
-            if len(self.queue) > 100:
-                for i in range 100:
-                    queue.append(heapq.heappop(self.heap))
-            else:
-                for i in range len(self.queue):
-                    queue.append(heapq.heappop(self.heap))
-            queueobject = popleft(self.queue)
+        while self.heap:
+            if len(self.heap) > 100:
+                self.heap = heapq.nsmallest(100, self.heap)
+            print(len(self.heap))
+            queueobject = heapq.heappop(self.heap)
             current = self.archive_dict[queueobject[1]]
             if self.won:
                 print(f"The solution was found in {self.archive.distance + 1} steps.")
