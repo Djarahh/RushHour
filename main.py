@@ -23,17 +23,24 @@ def main(game_id):
     algorithm = "RANDOM"
     #
     final_board = A.game.return_car_list()
+
+    for car in final_board:
+        print(car.id)
+        print(car.coordinate)
     cd.cs.TxtSolution(game_id, solution, algorithm)
+
+    # s = LoadSolution(game_id)
+    # solved_board = s.car_list
+    #
+    rush = cd.cs.Rushhour(deepcopy(car_list), deepcopy(board))
+    B = cd.alg.BestFirst(rush, final_board)
+    solution = B.bfs()
+    algorithm = "BEST"
 
     s = cd.cs.LoadSolution(game_id)
     solved_board = s.car_list
 
-    B = cd.alg.BestFirst(deepcopy(rushhour), final_board)
-    solution = B.bfs()
-    algorithm = "BEST"
-
-
-    # # Let the BFS algorithm work
+    # Let the BFS algorithm work
     # B = cd.alg.Graph(deepcopy(rushhour))
     # solution = B.bfs()
     # algorithm = "BFS"

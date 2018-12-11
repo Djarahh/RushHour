@@ -27,7 +27,7 @@ class Iterative(object):
         source_board = Archive(None, None, deepcopy(source), distance)
         self.archive_dict[self.hashh(source)] = source_board
 
-        self.make_possible_babies(source, distance + 1)
+        self.make_possible_children(source, distance + 1)
 
         while not self.won:
             if len(self.stack) == 0:
@@ -36,7 +36,7 @@ class Iterative(object):
             current = self.stack.popleft()
             while current.distance > self.bound:
                 current = self.stack.popleft()
-            self.make_possible_babies(current.current, current.distance + 1)
+            self.make_possible_children(current.current, current.distance + 1)
 
         print(f"Bound: {self.bound}")
         return self.solution
@@ -50,7 +50,7 @@ class Iterative(object):
         self.archive_dict = {}
         self.bnb()
 
-    def make_possible_babies(self, parent, distance):
+    def make_possible_children(self, parent, distance):
         """Creates a stack and puts all board states that have not yet been
         visited in the archive.
         Parent = list of car objects,

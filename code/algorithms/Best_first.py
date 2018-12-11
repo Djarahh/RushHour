@@ -36,6 +36,8 @@ class BestFirst(Constructive):
         while self.heap:
             queueobject = heapq.heappop(self.heap)
             current = self.archive_dict[queueobject[1]]
+            print(queueobject[0], current.distance)
+
             if self.won:
                 print(f"The solution was found in {self.archive.distance + 1} steps.")
                 print(f"Calls to possible_babies: {self.counter}")

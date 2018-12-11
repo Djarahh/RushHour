@@ -1,7 +1,7 @@
 from collections import deque
 from code.classes.archive import Archive
 from copy import deepcopy
-from code.rushhour import Rushhour
+from code.classes.rushhour import Rushhour
 import heapq
 
 
@@ -33,11 +33,12 @@ class BestFirst(object):
         self.make_possible_babies(source, distance + 1)
 
         while self.heap:
-            if len(self.heap) > 200:
+            if len(self.heap) > 100:
                 self.heap = heapq.nsmallest(100, self.heap)
-            print(len(self.heap))
             queueobject = heapq.heappop(self.heap)
             current = self.archive_dict[queueobject[1]]
+            print(queueobject[0], current.distance)
+
             if self.won:
                 print(f"The solution was found in {self.archive.distance + 1} steps.")
                 print(f"Calls to possible_babies: {self.counter}")
