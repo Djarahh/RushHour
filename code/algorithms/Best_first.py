@@ -1,11 +1,12 @@
 from collections import deque
 from code.classes.archive import Archive
 from copy import deepcopy
-from code.rushhour import Rushhour
+from code.classes.rushhour import Rushhour
+from code.classes.constructive_algoritm import Constructive
 import heapq
 
 
-class BestFirst(object):
+class BestFirst(Constructive):
 
     def __init__(self, game, final_board):
         """Initialization method that creates a dictionary to store graph, a
@@ -63,7 +64,8 @@ class BestFirst(object):
             if self.game.won():
                 self.won = True
                 self.archive = Archive(move, self.hashh(parent), deepcopy(child_car_list), distance)
-                self.solution = self.make_solution()
+                solution = deque()
+                self.solution = self.make_solution(solution)
                 self.car_list = child_car_list
 
             if not self.hashh(child_car_list) in self.archive_dict:
@@ -74,27 +76,6 @@ class BestFirst(object):
                 heapq.heappush(self.heap, (value, self.hashh(child_car_list)))
                 self.archive_dict[self.hashh(child_car_list)] = archive
 
-    def hashh(self, car_list):
-        """Hashes a car list (configuration of a board).
-        car_list = list, contains car object of the current board"""
-        coordinates = []
-        for item in car_list:
-            coordinates.append(item.coordinate)
-        hash_code = hash(str(coordinates))
-        return hash_code
-
-    def make_solution(self):
-        """Traces the solution back and returns the solution"""
-        solution = deque()
-        cursor = self.archive
-        while True:
-            # while not end of solution
-            solution.appendleft(cursor.move)
-            cursor = self.archive_dict[cursor.parent]
-            if cursor.parent == None:
-                solution.append([1, [(self.game.board.entrance[0] - 1), self.game.board.entrance[0]]])
-                break
-        return solution
 
     def value_giver(self, final_car_list, inital_car_list):
         """Calculates the difference between xi and xf"""
