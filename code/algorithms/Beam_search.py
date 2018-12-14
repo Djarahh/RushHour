@@ -55,6 +55,8 @@ class BeamSearch(Constructive):
         print("No solution was found")
 
     def add_to_archive(self, move, parent, child_car_list, distance):
+        """Adds an archive object to the archive
+        move = """
         archive = Archive(move, self.hashh(parent), deepcopy(child_car_list), distance)
         value = self.value_giver(self.final_car_list, child_car_list)
         heapq.heappush(self.heap, (value, self.hashh(child_car_list)))
