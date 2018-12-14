@@ -7,3 +7,4 @@ test1.py
 main1.py
 results/
 results.py
+*.prof

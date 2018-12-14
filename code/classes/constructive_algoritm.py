@@ -40,12 +40,12 @@ class Constructive(object):
             child_car_list = self.game.return_car_list()
             if self.game.won():
                 if self.winning(move, parent, child_car_list, distance):
-                    print("I Broke")
                     break
             elif self.check_child(child_car_list, distance):
-                archive = Archive(move, self.hashh(parent), deepcopy(child_car_list), distance)
-                self.archive_dict[self.hashh(child_car_list)] = archive
-                self.put(archive)
+                self.add_to_archive(move, parent, child_car_list, distance)
+                # archive = Archive(move, self.hashh(parent), deepcopy(child_car_list), distance)
+                # self.archive_dict[self.hashh(child_car_list)] = archive
+                # self.put(archive)
 
     def winning(self, move, parent, child_car_list, distance):
         self.won = True

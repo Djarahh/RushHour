@@ -16,7 +16,7 @@ class Branches(Constructive):
         self.board = game.board
         self.archive_dict = {}
         self.solution = None
-        self.bound = 50
+        self.bound = 120
 
     def run(self):
         """
@@ -47,6 +47,11 @@ class Branches(Constructive):
             return check.distance > distance
         else:
             return True
+
+    def add_to_archive(self, move, parent, child_car_list, distance):
+        archive = Archive(move, self.hashh(parent), deepcopy(child_car_list), distance)
+        self.archive_dict[self.hashh(child_car_list)] = archive
+        self.put(archive)
 
     def put(self, archive):
         self.stack.appendleft(archive)
