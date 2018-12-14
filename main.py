@@ -63,4 +63,4 @@ def main(game_id):
     # SequenceVisualization(game_id, rushhour, algorithm)
 
 if __name__ == "__main__":
-    main("2")
+    main("6")
