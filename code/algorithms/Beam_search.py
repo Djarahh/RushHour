@@ -8,10 +8,12 @@ import heapq
 class BeamSearch(object):
 
     def __init__(self, game, final_board):
-        """Initialization method that creates a dictionary to store graph, a
-        heap as queue
+        """
+        Initialization method that creates a dictionary to store the graph,
+        a heap as queue
         game = rushhour
-        final_board = list, from a previous algorthm."""
+        final_board = list, from a previous algorthm.
+        """
         self.heap = []
         self.archive_dict = {}
         self.game = game
@@ -23,8 +25,12 @@ class BeamSearch(object):
         self.counter = 0
 
     def run(self):
-        """Function that iterates over the graph of parent boards and children
-        It pops an archive object from the queue (heap) has the lowest value"""
+        """
+        Function that iterates over the graph of parent boards and children
+        It pops an archive object from the queue (heap) that has the lowest value
+
+        returns a solution
+        """
         source = self.game.return_car_list()
         distance = 0
         source_board = Archive(None, None, deepcopy(source), distance)
@@ -49,10 +55,11 @@ class BeamSearch(object):
         print("No solution was found")
 
     def make_possible_babies(self, parent, distance):
-        """Puts archive object on the heap and checks and checks if the game
+        """
+        Puts archive object on the heap and checks and checks if the game
         is won.
-        parent =  list, contains car objects of the parent
-        distance = a single number
+        parent =  list, containing car objects of the parent
+        distance = an integer
         """
         self.counter += 1
         if self.counter % 1000 == 0:
@@ -79,8 +86,12 @@ class BeamSearch(object):
                 self.archive_dict[self.hashh(child_car_list)] = archive
 
     def hashh(self, car_list):
-        """Hashes a car list (configuration of a board).
-        car_list = list, contains car object of the current board"""
+        """
+        Hashes a car list (configuration of a board).
+        car_list = list, containing car objects of the current board
+
+        returns hashed code
+        """
         coordinates = []
         for item in car_list:
             coordinates.append(item.coordinate)
@@ -88,7 +99,11 @@ class BeamSearch(object):
         return hash_code
 
     def make_solution(self):
-        """Traces the solution back and returns the solution"""
+        """
+        Traces the solution back
+
+        returns the solution
+        """
         solution = deque()
         cursor = self.archive
         while True:
@@ -101,7 +116,11 @@ class BeamSearch(object):
         return solution
 
     def value_giver(self, final_car_list, inital_car_list):
-        """Calculates the difference between xi and xf"""
+        """
+        Calculates the difference between xi and xf
+
+        returns the difference between inital board and final board
+        """
         board_value = 0
         if final_car_list:
             for car in inital_car_list:

@@ -16,7 +16,7 @@ class SequenceVisualization:
         self.game_id = game_id
         self.counter = 0
         game = game
-        visual = BoardVisualization(game)
+        visual = BoardVisualization(game, len(self.sequence))
 
         for move in self.sequence:
             # wait a few seconds
@@ -30,6 +30,9 @@ class SequenceVisualization:
 
             # update the visualization
             visual.update(game.car_list, self.counter)
+            if self.counter < len(self.sequence):
+                time.sleep(0.05)
+                visual.w.delete("all")
 
         # enter the main loop
         visual.done()

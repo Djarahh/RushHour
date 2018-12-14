@@ -1,7 +1,7 @@
 from collections import deque
 from code.classes.archive import Archive
 from copy import deepcopy
-from code.rushhour import Rushhour
+from code.classes.rushhour import Rushhour
 
 
 class Tree(object):

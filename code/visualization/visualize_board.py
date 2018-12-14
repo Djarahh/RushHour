@@ -1,10 +1,11 @@
 # Class that visualizes a certain board from RushHour
 
 import tkinter as tk
+import time
 
 
 class BoardVisualization:
-    def __init__(self, game):
+    def __init__(self, game, length):
         """
         Visualizes a RushHour board with cars
 
@@ -21,6 +22,7 @@ class BoardVisualization:
         self.height = self.board.length*self.block
         self.max_dim = self.width
         self.counter = game.counter
+        self.length = length
 
         # Initialize a drawing surface
         self.master = tk.Tk()
