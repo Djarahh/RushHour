@@ -2,9 +2,11 @@ from collections import deque
 from code.classes.archive import Archive
 from copy import deepcopy
 from code.classes.rushhour import Rushhour
+from code.classes.constructive_algoritm import Constructive
 
 
-class Tree(object):
+
+class Tree(Constructive):
     def __init__(self, game):
         """
         Initializes a tree object to use for depth first search
@@ -23,40 +25,48 @@ class Tree(object):
         source_board = Archive(None, None, deepcopy(source), distance)
         self.archive_dict[self.hashh(source)] = source_board
 
-        self.make_possible_babies(source, distance + 1)
+        self.make_possible_children(source, distance + 1)
         # print(f"Stack: {len(self.stack)}")
 
         while not self.won:
             current = self.stack.popleft()
-            self.make_possible_babies(current.current, current.distance + 1)
+            self.make_possible_children(current.current, current.distance + 1)
         return self.solution
 
-    def make_possible_babies(self, parent, distance):
-        self.game = Rushhour(parent, self.board)
-        command_list = self.game.make_possible_move()
-        # print(command_list)
-        for move in command_list:
-            car_id = move[0]
-            command = move[1]
-            self.game.move(command, car_id, deepcopy(parent))
-            child_car_list = self.game.return_car_list()
-            if self.game.won():
-                self.won = True
-                last_board = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
-                print(f"Depth: {distance}")
-                self.solution = self.make_solution(last_board)
-                break
-            elif self.check_baby(child_car_list, distance):
-                archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
-                self.stack.appendleft(archive)
-                self.archive_dict[self.hashh(child_car_list)] = archive
+    # def make_possible_babies(self, parent, distance):
+    #     self.game = Rushhour(parent, self.board)
+    #     command_list = self.game.make_possible_move()
+    #     # print(command_list)
+    #     for move in command_list:
+    #         car_id = move[0]
+    #         command = move[1]
+    #         self.game.move(command, car_id, deepcopy(parent))
+    #         child_car_list = self.game.return_car_list()
+    #         if self.game.won():
+    #             self.won = True
+    #             last_board = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
+    #             print(f"Depth: {distance}")
+    #             self.solution = self.make_solution(last_board)
+    #             break
+    #         elif self.check_baby(child_car_list, distance):
+    #             archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
+    #             self.stack.appendleft(archive)
+    #             self.archive_dict[self.hashh(child_car_list)] = archive
 
-    def check_baby(self, child_car_list, distance):
+
+    def add_to_archive(self, move, parent, child_car_list, distance):
+        archive = Archive(move, self.hashh(parent), deepcopy(child_car_list), distance)
+        self.archive_dict[self.hashh(child_car_list)] = archive
+        self.put(archive)
+
+    def check_child(self, child_car_list, distance):
         if self.hashh(child_car_list) in self.archive_dict:
             check = self.archive_dict[self.hashh(child_car_list)]
             return check.distance > distance
         else:
             return True
+    def put(self, archive):
+        self.stack.appendleft(archive)
 
     def hashh(self, car_list):
         coordinates = []
@@ -65,13 +75,13 @@ class Tree(object):
         hash_code = hash(str(coordinates))
         return hash_code
 
-    def make_solution(self, last_board):
-        solution = deque()
-        cursor = last_board
-        while True:
-            solution.appendleft(cursor.move)
-            cursor = self.archive_dict[self.hashh(cursor.parent)]
-            if cursor.parent == None:
-                solution.append([1,[(self.game.board.entrance[0] - 1), self.game.board.entrance[0]]])
-                break
-        return solution
+    # def make_solution(self, last_board):
+    #     solution = deque()
+    #     cursor = last_board
+    #     while True:
+    #         solution.appendleft(cursor.move)
+    #         cursor = self.archive_dict[self.hashh(cursor.parent)]
+    #         if cursor.parent == None:
+    #             solution.append([1,[(self.game.board.entrance[0] - 1), self.game.board.entrance[0]]])
+    #             break
+    #     return solution

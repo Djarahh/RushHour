@@ -45,6 +45,11 @@ def main(game_id):
     # solution = B.run()
     # algorithm = "BFS"
 
+    # let the BeamSearch algorithm work
+    # B = cd.alg.BeamSearch(deepcopy(rushhour), final_board)
+    # solution = B.run()
+    # algorithm = "Beam"
+
 
     # Let the DFS algorithm work it
     C =  cd.alg.Tree(deepcopy(rushhour))
@@ -66,12 +71,4 @@ def main(game_id):
     cd.vis.SequenceVisualization(game_id, rushhour, algorithm)
 
 if __name__ == "__main__":
-<<<<<<< HEAD
     main("2")
-=======
-<<<<<<< HEAD
-    main("6")
-=======
-    main("4")
->>>>>>> ab4c662d6f84aa76a2a108c3b24c4e4e0ad64541
->>>>>>> eecb3167bf6c15b9af8189a2f2dcd32cb82fc17c

@@ -34,6 +34,11 @@ class Graph(Constructive):
                 self.make_possible_children(current.current, current.distance + 1)
         print("No solution was found")
 
+    def add_to_archive(self, move, parent, child_car_list, distance):
+        archive = Archive(move, self.hashh(parent), deepcopy(child_car_list), distance)
+        self.archive_dict[self.hashh(child_car_list)] = archive
+        self.put(archive)
+
     def check_child(self, child_car_list, distance):
             return not self.hashh(child_car_list) in self.archive_dict
 
