@@ -9,7 +9,8 @@ class Constructive(object):
 
     def hashh(self, car_list):
         """Hashes a car list (configuration of a board).
-        car_list = list, contains car object of the current board"""
+        car_list = list, contains car object of the current board
+        Returns a hash of the car_list"""
         coordinates = []
         for item in car_list:
             coordinates.append(item.coordinate)
@@ -18,7 +19,9 @@ class Constructive(object):
 
     def make_solution(self, solution):
         """Traces the solution back and returns the solution
-        solution = deque(), a queue that is empty"""
+        solution = deque(), a queue that is empty
+        solution = queue
+        Returns a list with the cars and their moves"""
         cursor = self.archive
         while cursor.parent:
             # while not end of solution
@@ -30,7 +33,9 @@ class Constructive(object):
 
     def make_possible_children(self, parent, distance):
         """Creates a queue and puts all board states that have not yet been
-        visited in the archive. Parent = list of car objects, distance = integer """
+        visited in the archive. Parent = list of car objects, distance = integer
+        parent = list of car objects of parent board
+        distance = int, distance from starting board"""
         self.game = Rushhour(parent, self.board)
         command_list = self.game.make_possible_move()
         for move in command_list:
@@ -43,11 +48,15 @@ class Constructive(object):
                     break
             elif self.check_child(child_car_list, distance):
                 self.add_to_archive(move, parent, child_car_list, distance)
-                # archive = Archive(move, self.hashh(parent), deepcopy(child_car_list), distance)
-                # self.archive_dict[self.hashh(child_car_list)] = archive
-                # self.put(archive)
 
     def winning(self, move, parent, child_car_list, distance):
+        """If the game is won, the final board is added to the Archive and the
+        solution is made.
+        move = [car_id, command], contains info on the move which has been made
+        parent = list of car objects of parent board
+        child_car_list = list of car objects of current board
+        distance = int, distance from starting board
+        Returns True"""
         self.won = True
         self.archive = Archive(move, self.hashh(parent), deepcopy(child_car_list), distance)
         solution = deque()

@@ -52,16 +52,16 @@ def main(game_id):
 
 
     # Let the DFS algorithm work it
-    C =  cd.alg.Tree(deepcopy(rushhour))
-    solution = C.run()
-    print(len(solution))
-    algorithm = "DFS"
+    # C =  cd.alg.Tree(deepcopy(rushhour))
+    # solution = C.run()
+    # print(len(solution))
+    # algorithm = "DFS"
 
 
     # # Branch and Bound algorithm
-    # D = cd.alg.Branches(deepcopy(rushhour))
-    # solution = D.run()
-    # algorithm = "BNB"
+    D = cd.alg.Branches(deepcopy(rushhour))
+    solution = D.run()
+    algorithm = "BNB"
 
 
     # Make a .txt file with the solution
@@ -71,4 +71,4 @@ def main(game_id):
     cd.vis.SequenceVisualization(game_id, rushhour, algorithm)
 
 if __name__ == "__main__":
-    main("2")
+    main("6")

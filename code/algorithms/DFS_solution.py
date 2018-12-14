@@ -19,7 +19,7 @@ class Tree(Constructive):
         self.won = False
 
     def run(self):
-
+        """Searches the tree untill a solution is found, pulling from a stack"""
         source = self.game.return_car_list()
         distance = 0
         source_board = Archive(None, None, deepcopy(source), distance)
@@ -32,26 +32,6 @@ class Tree(Constructive):
             current = self.stack.popleft()
             self.make_possible_children(current.current, current.distance + 1)
         return self.solution
-
-    # def make_possible_babies(self, parent, distance):
-    #     self.game = Rushhour(parent, self.board)
-    #     command_list = self.game.make_possible_move()
-    #     # print(command_list)
-    #     for move in command_list:
-    #         car_id = move[0]
-    #         command = move[1]
-    #         self.game.move(command, car_id, deepcopy(parent))
-    #         child_car_list = self.game.return_car_list()
-    #         if self.game.won():
-    #             self.won = True
-    #             last_board = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
-    #             print(f"Depth: {distance}")
-    #             self.solution = self.make_solution(last_board)
-    #             break
-    #         elif self.check_baby(child_car_list, distance):
-    #             archive = Archive(move, deepcopy(parent), deepcopy(child_car_list), distance)
-    #             self.stack.appendleft(archive)
-    #             self.archive_dict[self.hashh(child_car_list)] = archive
 
 
     def add_to_archive(self, move, parent, child_car_list, distance):
@@ -74,14 +54,3 @@ class Tree(Constructive):
             coordinates.append(item.coordinate)
         hash_code = hash(str(coordinates))
         return hash_code
-
-    # def make_solution(self, last_board):
-    #     solution = deque()
-    #     cursor = last_board
-    #     while True:
-    #         solution.appendleft(cursor.move)
-    #         cursor = self.archive_dict[self.hashh(cursor.parent)]
-    #         if cursor.parent == None:
-    #             solution.append([1,[(self.game.board.entrance[0] - 1), self.game.board.entrance[0]]])
-    #             break
-    #     return solution
