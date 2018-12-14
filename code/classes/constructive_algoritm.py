@@ -63,3 +63,7 @@ class Constructive(object):
         self.solution = self.make_solution(solution)
         self.final_board = child_car_list
         return True
+
+    def return_car_list(self):
+        """Returns list of car objects"""
+        return self.final_board

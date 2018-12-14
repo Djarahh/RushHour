@@ -99,7 +99,3 @@ class BeamSearch(Constructive):
             if move[0] in car_id_list:
                 heur_value += 1
         return(heur_value)
-
-    def return_car_list(self):
-        """Returns list of car objects"""
-        return self.final_board

@@ -10,7 +10,7 @@ class Branches(Constructive):
     def __init__(self, game):
         """
         Initializes a tree object to use for depth first search
-        """
+        game = rushhour object"""
         self.stack = deque()
         self.game = game
         self.board = game.board
@@ -41,7 +41,11 @@ class Branches(Constructive):
         return self.solution
 
     def check_child(self, child_car_list, distance):
-        """Checks if the boards of children are already in the archive"""
+        """Checks if the child is in the archive
+        child_car_list = list of car objects of current board
+        distance = int, distance from starting board
+        Returns (if child in archive) the distance
+        Returns (else) True"""
         if self.hashh(child_car_list) in self.archive_dict:
             check = self.archive_dict[self.hashh(child_car_list)]
             return check.distance > distance
@@ -49,16 +53,28 @@ class Branches(Constructive):
             return True
 
     def add_to_archive(self, move, parent, child_car_list, distance):
+        """Creates archive object and adds it to the archive.
+        move = [car_id, command], contains info on the move which has been made
+        parent = list of car objects of parent board
+        child_car_list = list of car objects of current board
+        distance = int, distance from starting board """
         archive = Archive(move, self.hashh(parent), deepcopy(child_car_list), distance)
         self.archive_dict[self.hashh(child_car_list)] = archive
         self.put(archive)
 
     def put(self, archive):
+        """Adds archive object to stack
+        archive = archive object"""
         self.stack.appendleft(archive)
 
     def winning(self, move, parent, child_car_list, distance):
-        print("I didn't Broke")
-
+        """If the game is won, the final board is added to the Archive and the
+        solution is made. The bound is also updated
+        move = [car_id, command], contains info on the move which has been made
+        parent = list of car objects of parent board
+        child_car_list = list of car objects of current board
+        distance = int, distance from starting board
+        Returns False"""
         self.archive = Archive(move, self.hashh(parent), deepcopy(child_car_list), distance)
         self.update_bound(distance)
         print(f"Bound: {self.bound}")
@@ -68,5 +84,6 @@ class Branches(Constructive):
         return False
 
     def update_bound(self, distance):
-        """Updates the bound"""
+        """Updates the bound
+        distance = int, steps from the initial board"""
         self.bound = distance - 10

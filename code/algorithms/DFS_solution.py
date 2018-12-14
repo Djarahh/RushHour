@@ -10,6 +10,7 @@ class Tree(Constructive):
     def __init__(self, game):
         """
         Initializes a tree object to use for depth first search
+        game = rushhour object
         """
         self.stack = deque()
         self.game = game
@@ -26,7 +27,6 @@ class Tree(Constructive):
         self.archive_dict[self.hashh(source)] = source_board
 
         self.make_possible_children(source, distance + 1)
-        # print(f"Stack: {len(self.stack)}")
 
         while not self.won:
             current = self.stack.popleft()
@@ -35,22 +35,28 @@ class Tree(Constructive):
 
 
     def add_to_archive(self, move, parent, child_car_list, distance):
+        """Creates archive object and adds it to the archive.
+        move = [car_id, command], contains info on the move which has been made
+        parent = list of car objects of parent board
+        child_car_list = list of car objects of current board
+        distance = int, distance from starting board """
         archive = Archive(move, self.hashh(parent), deepcopy(child_car_list), distance)
         self.archive_dict[self.hashh(child_car_list)] = archive
         self.put(archive)
 
     def check_child(self, child_car_list, distance):
+        """Checks if the child is in the archive
+        child_car_list = list of car objects of current board
+        distance = int, distance from starting board
+        Returns (if child in archive) the distance
+        Returns (else) True"""
         if self.hashh(child_car_list) in self.archive_dict:
             check = self.archive_dict[self.hashh(child_car_list)]
             return check.distance > distance
         else:
             return True
-    def put(self, archive):
-        self.stack.appendleft(archive)
 
-    def hashh(self, car_list):
-        coordinates = []
-        for item in car_list:
-            coordinates.append(item.coordinate)
-        hash_code = hash(str(coordinates))
-        return hash_code
+    def put(self, archive):
+        """Adds archive object to stack
+        archive = archive object"""
+        self.stack.appendleft(archive)
