@@ -1,5 +1,6 @@
 from copy import deepcopy
 import code as cd
+import argparse
 
 
 def main(game_id):
@@ -65,9 +66,23 @@ def main(game_id):
     # Visualize the solution that the algorithm made
     # SequenceVisualization(game_id, rushhour, algorithm)
 
+
+
+
 if __name__ == "__main__":
-<<<<<<< HEAD
-    main("6")
-=======
-    main("4")
->>>>>>> ab4c662d6f84aa76a2a108c3b24c4e4e0ad64541
+    parser = argparse.ArgumentParser(description='Solves rushhour boards.')
+
+    parser.add_argument("-b", "--b", metavar='board', type=int,
+                        help='choose a board', choices=[1, 2, 3, 4, 5, 6, 12],
+                        default=1)
+    parser.add_argument("-be", "--beam", nargs="?", metavar="width", type=int,
+                        help="the width of the beamsearch (default = 100)",
+                        default=100)
+
+    parser.add_argument('-a', "--algorithm", metavar='algorithm', nargs="+",
+                        help='choose (an) algoritm(s)', choices=["bfs", "best",
+                        "dfs", "bnb", "random", "beam"], default="random")
+
+    args = parser.parse_args()
+
+    main(args.board)
