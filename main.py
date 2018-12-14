@@ -66,4 +66,12 @@ def main(game_id):
     cd.vis.SequenceVisualization(game_id, rushhour, algorithm)
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     main("2")
+=======
+<<<<<<< HEAD
+    main("6")
+=======
+    main("4")
+>>>>>>> ab4c662d6f84aa76a2a108c3b24c4e4e0ad64541
+>>>>>>> eecb3167bf6c15b9af8189a2f2dcd32cb82fc17c

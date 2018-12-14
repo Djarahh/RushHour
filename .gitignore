@@ -6,5 +6,4 @@ pset9/
 test1.py
 main1.py
 results/
-*.prof
 results.py
