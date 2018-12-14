@@ -9,6 +9,7 @@ def main(game_id, algorithm):
     Makes .txt files with the solution.
     Visualizes the solution.
     game_id = string (number of gameboard)
+    algorithm = string(algorihm that is being put in by user)
     """
     # Load the cars and the board
     things = cd.cs.LoadCars(game_id)

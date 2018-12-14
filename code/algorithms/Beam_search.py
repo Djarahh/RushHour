@@ -56,7 +56,10 @@ class BeamSearch(Constructive):
 
     def add_to_archive(self, move, parent, child_car_list, distance):
         """Adds an archive object to the archive
-        move = """
+        move = [car_id, command], contains info on the move which has been made
+        parent = list of car objects of parent board
+        child_car_list = list of car objects of current board
+        distance = int, distance from starting board """
         archive = Archive(move, self.hashh(parent), deepcopy(child_car_list), distance)
         value = self.value_giver(self.final_car_list, child_car_list)
         heapq.heappush(self.heap, (value, self.hashh(child_car_list)))
@@ -66,7 +69,11 @@ class BeamSearch(Constructive):
             return not self.hashh(child_car_list) in self.archive_dict
 
     def value_giver(self, final_car_list, inital_car_list):
-        """Calculates the difference between xi and xf"""
+        """Calculates a value for a board based on coordinates of cars of the
+        final board and what the current board is
+        final_car_list = list of car objects of the final board
+        inital_car_list = list of car objects of current board
+        returns a value (integer)"""
         board_value = 0
         if final_car_list:
             for car in inital_car_list:
@@ -79,7 +86,9 @@ class BeamSearch(Constructive):
         return board_value
 
     def freeing_cars(self, current_car_list, child_car_list):
-        """Heuristic for freeing other cars"""
+        """Heuristic for freeing other cars
+        child_car_list = list of car objects of child board
+        current_car_list = list of car objects of current board."""
         heur_value = 0
         current_command_list = self.game.make_possible_move_with_input(current_car_list)
         child_command_list = self.game.make_possible_move_with_input(child_car_list)
