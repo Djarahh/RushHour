@@ -23,3 +23,4 @@ Yara over Stan: hij heeft z'n appel en z'n peer door elkaar gehaald.
 + DOC strings rechttrekken (parameters en return waardes)
 + goede output bedenken per algoritme tijdens het runnen
 + leeg environment aanmaken met anaconda en pipreqs om requirements te testen
++ archief van BEAM search aanpassen! met distance

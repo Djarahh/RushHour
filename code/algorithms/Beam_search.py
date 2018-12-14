@@ -5,7 +5,7 @@ from code.classes.rushhour import Rushhour
 import heapq
 
 
-class BestFirst(object):
+class BeamSearch(object):
 
     def __init__(self, game, final_board):
         """Initialization method that creates a dictionary to store graph, a
@@ -22,7 +22,7 @@ class BestFirst(object):
         self.final_car_list = final_board
         self.counter = 0
 
-    def bfs(self):
+    def run(self):
         """Function that iterates over the graph of parent boards and children
         It pops an archive object from the queue (heap) has the lowest value"""
         source = self.game.return_car_list()
