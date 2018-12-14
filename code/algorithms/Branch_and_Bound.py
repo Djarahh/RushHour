@@ -16,9 +16,9 @@ class Branches(Constructive):
         self.board = game.board
         self.archive_dict = {}
         self.solution = None
-        self.bound = 40
+        self.bound = 50
 
-    def bnb(self):
+    def run(self):
         """
         Searches the tree untill a solution is found, and resets the bound to
         the depth of that solution. And starts iterating over the tree again
@@ -64,4 +64,4 @@ class Branches(Constructive):
 
     def update_bound(self, distance):
         """Updates the bound"""
-        self.bound = distance - 30
+        self.bound = distance - 10

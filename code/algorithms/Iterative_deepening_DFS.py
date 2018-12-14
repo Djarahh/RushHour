@@ -18,7 +18,7 @@ class Iterative(object):
         self.bound = 15
         self.won = False
 
-    def bnb(self):
+    def run(self):
         """
         Searches the tree untill a solution is found
         """

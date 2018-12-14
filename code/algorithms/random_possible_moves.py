@@ -10,7 +10,7 @@ class Randomize(object):
         self.game = game
         self.initial_car_list = initial_car_list
 
-    def randomize(self):
+    def run(self):
         """Chooses a random move from the move_list. The move_list contains
         all possible moves, formatted in
         [car.id, [coordinate[1], coordinate[2]]]"""

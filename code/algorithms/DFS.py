@@ -25,7 +25,7 @@ class Tree(object):
         """Function to check child for stack"""
         pass
 
-    def dfs(self):
+    def run(self):
         """Function """
         # define the first board
         source = self.game.return_car_list()

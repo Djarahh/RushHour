@@ -16,7 +16,7 @@ class Graph(Constructive):
         self.solution = None
         self.won = False
 
-    def bfs(self):
+    def run(self):
         """Iterates over the graph and retuns solution when game is won"""
         source = self.game.return_car_list()
         distance = 0
