@@ -1,18 +1,18 @@
-from code.rushhour import Rushhour
+from code.classes.rushhour import Rushhour
 from code.algorithms.random_possible_moves import Randomize
 from code.algorithms.BFS_solution import Graph
 from code.algorithms.DFS_solution import Tree
 from code.algorithms.Branch_and_Bound import Branches
-from code.algorithms.Iterative_deepening_DFS import Iterative
+# from code.algorithms.Iterative_deepening_DFS import Iterative
 from code.classes.load_cars import LoadCars
-from code.classes.load_solution import LoadSolution
-from code.algorithms.Random_compare import Find_pattern
+# from code.classes.load_solution import LoadSolution
+# from code.algorithms.Random_compare import Find_pattern
 from code.algorithms.Best_first import BestFirst
-from code.visualization.visualize_board import BoardVisualization
-from code.visualization.visualize_sequence import SequenceVisualization
-from code.classes.solution_txt import TxtSolution
+# from code.visualization.visualize_board import BoardVisualization
+# from code.visualization.visualize_sequence import SequenceVisualization
+# from code.classes.solution_txt import TxtSolution
 from copy import deepcopy
-from timeit import Timer
+# from timeit import Timer
 # from code.algorithms.iterative import Iterative
 
 
@@ -31,24 +31,25 @@ def main(game_id):
     # Initiate a RushHour game
     rushhour = Rushhour(deepcopy(car_list), deepcopy(board))
 
-    # # Let the randomize algorithm run and return a solution
-    # A = Randomize(deepcopy(rushhour))
-    # solution = A.randomize()
-    # algorithm = "RANDOM"
+    # # # Let the randomize algorithm run and return a solution
+    A = Randomize(deepcopy(rushhour), deepcopy(car_list))
+    solution = A.run()
+    solved_board = A.game.return_car_list()
+    algorithm = "RANDOM"
 
     # Let the BFS algorithm work
     # B = Graph(deepcopy(rushhour))
-    # solution = B.bfs()
+    # solution = B.run()
     # algorithm = "BFS"
 
     # # Let the DFS algorithm work it
     # C = Tree(deepcopy(rushhour))
-    # solution = C.dfs()
+    # solution = C.run()
     # algorithm = "DFS"
 
-    # # Branch and Bound algorithm
+    # # # Branch and Bound algorithm
     # D = Branches(deepcopy(rushhour))
-    # solution = D.bnb()
+    # solution = D.run()
     # algorithm = "BNB"
 
     # # Iterative deepening DFS
@@ -58,17 +59,17 @@ def main(game_id):
 
     # # solution = []
     # F = Find_pattern(deepcopy(rushhour), solution)
-    # F.find_pattern(1)
-
-    s = LoadSolution(game_id)
-    solved_board = s.car_list
-
+    # # F.find_pattern(1)
+    #
+    # s = LoadSolution(game_id)
+    # solved_board = s.car_list
+    #
     G = BestFirst(deepcopy(rushhour), solved_board)
-    solution = G.bfs()
+    solution = G.run()
     algorithm = "BEST"
-
-    # # Make a .txt file with the solution
-    TxtSolution(game_id, solution, algorithm)
+    #
+    # # # Make a .txt file with the solution
+    # TxtSolution(game_id, solution, algorithm)
 
     # # Visualize the solution that the algorithm made
     # SequenceVisualization(game_id, rushhour, algorithm)
@@ -76,4 +77,4 @@ def main(game_id):
 
 
 if __name__ == "__main__":
-    main("5")
+    main("2")

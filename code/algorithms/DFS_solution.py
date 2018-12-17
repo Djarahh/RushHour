@@ -28,7 +28,13 @@ class Tree(Constructive):
 
         self.make_possible_children(source, distance + 1)
 
+        # print statements and counter for the spinner
+        print("running...")
+        counter_spinner = 0
+        
         while not self.won:
+            counter_spinner += 1
+            self.spinner(counter_spinner % 4)
             current = self.stack.popleft()
             self.make_possible_children(current.current, current.distance + 1)
         return self.solution
