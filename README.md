@@ -23,7 +23,7 @@ Here is a short summary of the structure of our program:
 
 ### Testing
 
-To run the code with the default configuration(algorithm: .., game: ..) use:
+To run the code with the default configuration(algorithm: random, game: 1) use:
 
 python main.py
 
@@ -31,20 +31,11 @@ To choose your own algorithm, game and other parameters use this format:
 
 python main.py [-h] [-b board] [-be [width]] [-a algorithm] [-vis [visualize]]
 
-optional arguments:
-  + -h, --help            show this help message and exit
-  + -b board, --board board
-                        choose a board with the following choices [1, 2, 3, 4,
-                        5, 6, 12]
-  + -be [width], --beam [width]
-                        the width of the beamsearch (default = 100)
-  + -a algorithm, --algorithm algorithm
-                        choose (an) algoritm(s) with the following choices
-                        ["bfs", "best", "dfs", "bnb", "random", "beam"]
-  + -vis [visualize], --visualize [visualize]
-                        turns visualize on or off (choose from yes (y) or no
-                        (n))
-
++ -h shows a help message and exits
++ -b board, choose a board with the following choices [1, 2, 3, 4, 5, 6, 12]
++ -be [width], the width of the beamsearch (default = 100)
++ -a algorithm, choose an algorithm from the following choices ["bfs", "best", "dfs", "bnb", "random", "beam"]
++ -vis [visualize], turns visualisation on or off (choose from yes (y) or no (n))
 
 ## Authors
 
