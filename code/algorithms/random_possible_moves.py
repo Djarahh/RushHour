@@ -33,6 +33,7 @@ class Randomize(object):
             sequence.append(move)
             if self.game.car_list == self.initial_car_list:
                 sequence = []
+        print("Congratulations, you have found a random solution!")
         return sequence
 
     def runner(self, counter):

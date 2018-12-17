@@ -63,6 +63,7 @@ class Constructive(object):
         solution = deque()
         self.solution = self.make_solution(solution)
         self.final_board = child_car_list
+        print("Congratulations, you have found a solution!")
         return True
 
     def return_car_list(self):
