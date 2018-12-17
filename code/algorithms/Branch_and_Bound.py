@@ -16,7 +16,7 @@ class Branches(Constructive):
         self.board = game.board
         self.archive_dict = {}
         self.solution = None
-        self.bound = 120
+        self.bound = 16
 
     def run(self):
         """
@@ -27,22 +27,22 @@ class Branches(Constructive):
         distance = 0
         source_board = Archive(None, None, deepcopy(source), distance)
         self.archive_dict[self.hashh(source)] = source_board
-
-        self.make_possible_children(source, distance + 1)
+        self.make_possible_children(source, distance + 1, False)
 
        # print statements and counter for the spinner
         print("running...")
         counter_spinner = 0
-
+        counter_bound = 0
         while self.stack:
             counter_spinner += 1
             self.spinner(counter_spinner % 4)
             current = self.stack.popleft()
+            if current.distance == self.bound:
+                counter_bound += 1
             while current.distance > self.bound:
                 current = self.stack.popleft()
-            self.make_possible_children(current.current, current.distance + 1)
-            # print(f"Stack: {len(self.stack)}")
-        print(f"Length archive:{len(self.archive_dict)}")
+            self.make_possible_children(current.current, current.distance + 1, False)
+        print(f"the bound was reached {counter_bound} times")
         return self.solution
 
     def check_child(self, child_car_list, distance):
@@ -72,7 +72,7 @@ class Branches(Constructive):
         archive = archive object"""
         self.stack.appendleft(archive)
 
-    def winning(self, move, parent, child_car_list, distance):
+    def winning(self, move, parent, child_car_list, distance, deepest):
         """If the game is won, the final board is added to the Archive and the
         solution is made. The bound is also updated
         move = [car_id, command], contains info on the move which has been made

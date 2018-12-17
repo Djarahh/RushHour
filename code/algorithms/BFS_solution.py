@@ -24,7 +24,10 @@ class Graph(Constructive):
         source_board = Archive(None, None, deepcopy(source), distance)
         self.archive_dict[self.hashh(source)] = source_board
 
-        self.make_possible_children(source, distance + 1)
+        # list for keeping track of dept
+        depth_list = [0]
+
+        self.make_possible_children(source, distance + 1, depth_list)
         # print statements and counter for the spinner
         print("running...")
         counter_spinner = 0
@@ -36,7 +39,11 @@ class Graph(Constructive):
                 print(f"The solution was found in {self.archive.distance + 1} steps.")
                 return self.solution
             else:
-                self.make_possible_children(current.current, current.distance + 1)
+                self.make_possible_children(current.current, current.distance + 1, max(depth_list))
+
+            if current.distance not in depth_list:
+                depth_list.append(current.distance)
+                print(f"Deepest point: {current.distance}")
         print("No solution was found")
 
     def add_to_archive(self, move, parent, child_car_list, distance):

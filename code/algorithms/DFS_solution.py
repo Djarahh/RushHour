@@ -26,17 +26,19 @@ class Tree(Constructive):
         source_board = Archive(None, None, deepcopy(source), distance)
         self.archive_dict[self.hashh(source)] = source_board
 
-        self.make_possible_children(source, distance + 1)
+        self.make_possible_children(source, distance + 1, False)
 
         # print statements and counter for the spinner
         print("running...")
         counter_spinner = 0
-        
+
         while not self.won:
             counter_spinner += 1
             self.spinner(counter_spinner % 4)
             current = self.stack.popleft()
-            self.make_possible_children(current.current, current.distance + 1)
+            self.make_possible_children(current.current, current.distance + 1, False)
+
+        print(f"the solution was found in {current.distance + 1} steps")
         return self.solution
 
 

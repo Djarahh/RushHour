@@ -8,6 +8,7 @@ from code.classes.load_cars import LoadCars
 # from code.classes.load_solution import LoadSolution
 # from code.algorithms.Random_compare import Find_pattern
 from code.algorithms.Best_first import BestFirst
+from code.algorithms.Beam_search import BeamSearch
 # from code.visualization.visualize_board import BoardVisualization
 # from code.visualization.visualize_sequence import SequenceVisualization
 # from code.classes.solution_txt import TxtSolution
@@ -64,9 +65,13 @@ def main(game_id):
     # s = LoadSolution(game_id)
     # solved_board = s.car_list
     #
-    G = BestFirst(deepcopy(rushhour), solved_board)
-    solution = G.run()
-    algorithm = "BEST"
+    # G = BestFirst(deepcopy(rushhour), solved_board)
+    # solution = G.run()
+    # algorithm = "BEST"
+
+    # H = BeamSearch(deepcopy(rushhour), solved_board, 100)
+    # solution = H.run()
+     # algorithm = "BEST"
     #
     # # # Make a .txt file with the solution
     # TxtSolution(game_id, solution, algorithm)
@@ -77,4 +82,4 @@ def main(game_id):
 
 
 if __name__ == "__main__":
-    main("2")
+    main("4")
