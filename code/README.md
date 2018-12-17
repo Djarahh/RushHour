@@ -11,15 +11,5 @@ Here you can find three directories:
   + Random_possible_moves: This is an algorithm that randomly chooses possible moves.
 
 + classes
-  + archive.py: This is an archive for the constructive algorithms.
-  + board.py:
-  + car.py:
-  + constructive_algorithm.py:
-  + load_cars.py:
-  + load_solution.py:
-  + rushhour.py:
-  + solution_txt.py:
 
 + visualisation
-  + visualize_board.py: This class visualises a game board.
-  + visualize_sequence.py: This class visualises a solution sequence.
