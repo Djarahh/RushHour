@@ -25,11 +25,11 @@ Here is a short summary of the structure of our program:
 
 To run the code with the default configuration(algorithm: random, game: 1) use:
 
-python main.py
+*python main.py*
 
 To choose your own algorithm, game and other parameters use this format:
 
-python main.py [-h] [-b board] [-be [width]] [-a algorithm] [-vis [visualize]]
+*python main.py [-h] [-b board] [-be [width]] [-a algorithm] [-vis [visualize]]*
 
 + -h shows a help message and exits
 + -b board, choose a board with the following choices [1, 2, 3, 4, 5, 6, 12]
