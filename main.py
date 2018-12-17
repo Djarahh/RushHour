@@ -3,7 +3,7 @@ import code as cd
 import argparse
 
 
-def main(game_id, algorithm):
+def main(game_id, algorithm, beam):
     """
     Uses algorithms to solve a RushHour board.
     Makes .txt files with the solution.
@@ -47,7 +47,7 @@ def main(game_id, algorithm):
 
     elif algorithm == "beam":
         # let the BeamSearch algorithm work
-        B = cd.alg.BeamSearch(deepcopy(rushhour), final_board)
+        B = cd.alg.BeamSearch(deepcopy(rushhour), final_board, beam)
         solution = B.run()
 
     elif algorithm == "dfs":
@@ -85,4 +85,4 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    main(args.board, args.algorithm[0])
+    main(args.board, args.algorithm[0], args.beam)

@@ -8,7 +8,7 @@ from code.classes.constructive_algoritm import Constructive
 
 class BeamSearch(Constructive):
 
-    def __init__(self, game, final_board):
+    def __init__(self, game, final_board, beam):
         """
         Initialization method that creates a dictionary to store the graph,
         a heap as queue
@@ -24,6 +24,7 @@ class BeamSearch(Constructive):
         self.won = False
         self.final_car_list = final_board
         self.counter = 0
+        self.beam = beam
 
     def run(self):
         """
@@ -40,8 +41,8 @@ class BeamSearch(Constructive):
         self.make_possible_children(source, distance + 1)
 
         while self.heap:
-            if len(self.heap) > 100:
-                self.heap = heapq.nsmallest(100, self.heap)
+            if len(self.heap) > self.beam:
+                self.heap = heapq.nsmallest(self.beam, self.heap)
             queueobject = heapq.heappop(self.heap)
             current = self.archive_dict[queueobject[1]]
             print(queueobject[0], current.distance)
