@@ -32,16 +32,16 @@ To choose your own algorithm, game and other parameters use this format:
 python main.py [-h] [-b board] [-be [width]] [-a algorithm] [-vis [visualize]]
 
 optional arguments:
-  -h, --help            show this help message and exit
-  -b board, --board board
+  + -h, --help            show this help message and exit
+  + -b board, --board board
                         choose a board with the following choices [1, 2, 3, 4,
                         5, 6, 12]
-  -be [width], --beam [width]
+  + -be [width], --beam [width]
                         the width of the beamsearch (default = 100)
-  -a algorithm, --algorithm algorithm
+  + -a algorithm, --algorithm algorithm
                         choose (an) algoritm(s) with the following choices
                         ["bfs", "best", "dfs", "bnb", "random", "beam"]
-  -vis [visualize], --visualize [visualize]
+  + -vis [visualize], --visualize [visualize]
                         turns visualize on or off (choose from yes (y) or no
                         (n))
 
