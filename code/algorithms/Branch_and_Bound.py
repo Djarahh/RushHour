@@ -7,7 +7,7 @@ import time
 
 
 class Branches(Constructive):
-    def __init__(self, game):
+    def __init__(self, game, bound, updatebound):
         """
         Initializes a tree object to use for depth first search
         game = rushhour object"""
@@ -16,7 +16,8 @@ class Branches(Constructive):
         self.board = game.board
         self.archive_dict = {}
         self.solution = None
-        self.bound = 120
+        self.bound = bound
+        self.updatebound = updatebound
 
     def run(self):
         """
@@ -86,4 +87,4 @@ class Branches(Constructive):
     def update_bound(self, distance):
         """Updates the bound
         distance = int, steps from the initial board"""
-        self.bound = distance - 10
+        self.bound = distance - self.updatebound
