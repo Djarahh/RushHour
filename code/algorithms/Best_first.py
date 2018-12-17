@@ -33,10 +33,14 @@ class BestFirst(Constructive):
 
         self.make_possible_children(source, distance + 1)
 
+        # print statements and counter for the spinner
+        print("running...")
+        counter_spinner = 0
         while self.heap:
+            counter_spinner += 1
+            self.spinner(counter_spinner % 4)
             queueobject = heapq.heappop(self.heap)
             current = self.archive_dict[queueobject[1]]
-            print(queueobject[0], current.distance)
 
             if self.won:
                 print(f"The solution was found in {self.archive.distance + 1} steps.")
