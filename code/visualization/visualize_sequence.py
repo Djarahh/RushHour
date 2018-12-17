@@ -10,8 +10,10 @@ class SequenceVisualization:
         Visualizes a sequence of RushHour boards
 
         game_id = string (number of the gameboard)
+        game = the game rushhour
+        algorithm = string, algorithm that is run
+        speed = the speed in which the visualization is played
         """
-
         self.sequence = self.load_sequence(f"results/{algorithm}solution{game_id}.txt")
         self.game_id = game_id
         self.counter = 0

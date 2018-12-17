@@ -8,8 +8,13 @@ def main(game_id, algorithm, beam, visualize, bound, deltabound):
     Uses algorithms to solve a RushHour board.
     Makes .txt files with the solution.
     Visualizes the solution.
+
     game_id = string (number of gameboard)
-    algorithm = string(algorihm that is being put in by user)
+    algorithm = string (algorithm that is being put in by user)
+    beam = integer (as being put in by user)
+    visualize = bool (as being put in by user)
+    bound = integer (as being put in by user)
+    deltabound = integer (as being put in by user)
     """
     # Load the cars and the board
     things = cd.cs.LoadCars(game_id)
@@ -85,15 +90,16 @@ if __name__ == "__main__":
                         default=100)
     parser.add_argument('-a', "--algorithm", metavar='algorithm', nargs=1,
                         help='choose (an) algoritm(s) with the following \
-                        choices ["bfs", "best", "dfs", "bnb", "random", "beam"]',
-                        default=["random"], choices=["bfs", "best", "dfs", "bnb",
-                                                     "random", "beam"])
+                        choices ["bfs", "best", "dfs", "bnb", "random", \
+                        "beam"]', default=["random"],
+                        choices=["bfs", "best", "dfs", "bnb", "random",
+                                 "beam"])
     parser.add_argument("-vis", "--visualize", nargs="?", metavar="visualize",
                         type=str, help="turns visualize on or off (choose from \
-                        yes (y) or no (n))", default="yes", choices=["Y", "y",
-                        "yes", "N", "n", "no"])
-    parser.add_argument("-bou", "--bound", nargs="?", metavar="bound", type=int,
-                        help="first bound of the BnB (default = 80)",
+                        yes (y) or no (n))", default="yes",
+                        choices=["Y", "y", "yes", "N", "n", "no"])
+    parser.add_argument("-bou", "--bound", nargs="?", metavar="bound",
+                        type=int, help="first bound of the BnB (default = 80)",
                         default=80)
     parser.add_argument("-d", "--deltabound", nargs="?", metavar="deltabound",
                         type=int, help="decrease of the updated bound of the \

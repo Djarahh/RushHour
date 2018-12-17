@@ -40,6 +40,7 @@ class Car(object):
     def update_x_y(self, command):
         """
         Creates x or y function for use in the update/temp functions.
+
         command = list
         """
         if self.direction == "x":

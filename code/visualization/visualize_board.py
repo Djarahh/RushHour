@@ -75,7 +75,6 @@ class BoardVisualization:
         Draws the board
 
         cars = list (of cars)
-
         """
         # Draw white blocks
         self.blocks = {}
