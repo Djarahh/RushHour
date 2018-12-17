@@ -10,7 +10,8 @@ class Rushhour(object):
         self.counter = 0
 
     def won(self):
-        """Win condition for the game"""
+        """Win condition for the game
+        Returns boolean"""
         # if car 1 (red car) is on exit coordinate game is won
         command = [(self.board.entrance[0] - 1), self.board.entrance[0]]
         car = self.car_list[0]
@@ -38,7 +39,10 @@ class Rushhour(object):
         return move_list
 
     def make_possible_move_with_input(self, car_list):
-        """Creates a list with possible moves"""
+        """Creates a list with possible moves. Requires input and does not
+        actually move the car.
+        car_list = list of car objects
+        Returns list of possible moves (moves = [car_id, command])"""
         move_list = []
         for i in range(self.board.length):
             command = [i, (i + 1)]
@@ -53,27 +57,20 @@ class Rushhour(object):
     def move(self, command, id, car_list):
         """Function for moving the cars on the board
         command = list, contains either x or y coordinates
-        id = int, represents the car"""
+        id = int, represents the car
+        car_list = list of car objects"""
         # selecting the right car
 
         self.car_list = car_list
         car = self.car_list[int(id) - 1]
-        # check if coordinates are allowed
-        # if self.check_move(car, command) and self.inside_boundries(car, command):
-            # do the move
         car.update_coordinates(command)
-            # self.counter += 1
-            # print(self.counter)
-        # self.update_board()
-        # self.print_board()
-        #     # return True
-        # else:
-        #     print("not valid you cunt", id, command)
+
 
     def check_move(self, car, command):
         """Checks if no other cars are in the way
         command = list, contains either x or y coordinates
-        car = car object"""
+        car = car object
+        Returns false or tries the command"""
         for car_rest in self.car_list:
             # the car is allowed to move on its own coordinates
             if car_rest is not car:
@@ -86,7 +83,9 @@ class Rushhour(object):
     def check_move_with_input(self, car, command, car_list):
         """Checks if no other cars are in the way
         command = list, contains either x or y coordinates
-        car = car object"""
+        car = car object
+        car_list = list of car objects
+        Returns False or tries the command"""
         for car_rest in car_list:
             # the car is allowed to move on its own coordinates
             if car_rest is not car:
@@ -100,7 +99,8 @@ class Rushhour(object):
         """Perform control on temporary moves
         command = list, contains either x or y coordinates
         car = car object
-        car_rest = car object, from the car_list"""
+        car_rest = car object, from the car_list
+        Returns false or makes command"""
         if car_rest is not car:
             # check every coordinate in between begin and end using steps of 1
             temp_command = self.make_temporary_command(command, car)
@@ -127,7 +127,8 @@ class Rushhour(object):
 
     def indexing_constant(self, car):
         """Returns a integer for the indexation of the coordinate system
-        car = car object"""
+        car = car object
+        Returns int"""
         if car.direction == "x":
             i = 0
         else:
@@ -137,7 +138,8 @@ class Rushhour(object):
     def make_temporary_command(self, command, car):
         """Function for the creation of a temporary coordinate
         command = list, contains either x or y coordinates
-        car = car object"""
+        car = car object
+        Returns list with possible commands"""
         i = self.indexing_constant(car)
         # determine the direction of the move and change the steps accordingly
         temp_command_list = []
@@ -155,7 +157,8 @@ class Rushhour(object):
     def inside_boundries(self, car, command):
         """Checks if move is inside board
         command = list, contains either x or y coordinates
-        car = car object"""
+        car = car object
+        Returns boolean"""
         for coordinate in car.temp_coordinates(command):
             if tuple(coordinate) not in self.board.grid:
                 return False
@@ -182,11 +185,13 @@ class Rushhour(object):
                 self.board.grid[x, y] = int(car.id)
 
     def return_car_list(self):
-        """Returns the self.car_list"""
+        """Returns the self.car_list
+        Returns the car list"""
         return self.car_list
 
     def try_solution(self, solution):
-        """Tries using a list of moves as input"""
+        """Tries using a list of moves as input
+        Returns boolean"""
         for move in solution:
             command_list = move.split()
             command = command_list[1].split(",")
