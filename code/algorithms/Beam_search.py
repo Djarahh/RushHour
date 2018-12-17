@@ -40,7 +40,13 @@ class BeamSearch(Constructive):
 
         self.make_possible_children(source, distance + 1)
 
+        # print statements and counter for the spinner
+        print("running...")
+        counter_spinner = 0
+
         while self.heap:
+            counter_spinner += 1
+            self.spinner(counter_spinner % 4)
             if len(self.heap) > self.beam:
                 self.heap = heapq.nsmallest(self.beam, self.heap)
             queueobject = heapq.heappop(self.heap)

@@ -29,9 +29,14 @@ class Branches(Constructive):
         self.archive_dict[self.hashh(source)] = source_board
 
         self.make_possible_children(source, distance + 1)
-        # print(f"Stack: {len(self.stack)}")
+
+       # print statements and counter for the spinner
+        print("running...")
+        counter_spinner = 0
 
         while self.stack:
+            counter_spinner += 1
+            self.spinner(counter_spinner % 4)
             current = self.stack.popleft()
             while current.distance > self.bound:
                 current = self.stack.popleft()

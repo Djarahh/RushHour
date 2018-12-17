@@ -1,4 +1,5 @@
 from random import randint
+import sys
 
 
 class Randomize(object):
@@ -15,7 +16,11 @@ class Randomize(object):
         all possible moves, formatted in
         [car.id, [coordinate[1], coordinate[2]]]"""
         sequence = []
+        counter_spinner = 0
+        print("running...")
         while not self.game.won():
+            counter_spinner += 1
+            self.runner(counter_spinner % 4)
             command_list = self.game.make_possible_move()
             rand_int = randint(0, len(command_list) - 1)
             input = command_list[rand_int]
@@ -28,4 +33,14 @@ class Randomize(object):
             sequence.append(move)
             if self.game.car_list == self.initial_car_list:
                 sequence = []
+        print("Congratulations, you have found a random solution!")
         return sequence
+
+    def runner(self, counter):
+        """Progress spinner cause its awesome"""
+        # turning tables
+        syms = ['\\', '|', '/', '-']
+        bs = "\b"
+        sym = syms[counter]
+        sys.stdout.write("\b%s" % sym)
+        sys.stdout.flush()

@@ -2,6 +2,7 @@ from .rushhour import Rushhour
 from copy import deepcopy
 from .archive import Archive
 from collections import deque
+import sys
 
 class Constructive(object):
     """Class that contains functions that are used in all constructive
@@ -62,8 +63,18 @@ class Constructive(object):
         solution = deque()
         self.solution = self.make_solution(solution)
         self.final_board = child_car_list
+        print("Congratulations, you have found a solution!")
         return True
 
     def return_car_list(self):
         """Returns list of car objects"""
         return self.final_board
+
+    def spinner(self, counter):
+        """Progress spinner cause its awesome"""
+        # turning tables
+        syms = ['\\', '|', '/', '-']
+        bs = "\b"
+        sym = syms[counter]
+        sys.stdout.write("\b%s" % sym)
+        sys.stdout.flush()
