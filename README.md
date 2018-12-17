@@ -12,11 +12,11 @@ There are no requirements for our code.
 
 ### Structure
 
-Here is a short summary of the structure of our programm:
+Here is a short summary of the structure of our program:
 + code (here you can find all python scripts)
-  + algorithms
-  + classes
-  + visualization
+  + algorithms (here you can find all of our algorithms)
+  + classes (here you can find all classes used)
+  + visualisation (here you can find the files for the visualisation)
 + data (here you can find all data necessary for implementing the game boards)
 + exploration (here you can find our exploration of the problem)
 + results (here you can find the results of the algorithms)
@@ -27,14 +27,17 @@ Here is a short summary of the structure of our programm:
 
 Team: Gargamel and the Smurfs
 
-Yara Djaidoen
-
-Stan Helsloot
-
-Tula Kaptein
++ Yara Djaidoen
++ Stan Helsloot
++ Tula Kaptein
 
 ## Acknowledgments
 
+We would like to thank:
+
++ Quinten van der Post for being our tech assistant and helping us through all of our struggles
++ Minor Programmeren for making it possible to learn so much of programming in such a short time
++ The world wide web for providing us with code, how to's and error solutions 
 
 
 
