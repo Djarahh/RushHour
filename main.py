@@ -3,7 +3,7 @@ import code as cd
 import argparse
 
 
-def main(game_id, algorithm, beam):
+def main(game_id, algorithm, beam, visualize):
     """
     Uses algorithms to solve a RushHour board.
     Makes .txt files with the solution.
@@ -25,9 +25,7 @@ def main(game_id, algorithm, beam):
         A = cd.alg.Randomize(deepcopy(rushhour), deepcopy(car_list))
         solution = A.run()
 
-
-    elif algorithm == "best":
-        print("ik run nu best")
+    elif algorithm == "best" or algorithm == "beam":
         # Let the randomize algorithm run and return a solution for bestfs
         A = cd.alg.Randomize(deepcopy(rushhour), deepcopy(car_list))
         solution = A.run()
@@ -36,18 +34,20 @@ def main(game_id, algorithm, beam):
         final_board = A.game.return_car_list()
         cd.cs.TxtSolution(game_id, solution, algorithm)
 
-        rush = cd.cs.Rushhour(deepcopy(car_list), deepcopy(board))
-        B = cd.alg.BestFirst(rush, final_board)
-        solution = B.run()
+        if algorithm == "best":
+            # Run the Best First Search algorithm
+            rush = cd.cs.Rushhour(deepcopy(car_list), deepcopy(board))
+            B = cd.alg.BestFirst(rush, final_board)
+            solution = B.run()
+
+        else:
+            # let the BeamSearch algorithm work
+            B = cd.alg.BeamSearch(deepcopy(rushhour), final_board, beam)
+            solution = B.run()
 
     elif algorithm == "bfs":
         # Let the BFS algorithm work
         B = cd.alg.Graph(deepcopy(rushhour))
-        solution = B.run()
-
-    elif algorithm == "beam":
-        # let the BeamSearch algorithm work
-        B = cd.alg.BeamSearch(deepcopy(rushhour), final_board, beam)
         solution = B.run()
 
     elif algorithm == "dfs":
@@ -63,8 +63,15 @@ def main(game_id, algorithm, beam):
     if solution:
         # Make a .txt file with the solution
         cd.cs.TxtSolution(game_id, solution, algorithm)
-        # Visualize the solution that the algorithm made
-        cd.vis.SequenceVisualization(game_id, rushhour, algorithm)
+
+        if visualize == "yes" or visualize == "y":
+            # Visualize the solution that the algorithm made
+            if algorithm == "random":
+                speed = 0.0005
+            else:
+                speed = 0.1
+
+            cd.vis.SequenceVisualization(game_id, rushhour, algorithm, speed)
 
 
 if __name__ == "__main__":
@@ -83,6 +90,11 @@ if __name__ == "__main__":
                         choices ["bfs", "best", "dfs", "bnb", "random", "beam"]',
                         default="random")
 
-    args = parser.parse_args()
+    parser.add_argument("-vis", "--visualize", nargs="?", metavar="visualize", type=str,
+                        help="turns visualize on or off (choose from yes (y) or no (n))",
+                        default="yes")
 
-    main(args.board, args.algorithm[0], args.beam)
+    args = parser.parse_args()
+    print(args.board, args.algorithm[0], args.beam, args.visualize)
+
+    main(args.board, args.algorithm[0], args.beam, args.visualize)

@@ -48,7 +48,7 @@ class Graph(Constructive):
     def check_child(self, child_car_list, distance):
         """Checks if the child is in the archive
         Returns bolean"""
-            return not self.hashh(child_car_list) in self.archive_dict
+        return not self.hashh(child_car_list) in self.archive_dict
 
     def put(self, archive):
         """Adds archive object to queue
