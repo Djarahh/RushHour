@@ -3,7 +3,7 @@ import code as cd
 import argparse
 
 
-def main(game_id, algorithm, beam, visualize):
+def main(game_id, algorithm, beam, visualize, bound, deltabound):
     """
     Uses algorithms to solve a RushHour board.
     Makes .txt files with the solution.
@@ -57,7 +57,7 @@ def main(game_id, algorithm, beam, visualize):
 
     elif algorithm == "bnb":
         # Branch and Bound algorithm
-        D = cd.alg.Branches(deepcopy(rushhour))
+        D = cd.alg.Branches(deepcopy(rushhour), bound, deltabound)
         solution = D.run()
 
     if solution:
@@ -76,25 +76,30 @@ def main(game_id, algorithm, beam, visualize):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Solves rushhour boards.')
-
     parser.add_argument("-b", "--board", metavar='board', type=int,
                         help='choose a board with the following choices [1, 2,\
-                        3, 4, 5, 6, 12]',
+                        3, 4, 5, 6, 12] (default = board 1)',
                         default=1)
     parser.add_argument("-be", "--beam", nargs="?", metavar="width", type=int,
                         help="the width of the beamsearch (default = 100)",
                         default=100)
-
     parser.add_argument('-a', "--algorithm", metavar='algorithm', nargs=1,
                         help='choose (an) algoritm(s) with the following \
                         choices ["bfs", "best", "dfs", "bnb", "random", "beam"]',
-                        default="random")
-
-    parser.add_argument("-vis", "--visualize", nargs="?", metavar="visualize", type=str,
-                        help="turns visualize on or off (choose from yes (y) or no (n))",
-                        default="yes")
+                        default=["random"], choices=["bfs", "best", "dfs", "bnb",
+                                                     "random", "beam"])
+    parser.add_argument("-vis", "--visualize", nargs="?", metavar="visualize",
+                        type=str, help="turns visualize on or off (choose from \
+                        yes (y) or no (n))", default="yes", choices=["Y", "y",
+                        "yes", "N", "n", "no"])
+    parser.add_argument("-bou", "--bound", nargs="?", metavar="bound", type=int,
+                        help="first bound of the BnB (default = 80)",
+                        default=80)
+    parser.add_argument("-d", "--deltabound", nargs="?", metavar="deltabound",
+                        type=int, help="decrease of the updated bound of the \
+                        BnB algorithm  (default = 10)", default=10)
 
     args = parser.parse_args()
-    print(args.board, args.algorithm[0], args.beam, args.visualize)
 
-    main(args.board, args.algorithm[0], args.beam, args.visualize)
+    main(args.board, args.algorithm[0], args.beam, args.visualize.lower(),
+         args.bound, args.deltabound)
