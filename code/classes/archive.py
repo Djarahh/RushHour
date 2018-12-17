@@ -1,5 +1,3 @@
-from copy import deepcopy
-
 class Archive(object):
     def __init__(self, move, car_list_parent, current, distance):
         """

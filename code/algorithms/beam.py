@@ -108,23 +108,3 @@ class BeamSearch(Constructive):
                                      .coordinate[0][1])
                     board_value += difference
         return board_value
-
-    def freeing_cars(self, current_car_list, child_car_list):
-        """
-        Heuristic for freeing other cars
-
-        child_car_list = list of car objects of child board
-        current_car_list = list of car objects of current board.
-        """
-        heur_value = 0
-        current_command_list = self.game.make_possible_move_with_input(
-                                         current_car_list)
-        child_command_list = self.game.make_possible_move_with_input(
-                                       child_car_list)
-        car_id_list = []
-        for move in current_command_list:
-            car_id_list.append(move[0])
-        for move in child_command_list:
-            if move[0] in car_id_list:
-                heur_value += 1
-        return(heur_value)

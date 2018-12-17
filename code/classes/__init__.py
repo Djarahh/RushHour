@@ -1,5 +1,4 @@
 from .load_cars import LoadCars
-from .load_solution import LoadSolution
 from .archive import Archive
 from .board import Board
 from .car import Car

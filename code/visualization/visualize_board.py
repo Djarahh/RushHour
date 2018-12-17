@@ -1,7 +1,4 @@
-# Class that visualizes a certain board from RushHour
-
 import tkinter as tk
-import time
 
 
 class BoardVisualization:
@@ -107,7 +104,3 @@ class BoardVisualization:
     def done(self):
         """Goes into the main loop"""
         self.master.mainloop()
-
-
-if __name__ == '__main__':
-    visual = BoardVisualization()

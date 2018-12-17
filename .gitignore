@@ -1,10 +1,3 @@
 __pycache__/
-test.py
 .DS_Store
 *.pyc
-pset9/
-test1.py
-main1.py
-results/
-results.py
-*.prof

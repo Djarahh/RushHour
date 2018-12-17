@@ -35,7 +35,7 @@ class Branches(Constructive):
         self.archive_dict[self.hashh(source)] = source_board
         self.make_possible_children(source, distance + 1, False)
 
-       # print statements and counter for the spinner
+        # print statements and counter for the spinner
         print("running...")
         counter_spinner = 0
         counter_bound = 0

@@ -44,7 +44,6 @@ class Randomize(object):
         """Progress spinner cause its awesome"""
         # turning tables
         syms = ['\\', '|', '/', '-']
-        bs = "\b"
         sym = syms[counter]
         sys.stdout.write("\b%s" % sym)
         sys.stdout.flush()

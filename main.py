@@ -17,9 +17,9 @@ def main(game_id, algorithm, beam, visualize, bound, deltabound):
     deltabound = integer (as being put in by user)
     """
     # Load the cars and the board
-    things = cd.cs.LoadCars(game_id)
-    car_list = things.car_list
-    board = things.board
+    load_game = cd.cs.LoadCars(game_id)
+    car_list = load_game.car_list
+    board = load_game.board
 
     # Initiate a RushHour game and an empty solution
     rushhour = cd.cs.Rushhour(deepcopy(car_list), deepcopy(board))
@@ -31,7 +31,7 @@ def main(game_id, algorithm, beam, visualize, bound, deltabound):
         solution = A.run()
 
     elif algorithm == "best" or algorithm == "beam":
-        # Let the randomize algorithm run and return a solution for bestfs
+        # Let randomize run and return a solution for best or beam
         A = cd.alg.Randomize(deepcopy(rushhour), deepcopy(car_list))
         solution = A.run()
 
@@ -46,22 +46,22 @@ def main(game_id, algorithm, beam, visualize, bound, deltabound):
             solution = B.run()
 
         else:
-            # let the BeamSearch algorithm work
+            # Run the Beam Search algorithm
             B = cd.alg.BeamSearch(deepcopy(rushhour), final_board, beam)
             solution = B.run()
 
     elif algorithm == "bfs":
-        # Let the BFS algorithm work
+        # Run the BFS algorithm
         B = cd.alg.Graph(deepcopy(rushhour))
         solution = B.run()
 
     elif algorithm == "dfs":
-        # Let the DFS algorithm work it
+        # Run the DFS algorithm
         C = cd.alg.Tree(deepcopy(rushhour))
         solution = C.run()
 
     elif algorithm == "bnb":
-        # Branch and Bound algorithm
+        # Run the Branch and Bound algorithm
         D = cd.alg.Branches(deepcopy(rushhour), bound, deltabound)
         solution = D.run()
 

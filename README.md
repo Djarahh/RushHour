@@ -29,13 +29,31 @@ To run the code with the default configuration(algorithm: random, game: 1, visua
 
 To choose your own algorithm, game and other parameters use this format:
 
-*python main.py [-h] [-b board] [-be [width]] [-a algorithm] [-vis [visualize]]*
+*python main.py [-h] [-b board] [-be [width]] [-a algorithm] [-vis [visualize]]
+               [-bou [bound]] [-d [deltabound]]*
 
 + -h shows a help message and exits
-+ -b board, choose a board with the following choices [1, 2, 3, 4, 5, 6, 12]
++ -b board, choose a board with the following choices [1, 2, 3, 4, 5, 6, 12] (default = board 1)
 + -be [width], the width of the beam search (default = 100)
 + -a algorithm, choose an algorithm from the following choices ["bfs", "best", "dfs", "bnb", "random", "beam"]
 + -vis [visualize], turns visualisation on or off by choosing from [yes (y) or no (n)] (default = yes)
++ -bou [bound], the starting bound of the branch and bound algorithm (default = 80)
++ -d [deltabound], decrease of the updated bound of the branch and bound algorithm (default = 10)
+
+### Output
+
+While the algorithms are run you can see different output per algorithm,
+here a short explanation of the output:
+
+BFS: deepest point reached so far
+Best: deepest point reached so far
+Branch and Bound: the updated bound
+Beam: deepest point reached so far
+
+### Warning
+
+The BFS algorithm takes up a lot of memory, so we would advise users to not run this algorithm with 
+boards that are larger than 6x6.
 
 ## Authors
 
@@ -52,11 +70,3 @@ We would like to thank:
 + Quinten van der Post for being our tech assistant and helping us through all of our struggles
 + Minor Programmeren for making it possible to learn so much of programming in such a short time
 + The world wide web for providing us with code, how to's and error solutions
-
-
-+ DOC strings rechttrekken (parameters en return waardes) + variabel namen checken
-<!-- + goede output bedenken per algoritme tijdens het runnen -->
-<!-- + leeg environment aanmaken met anaconda en pipreqs om requirements te testen -->
-<!-- + archief van BEAM search aanpassen! met distance -->
-<!-- + zorgen dat overal de solution ook de laatste stap van rode auto doet -->
-+ exploratie even netjes maken
