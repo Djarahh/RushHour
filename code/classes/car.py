@@ -6,29 +6,29 @@ class Car(object):
     Describes a car object.
     """
     def __init__(self, id, length, color, coordinate):
-        """Initialization of a car object.
-        id = numeric
-        length = numeric
-        color = string
-        coordinate = list, x and y coordinates of the car"""
-        # id of the car
+        """
+        Initialization of a car object.
+
+        id = integer, id of the car
+        length = integer, length of the car
+        color = string, color of the car
+        coordinate = list, x and y coordinates of the car
+        """
         self.id = id
-        # length of the car, amount of blocks
         self.length = length
-        # color of the car
         self.color = color
-        # coordinates of the cars
         self.coordinate = coordinate
-        # direction of car
         self.direction = self.direction()
-        # I want another atribute in Car: depending on the direction, the
-        # coordinates must be saved as the move input (list, only x or y)
+
         self.x = 0
         self.y = 0
 
     def update_coordinates(self, command):
-        """Updates the coordinates
-        command = list"""
+        """
+        Updates the coordinates
+
+        command = list
+        """
         self.update_x_y(command)
         if type(self.x) == list:
             for i in range(len(self.x)):
@@ -38,23 +38,33 @@ class Car(object):
                 self.coordinate[i][1] = self.y[i]
 
     def update_x_y(self, command):
-        """Creates x or y function for use in the update/temp functions.
-        command = list"""
+        """
+        Creates x or y function for use in the update/temp functions.
+        command = list
+        """
         if self.direction == "x":
             self.x = command
         else:
             self.y = command
 
     def direction(self):
-        """Sets direction atribute"""
+        """
+        Sets direction atribute
+
+        returns x or y (direction)
+        """
         if self.coordinate[0][1] == self.coordinate[1][1]:
             return("x")
         else:
             return("y")
 
     def temp_coordinates(self, command):
-        """Function for testing if the inputted command is valid.
-        command = list"""
+        """
+        Function that tests whether the command is valid.
+        command = list
+
+        returns temporary car coordinates
+        """
         self.update_x_y(command)
         temp = copy.deepcopy(self.coordinate)
         if type(self.x) == list:
